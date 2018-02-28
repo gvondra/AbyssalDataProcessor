@@ -1,10 +1,10 @@
 body {
     padding: 0px;
     margin: 0px;
-    font-family: Consolas;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     max-width: 28cm;
     font-size: small;
-    background-color: #EFEFEF;
+    background-color: rgb(155, 180, 161);
 }
 
 .menu {
