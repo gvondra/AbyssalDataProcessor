@@ -53,6 +53,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="AbyssalDataProcessor.Core.Framework" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -63,6 +64,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Settings.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\DataTier.Utilities\DataTier.Utilities.vbproj">
+      <Project>{85efb4ba-c5f1-454b-8129-4b04512f5753}</Project>
+      <Name>DataTier.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Framework\Core.Framework.vbproj">
+      <Project>{90fbcf4b-681c-4b01-8d78-fabe7bbb04e0}</Project>
+      <Name>Core.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
