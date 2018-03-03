@@ -5,9 +5,14 @@
 
 # User-specific files
 *.suo
-*.user
+/Database/**/*.user
+/Core/*/*.user
+/Interfaces/**/*.user
+/Tests/**/*.user
 *.userosscache
 *.sln.docstates
+
+!Core/**/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
