@@ -105,6 +105,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
+    <Compile Include="UserDataFactoryTest.vb" />
     <Compile Include="UserDataSaverTest.vb" />
   </ItemGroup>
   <ItemGroup>
