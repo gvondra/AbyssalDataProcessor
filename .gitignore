@@ -12,6 +12,7 @@
 *.userosscache
 *.sln.docstates
 
+/Data/
 !Core/**/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
