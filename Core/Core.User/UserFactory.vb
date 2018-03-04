@@ -1,7 +1,7 @@
 ﻿Imports AbyssalDataProcessor.DataTier.Core
 Imports AbyssalDataProcessor.DataTier.Core.Models
 Imports Autofac
-Public Class UserDataFactory
+Public Class UserFactory
     Implements IUserFactory
 
     Private m_container As IContainer
