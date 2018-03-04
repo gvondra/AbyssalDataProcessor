@@ -1,0 +1,6 @@
+﻿Imports System.Security.Claims
+Public Interface IUserFactory
+    Inherits AbyssalDataProcessor.Core.Framework.IUserFactory
+
+    Function [Get](ByVal principal As ClaimsPrincipal) As IUser
+End Interface

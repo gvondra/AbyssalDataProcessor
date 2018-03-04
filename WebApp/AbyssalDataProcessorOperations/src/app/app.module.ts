@@ -12,6 +12,7 @@ import { MenuComponent } from './menu/menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
+import { FirstContactComponent } from './first-contact/first-contact.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CallbackComponent } from './callback/callback.component';
     HeaderComponent,
     HomeComponent,
     MenuComponent,
-    CallbackComponent
+    CallbackComponent,
+    FirstContactComponent
   ],
   imports: [
     BrowserModule,

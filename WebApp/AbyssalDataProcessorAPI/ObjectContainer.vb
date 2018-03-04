@@ -7,7 +7,8 @@ Friend NotInheritable Class ObjectContainer
     Shared Sub New()
         Dim builder As New ContainerBuilder()
 
-        builder.RegisterType(Of UserFactory).As(Of IUserFactory)()
+        builder.RegisterType(Of AbyssalDataProcessor.Core.User.UserFactory)().As(Of AbyssalDataProcessor.Core.Framework.IUserFactory)()
+        builder.RegisterType(Of UserFactory)().As(Of IUserFactory)()
 
         m_container = builder.Build()
     End Sub
