@@ -32,7 +32,7 @@
             command.Parameters.Add(timestamp)
 
             AddParameter(providerFactory, command.Parameters, "userId", DbType.Guid, GetParameterValue(m_userAccountData.UserId))
-            AddParameter(providerFactory, command.Parameters, "subscriberId", DbType.Guid, GetParameterValue(m_userAccountData.SubscriberId))
+            AddParameter(providerFactory, command.Parameters, "subscriberId", DbType.String, GetParameterValue(m_userAccountData.SubscriberId))
 
             command.ExecuteNonQuery()
             m_userAccountData.UserAccountId = CType(id.Value, Guid)
