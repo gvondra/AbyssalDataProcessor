@@ -10,7 +10,7 @@
 
     Public Function GetParameterValue(ByVal value As Guid?) As Object
         If value.HasValue AndAlso value.Value.Equals(Guid.Empty) = False Then
-            value = value.Value
+            Return value.Value
         Else
             Return DBNull.Value
         End If
