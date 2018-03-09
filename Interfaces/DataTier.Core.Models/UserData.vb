@@ -1,5 +1,5 @@
 ﻿Public Class UserData
-    <ColumnMapping("FullName")>
+    <ColumnMapping("UserId")>
     Public Property UserId As Guid
     <ColumnMapping("FullName")>
     Public Property FullName As String
