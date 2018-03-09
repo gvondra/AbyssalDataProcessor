@@ -9,6 +9,7 @@
 /Core/*/*.user
 /Interfaces/**/*.user
 /Tests/**/*.user
+/WebApp/**/*.user
 *.userosscache
 *.sln.docstates
 
@@ -293,3 +294,4 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 /Database/Database.refactorlog
+
