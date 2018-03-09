@@ -15,7 +15,7 @@ Namespace Controllers
             End If
 
             Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
-                user = Me.GetUser
+                user = Me.GetUserObject
             End Using
 
             Return result

@@ -7,7 +7,7 @@ Namespace Controllers
     Public Class UserController
         Inherits ControllerBase
 
-        <HttpGet(), Authorize()> Public Function GetUser() As IHttpActionResult
+        <HttpGet(), Authorize()> Public Shadows Function GetUser() As IHttpActionResult
             Dim user As ClaimsPrincipal = CType(Me.User, ClaimsPrincipal)
             Dim claim As Claim = user.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.NameIdentifier)
             Dim userFactory As IUserFactory

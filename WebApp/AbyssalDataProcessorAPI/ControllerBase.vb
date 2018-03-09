@@ -19,7 +19,7 @@ Public MustInherit Class ControllerBase
         End Set
     End Property
 
-    Public Function GetUser() As IUser
+    <NonAction()> Public Function GetUserObject() As IUser
         Dim factory As IUserFactory
         Dim user As IUser
         Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope

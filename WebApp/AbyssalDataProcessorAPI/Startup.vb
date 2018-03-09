@@ -25,6 +25,7 @@ Public Class Startup
         })
 
         WebApiConfig.Register(config)
+        SwaggerConfig.Register(config)
 
         app.UseWebApi(config)
     End Sub
