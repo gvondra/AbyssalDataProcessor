@@ -1,4 +1,5 @@
 ﻿Imports Autofac
+Imports AutoMapper
 Imports System.Net
 Imports System.Security.Claims
 Imports System.Web.Http
@@ -7,20 +8,37 @@ Namespace Controllers
     Public Class UserController
         Inherits ControllerBase
 
+        Private Shared m_mapperConfiguration As MapperConfiguration
+
+        Shared Sub New()
+            m_mapperConfiguration = New MapperConfiguration(Sub(c As IMapperConfigurationExpression)
+                                                                c.CreateMap(Of IUser, User)()
+                                                            End Sub)
+        End Sub
+
+        'todo add error handling
+        'todo add metrics logging
         <HttpGet(), Authorize()> Public Shadows Function GetUser() As IHttpActionResult
-            Dim user As ClaimsPrincipal = CType(Me.User, ClaimsPrincipal)
-            Dim claim As Claim = user.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.NameIdentifier)
             Dim userFactory As IUserFactory
-            Dim u As IUser
+            Dim u As IUser = Nothing
+            Dim mapper As IMapper
+            Dim result As IHttpActionResult = Nothing
+
             Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
-                If claim IsNot Nothing Then
-                    userFactory = scope.Resolve(Of IUserFactory)()
-                    u = userFactory.GetBySubscriberId(New Settings(), claim.Value)
-                End If
+                userFactory = scope.Resolve(Of IUserFactory)()
+                u = userFactory.Get(CType(Me.User, ClaimsPrincipal))
             End Using
 
+            If u Is Nothing Then
+                result = NotFound()
+            End If
 
-            Return Ok()
+            If result Is Nothing Then
+                mapper = New Mapper(m_mapperConfiguration)
+                result = Ok(mapper.Map(Of User)(u))
+            End If
+
+            Return result
         End Function
 
     End Class
