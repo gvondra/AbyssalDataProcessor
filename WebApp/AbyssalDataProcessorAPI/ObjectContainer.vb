@@ -10,6 +10,8 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of AbyssalDataProcessor.Core.User.UserFactory)().As(Of AbyssalDataProcessor.Core.Framework.IUserFactory)()
         builder.RegisterType(Of UserFactory)().As(Of IUserFactory)()
 
+        builder.RegisterType(Of UserSaver)().As(Of IUserSaver)()
+
         m_container = builder.Build()
     End Sub
 

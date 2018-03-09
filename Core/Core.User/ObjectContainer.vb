@@ -8,6 +8,8 @@ Friend NotInheritable Class ObjectContainer
         Dim builder As New ContainerBuilder()
 
         builder.RegisterType(Of UserDataFactory).As(Of IUserDataFactory)()
+        builder.RegisterType(Of UserDataSaver)()
+        builder.RegisterType(Of UserAccountDataSaver)()
 
         m_container = builder.Build()
     End Sub
