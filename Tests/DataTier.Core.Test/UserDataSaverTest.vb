@@ -30,7 +30,7 @@ Public Class UserDataSaverTest
     End Sub
 
     <TestMethod()>
-    Public Sub CreateWithAccountTest()
+    Public Sub UpdateTest()
         Dim settings As New Mock(Of ISettings)()
         Dim data As New UserData()
         Dim saver As New UserDataSaver(settings.Object, data)
@@ -49,11 +49,12 @@ Public Class UserDataSaverTest
         providerFactory.Setup(Of IDbDataParameter)(Function(f As IDbProviderFactory) f.CreateParameter()) _
         .Returns(Function() New Mock(Of IDbDataParameter)().Object)
 
-        saver.Create(providerFactory.Object, New UserAccountData())
+        saver.Update(providerFactory.Object)
         providerFactory.Verify(Sub(f As IDbProviderFactory) f.EstablishTransaction(settings.Object), Times.Once)
         command.Verify(Of Integer)(Function(c As IDbCommand) c.ExecuteNonQuery(), Times.Once)
         command.VerifySet(Sub(c As IDbCommand) c.CommandType = CommandType.StoredProcedure, Times.AtLeastOnce)
-        command.VerifySet(Sub(c As IDbCommand) c.CommandText = "adp.iUserAndAccount", Times.AtLeastOnce)
+        command.VerifySet(Sub(c As IDbCommand) c.CommandText = "adp.uUser", Times.AtLeastOnce)
     End Sub
+
 
 End Class

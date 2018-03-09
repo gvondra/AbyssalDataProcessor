@@ -64,7 +64,6 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IUserDataCreator.vb" />
     <Compile Include="UserAccountDataSaver.vb" />
     <Compile Include="UserDataFactory.vb" />
     <Compile Include="IDataCreator.vb" />
