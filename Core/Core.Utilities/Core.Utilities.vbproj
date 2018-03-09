@@ -63,10 +63,17 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataUpdaterWrapper.vb" />
+    <Compile Include="DataCreatorWrapper.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Saver.vb" />
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\DataTier.Core\DataTier.Core.vbproj">
+      <Project>{672a5b5a-0b59-47ce-ba3c-b4d350d99fd5}</Project>
+      <Name>DataTier.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Interfaces\DataTier.Utilities\DataTier.Utilities.vbproj">
       <Project>{85efb4ba-c5f1-454b-8129-4b04512f5753}</Project>
       <Name>DataTier.Utilities</Name>

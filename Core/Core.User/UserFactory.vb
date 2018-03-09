@@ -14,6 +14,24 @@ Public Class UserFactory
         m_container = container
     End Sub
 
+    Public Function Create() As IUser Implements IUserFactory.Create
+        Return New User(New UserData)
+    End Function
+
+    Public Function GetByEmailAddress(settings As ISettings, emailAddress As String) As IUser Implements IUserFactory.GetByEmailAddress
+        Dim userDataFactory As IUserDataFactory
+        Dim enumerable As IEnumerable(Of UserData)
+        Dim result As User = Nothing
+        Using scope = m_container.BeginLifetimeScope()
+            userDataFactory = scope.Resolve(Of IUserDataFactory)
+            enumerable = userDataFactory.GetByEmailAddress(New Settings(settings), emailAddress)
+            If enumerable.Count = 1 Then
+                result = New User(enumerable.First())
+            End If
+        End Using
+        Return result
+    End Function
+
     Public Function GetBySubscriberId(settings As ISettings, subscriberId As String) As IUser Implements IUserFactory.GetBySubscriberId
         Dim userDataFactory As IUserDataFactory
         Dim data As UserData

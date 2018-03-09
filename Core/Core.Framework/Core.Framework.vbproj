@@ -61,9 +61,13 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDataCreator.vb" />
+    <Compile Include="IDataUpdater.vb" />
+    <Compile Include="ISavable.vb" />
     <Compile Include="ISettings.vb" />
     <Compile Include="IUser.vb" />
     <Compile Include="IUserFactory.vb" />
+    <Compile Include="IUserSaver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -1,10 +1,19 @@
-﻿Imports AbyssalDataProcessor.DataTier.Core.Models
+﻿Imports AbyssalDataProcessor.DataTier.Core
+Imports AbyssalDataProcessor.DataTier.Core.Models
+Imports Autofac
 Public Class User
     Implements IUser
 
     Private m_userData As UserData
+    Private m_container As IContainer
 
     Friend Sub New(ByVal userData As UserData)
+        m_container = ObjectContainer.GetContainer()
+        m_userData = userData
+    End Sub
+
+    Friend Sub New(ByVal container As IContainer, ByVal userData As UserData)
+        m_container = container
         m_userData = userData
     End Sub
 
@@ -70,4 +79,32 @@ Public Class User
             Return m_userData.UserId
         End Get
     End Property
+
+    Public Function GetAccountDataCreater(ByVal settings As Framework.ISettings, ByVal subscriberId As String) As Framework.IDataCreator Implements IUser.GetAccountDataCreater
+        Return New DataCreatorWrapper(Sub() CreateAccount(settings, subscriberId))
+    End Function
+
+    Private Sub CreateAccount(ByVal settings As Framework.ISettings, ByVal subscriberId As String)
+        Dim data As New UserAccountData() With {.UserId = Me.UserId, .SubscriberId = subscriberId}
+        Dim creater As IDataCreator
+        Dim innerSettings As New Settings(settings)
+
+        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            creater = scope.Resolve(Of UserAccountDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), innerSettings), New TypedParameter(GetType(UserAccountData), data))
+            creater.Create()
+        End Using
+
+    End Sub
+
+    Public Function GetDataCreator(settings As ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
+        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            Return New DataCreatorWrapper(scope.Resolve(Of UserDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(UserData), m_userData)))
+        End Using
+    End Function
+
+    Public Function GetDataUpdater(settings As ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            Return New DataUpdateWrapper(scope.Resolve(Of UserDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(UserData), m_userData)))
+        End Using
+    End Function
 End Class

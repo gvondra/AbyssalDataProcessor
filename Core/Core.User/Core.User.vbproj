@@ -77,6 +77,7 @@
     <Compile Include="ObjectContainer.vb" />
     <Compile Include="User.vb" />
     <Compile Include="UserFactory.vb" />
+    <Compile Include="UserSaver.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\DataTier.Core.Models\DataTier.Core.Models.vbproj">
