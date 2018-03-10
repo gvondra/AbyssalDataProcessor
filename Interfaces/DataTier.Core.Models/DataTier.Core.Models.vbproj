@@ -65,14 +65,12 @@
     <Compile Include="GroupData.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="OrganizationData.vb" />
-    <Compile Include="RoleTypeData.vb" />
     <Compile Include="TaskTypeData.vb" />
     <Compile Include="TaskTypeGroupData.vb" />
     <Compile Include="UserAccountData.vb" />
     <Compile Include="UserData.vb" />
     <Compile Include="UserGroupData.vb" />
     <Compile Include="UserOrganizationData.vb" />
-    <Compile Include="UserRoleData.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTier.Utilities\DataTier.Utilities.vbproj">
