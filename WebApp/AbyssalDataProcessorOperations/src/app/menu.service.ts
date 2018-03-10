@@ -1,20 +1,28 @@
+import 'rxjs/add/operator/toPromise';
+import { Headers, Http, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { MenuItem } from './menu-item';
-import { MENU_ITEMS } from './mock-menu-items'
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class MenuService {
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   getMenuItems() : Promise<Array<Array<MenuItem>>> {
-    let items = JSON.parse(localStorage.getItem('adpMenuItems'));
+    let items = JSON.parse(sessionStorage.getItem('adpMenuItems'));
     if (items) {
       return Promise.resolve(items as Array<Array<MenuItem>>);
     }
     else {
-      localStorage.setItem('adpMenuItems', JSON.stringify(MENU_ITEMS));
-      return Promise.resolve(MENU_ITEMS);
+      return this.http.get(environment.baseUrl + "Menu", {
+        headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
+      })
+      .toPromise()
+      .then(response => {
+        sessionStorage.setItem('adpMenuItems', JSON.stringify(response.json()));
+        return response.json();
+      })
     }    
   }
 }

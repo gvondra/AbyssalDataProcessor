@@ -80,6 +80,7 @@ logout() {
   localStorage.removeItem('id_token');
   localStorage.removeItem('profile');
   localStorage.removeItem('expires_at');
+  sessionStorage.removeItem('adpMenuItems');
   this.userProfile = undefined;
   this.setLoggedIn(false);
 }

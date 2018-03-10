@@ -13,6 +13,6 @@ export class UserService {
       headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
     })
     .toPromise()
-    .then(response => response.json as User)
+    .then(response => response.json() as User)
   }
 }
