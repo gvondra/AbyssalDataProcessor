@@ -11,13 +11,15 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
+import { RoleRequestComponent } from './role-request/role-request.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    CallbackComponent
+    CallbackComponent,
+    RoleRequestComponent
   ],
   imports: [
     BrowserModule,
