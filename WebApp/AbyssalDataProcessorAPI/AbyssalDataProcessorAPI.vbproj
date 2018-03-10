@@ -190,13 +190,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\SwaggerConfig.cs" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.vb" />
     <Compile Include="App_Start\WebApiConfig.vb" />
+    <Compile Include="ClaimsAuthorizationAttribute.vb" />
     <Compile Include="ControllerBase.vb" />
     <Compile Include="Controllers\FirstContactController.vb" />
+    <Compile Include="Controllers\MenuController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="IUserFactory.vb" />
     <Compile Include="Models\User.vb" />
