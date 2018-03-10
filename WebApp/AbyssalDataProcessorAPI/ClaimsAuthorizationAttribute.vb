@@ -8,18 +8,17 @@ Imports System.Web.Http
 Public Class ClaimsAuthorizationAttribute
     Inherits AuthorizeAttribute
 
-    Private Property CLAIM_NAMESPACE As String = "https://abyssaldataprocessor-dvlp/role-"
-
     Public Property ClaimTypes As String
 
     Public Overrides Function OnAuthorizationAsync(actionContext As HttpActionContext, cancellationToken As CancellationToken) As Task
         Dim principal As ClaimsPrincipal = CType(actionContext.RequestContext.Principal, ClaimsPrincipal)
+        Dim ns As String = My.Settings.RoleNameSpace.ToLower & "role-"
 
         If principal.Identity.IsAuthenticated = False Then
             actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized)
         ElseIf String.IsNullOrEmpty(ClaimTypes) = False Then
             If principal.Claims.Select(Of String)(Function(c As Claim) c.Type.ToLower()) _
-                    .Intersect(ClaimTypes.Split("|"c, ":"c).Select(Of String)(Function(c As String) CLAIM_NAMESPACE & c.ToLower())) _
+                    .Intersect(ClaimTypes.Split("|"c, ":"c).Select(Of String)(Function(c As String) ns & c.ToLower())) _
                     .Any() = False Then
 
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized)
