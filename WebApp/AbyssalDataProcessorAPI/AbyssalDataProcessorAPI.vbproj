@@ -199,6 +199,7 @@
     <Compile Include="App_Start\WebApiConfig.vb" />
     <Compile Include="ClaimsAuthorizationAttribute.vb" />
     <Compile Include="ControllerBase.vb" />
+    <Compile Include="Controllers\FormController.vb" />
     <Compile Include="Controllers\MenuController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="IUserFactory.vb" />

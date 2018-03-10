@@ -18,6 +18,7 @@ Public Class Startup
             .AuthenticationMode = Security.AuthenticationMode.Active,
             .TokenValidationParameters = New TokenValidationParameters() _
             With {
+                .SaveSigninToken = True,
                 .ValidAudience = apiIdentifier,
                 .ValidIssuer = domain,
                 .IssuerSigningKeyResolver = Function(token As String, securityToken As System.IdentityModel.Tokens.SecurityToken, kid As SecurityKeyIdentifier, validationParameters As System.IdentityModel.Tokens.TokenValidationParameters) keyResolver.GetSigningKey(kid)

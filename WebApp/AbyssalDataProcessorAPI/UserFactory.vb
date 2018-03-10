@@ -1,5 +1,6 @@
 ﻿Imports Autofac
 Imports System.Security.Claims
+Imports System.Web
 Public Class UserFactory
     Implements IUserFactory
 
@@ -24,6 +25,8 @@ Public Class UserFactory
         Dim id As Claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.NameIdentifier)
         Dim user As IUser = Nothing
         Dim claim As Claim = Nothing
+
+        Debug.WriteLine(CType(CType(principal.Identity, ClaimsIdentity).BootstrapContext, System.IdentityModel.Tokens.BootstrapContext).Token)
 
         If id IsNot Nothing Then
             user = GetBySubscriberId(New Settings(), id.Value)
