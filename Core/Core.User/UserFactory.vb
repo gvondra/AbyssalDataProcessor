@@ -18,6 +18,18 @@ Public Class UserFactory
         Return New User(New UserData)
     End Function
 
+    Public Function GetAccountCount(settings As ISettings) As Integer Implements IUserFactory.GetAccountCount
+        Dim count As Integer
+        Dim userDataFactory As IUserDataFactory
+
+        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            userDataFactory = scope.Resolve(Of IUserDataFactory)()
+            count = userDataFactory.GetAccountCount(New Settings(settings))
+        End Using
+
+        Return count
+    End Function
+
     Public Function GetByEmailAddress(settings As ISettings, emailAddress As String) As IUser Implements IUserFactory.GetByEmailAddress
         Dim userDataFactory As IUserDataFactory
         Dim enumerable As IEnumerable(Of UserData)

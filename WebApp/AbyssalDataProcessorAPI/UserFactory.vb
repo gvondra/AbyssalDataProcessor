@@ -85,4 +85,8 @@ Public Class UserFactory
     Public Function GetByEmailAddress(settings As ISettings, emailAddress As String) As IUser Implements AbyssalDataProcessor.Core.Framework.IUserFactory.GetByEmailAddress
         Return m_innerUserFactory.GetByEmailAddress(settings, emailAddress)
     End Function
+
+    Public Function GetAccountCount(settings As ISettings) As Int32 Implements AbyssalDataProcessor.Core.Framework.IUserFactory.GetAccountCount
+        Return m_innerUserFactory.GetAccountCount(settings)
+    End Function
 End Class
