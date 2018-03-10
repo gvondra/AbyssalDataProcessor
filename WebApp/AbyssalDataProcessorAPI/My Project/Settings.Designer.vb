@@ -71,6 +71,15 @@ Namespace My
                 Return CType(Me("Auth0ApiIdentifier"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://abyssaldataprocessor-dvlp/")>  _
+        Public ReadOnly Property RoleNameSpace() As String
+            Get
+                Return CType(Me("RoleNameSpace"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

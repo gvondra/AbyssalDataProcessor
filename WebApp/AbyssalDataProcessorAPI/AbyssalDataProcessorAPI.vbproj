@@ -202,6 +202,7 @@
     <Compile Include="Controllers\MenuController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="IUserFactory.vb" />
+    <Compile Include="Models\RoleRequest.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -218,6 +219,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ObjectContainer.vb" />
+    <Compile Include="RoleProcessor.vb" />
     <Compile Include="Settings.vb" />
     <Compile Include="Startup.vb" />
     <Compile Include="UserFactory.vb" />

@@ -61,6 +61,7 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations.vb" />
     <Compile Include="IDataCreator.vb" />
     <Compile Include="IDataUpdater.vb" />
     <Compile Include="ISavable.vb" />
