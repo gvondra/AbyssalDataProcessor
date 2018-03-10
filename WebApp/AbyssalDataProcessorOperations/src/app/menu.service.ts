@@ -8,6 +8,13 @@ export class MenuService {
   constructor() { }
 
   getMenuItems() : Promise<Array<Array<MenuItem>>> {
-    return Promise.resolve(MENU_ITEMS);
+    let items = JSON.parse(localStorage.getItem('adpMenuItems'));
+    if (items) {
+      return Promise.resolve(items as Array<Array<MenuItem>>);
+    }
+    else {
+      localStorage.setItem('adpMenuItems', JSON.stringify(MENU_ITEMS));
+      return Promise.resolve(MENU_ITEMS);
+    }    
   }
 }
