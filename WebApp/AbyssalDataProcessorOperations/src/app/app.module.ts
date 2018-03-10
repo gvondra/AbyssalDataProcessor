@@ -11,15 +11,13 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
-import { FirstContactComponent } from './first-contact/first-contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    CallbackComponent,
-    FirstContactComponent
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
