@@ -78,5 +78,10 @@
     <Build Include="adp\Stored Procedure\iUserAccount.sql" />
     <Build Include="adp\Stored Procedure\uUser.sql" />
     <Build Include="adp\Stored Procedure\sUserAccountCount.sql" />
+    <Build Include="adp\Table\Form.sql" />
+    <Build Include="adp\Stored Procedure\iForm.sql" />
+    <Build Include="adp\Stored Procedure\sForm.sql" />
+    <Build Include="adp\Table\FormType.sql" />
+    <Build Include="adp\Table\FormTypeTaskType.sql" />
   </ItemGroup>
 </Project>
