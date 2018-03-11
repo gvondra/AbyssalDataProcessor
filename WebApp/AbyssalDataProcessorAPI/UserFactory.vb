@@ -26,8 +26,6 @@ Public Class UserFactory
         Dim user As IUser = Nothing
         Dim claim As Claim = Nothing
 
-        Debug.WriteLine(CType(CType(principal.Identity, ClaimsIdentity).BootstrapContext, System.IdentityModel.Tokens.BootstrapContext).Token)
-
         If id IsNot Nothing Then
             user = GetBySubscriberId(New Settings(), id.Value)
         End If
@@ -50,28 +48,40 @@ Public Class UserFactory
 
     Private Sub UpdateUser(ByVal principal As ClaimsPrincipal, ByVal user As IUser, ByVal id As Claim)
         Dim claim As Claim = Nothing
-
-        claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.Email)
-        If claim IsNot Nothing AndAlso String.IsNullOrEmpty(claim.Value) = False AndAlso String.IsNullOrEmpty(user.EmailAddress) Then
-            user.EmailAddress = claim.Value
-        End If
-
-        claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.Name)
-        If claim IsNot Nothing AndAlso String.IsNullOrEmpty(claim.Value) = False Then
-            If String.IsNullOrEmpty(user.FullName) Then
-                user.FullName = claim.Value
-            End If
-            If String.IsNullOrEmpty(user.ShortName) Then
-                user.ShortName = claim.Value
-            End If
-        End If
-
-        claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.DateOfBirth)
-        If claim IsNot Nothing AndAlso String.IsNullOrEmpty(claim.Value) = False AndAlso user.BirthDate.HasValue = False Then
-            user.BirthDate = Date.Parse(claim.Value).Date
-        End If
+        Dim accessToken As String
 
         Using scope = m_container.BeginLifetimeScope
+            claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.Email)
+            If claim IsNot Nothing AndAlso String.IsNullOrEmpty(claim.Value) = False AndAlso String.IsNullOrEmpty(user.EmailAddress) Then
+                user.EmailAddress = claim.Value
+            End If
+
+            claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.Name)
+            If claim IsNot Nothing AndAlso String.IsNullOrEmpty(claim.Value) = False Then
+                If String.IsNullOrEmpty(user.FullName) Then
+                    user.FullName = claim.Value
+                End If
+                If String.IsNullOrEmpty(user.ShortName) Then
+                    user.ShortName = claim.Value
+                End If
+            End If
+
+            claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.DateOfBirth)
+            If claim IsNot Nothing AndAlso String.IsNullOrEmpty(claim.Value) = False AndAlso user.BirthDate.HasValue = False Then
+                user.BirthDate = Date.Parse(claim.Value).Date
+            End If
+
+            If principal.Claims.Where(Function(c As Claim) c.Type = "gty" And c.Value = "client-credentials").Any() Then
+                claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.NameIdentifier)
+                If claim IsNot Nothing AndAlso String.IsNullOrEmpty(user.FullName) Then
+                    user.FullName = claim.Value
+                End If
+            Else
+                accessToken = CType(CType(principal.Identity, ClaimsIdentity).BootstrapContext, System.IdentityModel.Tokens.BootstrapContext).Token
+                Dim updater As IUserUpdater = scope.Resolve(Of IUserUpdater)()
+                updater.UpdateFromUserManagement(New Settings, user, accessToken)
+            End If
+
             Dim saver As IUserSaver = scope.Resolve(Of IUserSaver)
             saver.Save(New Settings(), user, id.Value)
         End Using
