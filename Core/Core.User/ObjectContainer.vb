@@ -11,6 +11,9 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of UserDataSaver)()
         builder.RegisterType(Of UserAccountDataSaver)()
 
+        builder.RegisterType(Of UserManagementSettings)().As(Of [Interface].UserManagement.ISettings)()
+        builder.RegisterType(Of [Interface].UserManagement.UserInfoService)().As(Of [Interface].UserManagement.IUserInfoService)()
+
         m_container = builder.Build()
     End Sub
 

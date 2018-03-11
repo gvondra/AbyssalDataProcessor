@@ -69,6 +69,7 @@
     <Compile Include="IUser.vb" />
     <Compile Include="IUserFactory.vb" />
     <Compile Include="IUserSaver.vb" />
+    <Compile Include="IUserUpdater.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
