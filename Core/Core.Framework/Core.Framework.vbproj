@@ -62,8 +62,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerations.vb" />
+    <Compile Include="Forms\IFormSerializable.vb" />
+    <Compile Include="Forms\IRoleRequest.vb" />
     <Compile Include="IDataCreator.vb" />
     <Compile Include="IDataUpdater.vb" />
+    <Compile Include="IForm.vb" />
+    <Compile Include="IFormFactory.vb" />
+    <Compile Include="IFormSaver.vb" />
+    <Compile Include="IFormSerializer.vb" />
+    <Compile Include="IFormSerializerFactory.vb" />
     <Compile Include="ISavable.vb" />
     <Compile Include="ISettings.vb" />
     <Compile Include="IUser.vb" />
