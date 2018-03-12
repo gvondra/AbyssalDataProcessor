@@ -82,6 +82,8 @@
     <Build Include="adp\Stored Procedure\iForm.sql" />
     <Build Include="adp\Stored Procedure\sForm.sql" />
     <Build Include="adp\Table\FormType.sql" />
-    <Build Include="adp\Table\FormTypeTaskType.sql" />
+    <Build Include="adp\Table\EventTypeTaskType.sql" />
+    <Build Include="adp\Table\EventType.sql" />
+    <Build Include="adp\Table\Event.sql" />
   </ItemGroup>
 </Project>
