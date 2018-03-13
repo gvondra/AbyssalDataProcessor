@@ -1,5 +1,4 @@
-﻿Imports Moq
-<TestClass()>
+﻿<TestClass()>
 Public Class UserDataSaverTest
 
     <TestMethod()>

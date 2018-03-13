@@ -89,5 +89,6 @@
     <Build Include="adp\Table\WebMetricAttribute.sql" />
     <Build Include="adp\Stored Procedure\iWebMetricAttribute.sql" />
     <Build Include="adp\Stored Procedure\iWebMetric.sql" />
+    <Build Include="adp\Stored Procedure\iEvent.sql" />
   </ItemGroup>
 </Project>

@@ -89,6 +89,7 @@
     <Import Include="AbyssalDataProcessor.DataTier.Core.Models" />
     <Import Include="AbyssalDataProcessor.DataTier.Utilities" />
     <Import Include="Microsoft.VisualBasic" />
+    <Import Include="Moq" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
@@ -99,6 +100,8 @@
     <Import Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDataSaverTest.vb" />
+    <Compile Include="EventDataSaverTest.vb" />
     <Compile Include="UserAccountDataSaverTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
