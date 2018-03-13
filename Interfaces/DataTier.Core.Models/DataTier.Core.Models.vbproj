@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventData.vb" />
+    <Compile Include="EventTypeData.vb" />
     <Compile Include="FormData.vb" />
     <Compile Include="GroupData.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

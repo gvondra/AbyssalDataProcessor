@@ -108,6 +108,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
+    <Compile Include="EventTypeDataFactoryTest.vb" />
     <Compile Include="UserDataFactoryTest.vb" />
     <Compile Include="UserDataSaverTest.vb" />
   </ItemGroup>
