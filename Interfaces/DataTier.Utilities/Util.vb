@@ -32,6 +32,14 @@ Public Module Util
         End If
     End Function
 
+    Public Function GetParameterValue(ByVal value As Double?) As Object
+        If value.HasValue Then
+            Return value.Value
+        Else
+            Return DBNull.Value
+        End If
+    End Function
+
     Public Function GetParameterValue(ByVal value As Integer?) As Object
         If value.HasValue Then
             Return value.Value

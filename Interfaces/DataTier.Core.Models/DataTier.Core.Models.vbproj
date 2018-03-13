@@ -72,6 +72,8 @@
     <Compile Include="UserData.vb" />
     <Compile Include="UserGroupData.vb" />
     <Compile Include="UserOrganizationData.vb" />
+    <Compile Include="WebMetricAttributeData.vb" />
+    <Compile Include="WebMetricData.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTier.Utilities\DataTier.Utilities.vbproj">

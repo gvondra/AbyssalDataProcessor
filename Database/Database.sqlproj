@@ -85,5 +85,12 @@
     <Build Include="adp\Table\EventTypeTaskType.sql" />
     <Build Include="adp\Table\EventType.sql" />
     <Build Include="adp\Table\Event.sql" />
+    <Build Include="adp\Table\WebMetric.sql" />
+    <Build Include="adp\Table\WebMetricAttribute.sql" />
+    <Build Include="adp\Stored Procedure\iWebMetricAttribute.sql" />
+    <Build Include="adp\Stored Procedure\iWebMetric.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Database.refactorlog" />
   </ItemGroup>
 </Project>

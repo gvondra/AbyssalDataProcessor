@@ -72,6 +72,8 @@
     <Compile Include="IUserDataFactory.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="UserDataSaver.vb" />
+    <Compile Include="WebMetricAttributeDataSaver.vb" />
+    <Compile Include="WebMetricDataSaver.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTier.Core.Models\DataTier.Core.Models.vbproj">
