@@ -27,7 +27,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Core.Form", "Core\Core.Form
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Core.Form.Test", "Tests\Core.Form.Test\Core.Form.Test.vbproj", "{4AD7C6D9-BA8D-4F62-B743-89A852438D00}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Core.Log", "Core\Core.Log\Core.Log.vbproj", "{8C9B4A10-F563-4491-AF9D-259E6A4F4F6F}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Core.Log", "Core\Core.Logging\Core.Log.vbproj", "{8C9B4A10-F563-4491-AF9D-259E6A4F4F6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

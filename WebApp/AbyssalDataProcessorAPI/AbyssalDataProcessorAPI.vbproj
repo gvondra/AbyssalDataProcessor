@@ -254,7 +254,7 @@
       <Project>{90fbcf4b-681c-4b01-8d78-fabe7bbb04e0}</Project>
       <Name>Core.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Core.Log\Core.Log.vbproj">
+    <ProjectReference Include="..\..\Core\Core.Logging\Core.Log.vbproj">
       <Project>{8c9b4a10-f563-4491-af9d-259e6a4f4f6f}</Project>
       <Name>Core.Log</Name>
     </ProjectReference>
