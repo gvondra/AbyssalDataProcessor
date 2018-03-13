@@ -3,6 +3,7 @@ Imports System.Security.Claims
 Imports System.Web.Http
 
 Namespace Controllers
+    <MetricsLog()>
     Public Class MenuController
         Inherits ControllerBase
 

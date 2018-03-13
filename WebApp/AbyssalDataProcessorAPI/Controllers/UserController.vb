@@ -5,6 +5,7 @@ Imports System.Security.Claims
 Imports System.Web.Http
 
 Namespace Controllers
+    <MetricsLog()>
     Public Class UserController
         Inherits ControllerBase
 
@@ -17,7 +18,6 @@ Namespace Controllers
         End Sub
 
         'todo add error handling
-        'todo add metrics logging
         <HttpGet(), Authorize()> Public Shadows Function GetUser() As IHttpActionResult
             Dim userFactory As IUserFactory
             Dim u As IUser = Nothing

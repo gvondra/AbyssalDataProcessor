@@ -5,6 +5,7 @@ Imports System.Security.Claims
 Imports System.Web.Http
 
 Namespace Controllers
+    <MetricsLog()>
     Public Class FormController
         Inherits ControllerBase
 
@@ -17,7 +18,6 @@ Namespace Controllers
         End Sub
 
         'todo add exception handler
-        'todo add metrics
         'todo add role request event trigger
         <HttpPost(), Authorize(), Route("api/Form/RoleRequest")> Public Function CreateRoleRequest(<FromBody> ByVal request As RoleRequest) As IHttpActionResult
             Dim userFactory As IUserFactory

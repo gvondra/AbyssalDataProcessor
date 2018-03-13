@@ -1,4 +1,5 @@
-﻿Imports AbyssalDataProcessor.Core.form
+﻿Imports AbyssalDataProcessor.Core.Form
+Imports AbyssalDataProcessor.Core.Log
 Imports AbyssalDataProcessor.Core.User
 Imports Autofac
 Friend NotInheritable Class ObjectContainer
@@ -19,6 +20,8 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of FormSerializerFactory)().As(Of IFormSerializerFactory)()
         builder.RegisterType(Of FormFactory)().As(Of IFormFactory)()
         builder.RegisterType(Of FormSaver)().As(Of IFormSaver)()
+
+        builder.RegisterType(Of WebMetricSaver)().As(Of IWebMetricSaver)()
 
         m_container = builder.Build()
     End Sub

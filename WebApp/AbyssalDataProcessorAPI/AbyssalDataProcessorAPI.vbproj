@@ -203,6 +203,7 @@
     <Compile Include="Controllers\MenuController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="IUserFactory.vb" />
+    <Compile Include="MetricsLogAttribute.vb" />
     <Compile Include="Models\RoleRequest.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -252,6 +253,10 @@
     <ProjectReference Include="..\..\Core\Core.Framework\Core.Framework.vbproj">
       <Project>{90fbcf4b-681c-4b01-8d78-fabe7bbb04e0}</Project>
       <Name>Core.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.Log\Core.Log.vbproj">
+      <Project>{8c9b4a10-f563-4491-af9d-259e6a4f4f6f}</Project>
+      <Name>Core.Log</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.User\Core.User.vbproj">
       <Project>{2e861851-89c0-420c-88cd-bf91f6e51b4d}</Project>
