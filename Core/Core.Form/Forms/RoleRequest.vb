@@ -15,8 +15,8 @@
             Throw New NotSupportedException()
         End Sub
 
-        Public Property Comment As String Implements IRoleRequest.Comment
-        Public Property FullName As String Implements IRoleRequest.FullName
+        <XmlElement(Order:=1)> Public Property FullName As String Implements IRoleRequest.FullName
+        <XmlElement(Order:=2)> Public Property Comment As String Implements IRoleRequest.Comment
 
         Public Function CreateForm(ByVal user As IUser) As IForm Implements IFormSerializable.CreateForm
             Return m_formFactory.CreateForm(user, enumFormType.RoleRequest, enumFormStyle.RoleRequest, Serialize())

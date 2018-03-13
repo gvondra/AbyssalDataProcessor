@@ -75,9 +75,18 @@ Public Class Form
 
     Public Function GetDataCreator(settings As Framework.ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataCreatorWrapper(scope.Resolve(Of FormDataSaver)(New TypedParameter(GetType(DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(FormData), m_formData)))
+            Return New DataCreatorWrapper(Sub() Create(settings))
         End Using
     End Function
+
+    Private Sub Create(settings As Framework.ISettings)
+        Dim creator As IDataCreator
+
+        UserId = m_user.UserId
+
+        creator = New FormDataSaver(New Settings(settings), m_formData)
+        creator.Create()
+    End Sub
 
     Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
         Throw New NotImplementedException()

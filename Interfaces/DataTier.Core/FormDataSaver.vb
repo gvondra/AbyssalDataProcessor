@@ -32,10 +32,10 @@ Public Class FormDataSaver
             timestamp.Direction = ParameterDirection.Output
             command.Parameters.Add(timestamp)
 
-            AddParameter(providerFactory, command.Parameters, "userId", DbType.String, m_formData.UserId)
-            AddParameter(providerFactory, command.Parameters, "formTypeId", DbType.Int16, m_formData.FormTypeId)
-            AddParameter(providerFactory, command.Parameters, "style", DbType.Int16, m_formData.Style)
-            AddParameter(providerFactory, command.Parameters, "content", DbType.Xml, m_formData.Content)
+            AddParameter(providerFactory, command.Parameters, "userId", DbType.Guid, GetParameterValue(m_formData.UserId))
+            AddParameter(providerFactory, command.Parameters, "formTypeId", DbType.Int16, GetParameterValue(m_formData.FormTypeId))
+            AddParameter(providerFactory, command.Parameters, "style", DbType.Int16, GetParameterValue(m_formData.Style))
+            AddParameter(providerFactory, command.Parameters, "content", DbType.Xml, GetParameterValue(m_formData.Content))
 
             command.ExecuteNonQuery()
             m_formData.FormId = CType(id.Value, Guid)

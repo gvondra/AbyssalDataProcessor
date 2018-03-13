@@ -1,4 +1,5 @@
-﻿Public Module Util
+﻿Imports System.Xml
+Public Module Util
     Public Function CreateParameter(ByVal providerFactory As IDbProviderFactory, ByVal name As String, ByVal type As DbType) As IDbDataParameter
         Dim parameter As IDbDataParameter = providerFactory.CreateParameter()
         If String.IsNullOrEmpty(name) = False Then
@@ -66,6 +67,14 @@
     Public Function GetParameterValue(ByVal value As Boolean?) As Object
         If value.HasValue Then
             Return value.Value
+        Else
+            Return DBNull.Value
+        End If
+    End Function
+
+    Public Function GetParameterValue(ByVal value As XmlNode) As Object
+        If value IsNot Nothing Then
+            Return value.OuterXml()
         Else
             Return DBNull.Value
         End If

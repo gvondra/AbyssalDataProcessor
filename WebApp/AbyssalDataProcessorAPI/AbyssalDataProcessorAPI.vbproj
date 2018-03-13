@@ -245,6 +245,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core.Form\Core.Form.vbproj">
+      <Project>{e0824bc0-9245-4273-bbbe-ca435f79817f}</Project>
+      <Name>Core.Form</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.Framework\Core.Framework.vbproj">
       <Project>{90fbcf4b-681c-4b01-8d78-fabe7bbb04e0}</Project>
       <Name>Core.Framework</Name>

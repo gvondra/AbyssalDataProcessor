@@ -13,14 +13,22 @@ Public Class ClaimsAuthorizationAttribute
     Public Overrides Function OnAuthorizationAsync(actionContext As HttpActionContext, cancellationToken As CancellationToken) As Task
         Dim principal As ClaimsPrincipal = CType(actionContext.RequestContext.Principal, ClaimsPrincipal)
         Dim ns As String = My.Settings.RoleNameSpace.ToLower & "role-"
+        Dim hasAccess As Boolean = False
+        Dim role As enumRole
 
         If principal.Identity.IsAuthenticated = False Then
             actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized)
         ElseIf String.IsNullOrEmpty(ClaimTypes) = False Then
-            If principal.Claims.Select(Of String)(Function(c As Claim) c.Type.ToLower()) _
-                    .Intersect(ClaimTypes.Split("|"c, ":"c).Select(Of String)(Function(c As String) ns & c.ToLower())) _
-                    .Any() = False Then
+            role = RoleProcessor.GetRoleFlags(principal)
 
+            If role <> enumRole.None Then
+                For Each c As String In ClaimTypes.Split("|"c, ":"c)
+                    If (role And RoleProcessor.GetRoleFlags(c)) <> enumRole.None Then
+                        hasAccess = True
+                    End If
+                Next c
+            End If
+            If hasAccess = False Then
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized)
             End If
         End If
