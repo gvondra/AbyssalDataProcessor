@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="EventDataSaver.vb" />
     <Compile Include="EventTypeDataFactory.vb" />
+    <Compile Include="EventTypeDataSaver.vb" />
     <Compile Include="FormDataSaver.vb" />
     <Compile Include="IEventTypeDataFactory.vb" />
     <Compile Include="UserAccountDataSaver.vb" />

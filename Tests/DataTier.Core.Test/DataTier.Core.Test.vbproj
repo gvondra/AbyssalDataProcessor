@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="EventTypeDataFactoryTest.vb" />
     <Compile Include="UserDataFactoryTest.vb" />
+    <Compile Include="EventTypeDataSaverTest.vb" />
     <Compile Include="UserDataSaverTest.vb" />
   </ItemGroup>
   <ItemGroup>

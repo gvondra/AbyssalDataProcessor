@@ -90,5 +90,8 @@
     <Build Include="adp\Stored Procedure\iWebMetricAttribute.sql" />
     <Build Include="adp\Stored Procedure\iWebMetric.sql" />
     <Build Include="adp\Stored Procedure\iEvent.sql" />
+    <Build Include="adp\Stored Procedure\sEventType.sql" />
+    <Build Include="adp\Stored Procedure\iEventType.sql" />
+    <Build Include="adp\Stored Procedure\uEventType.sql" />
   </ItemGroup>
 </Project>
