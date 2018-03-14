@@ -68,6 +68,7 @@
     <Compile Include="IDataUpdater.vb" />
     <Compile Include="IEvent.vb" />
     <Compile Include="IEventFactory.vb" />
+    <Compile Include="IEventSaver.vb" />
     <Compile Include="IEventType.vb" />
     <Compile Include="IEventTypeFactory.vb" />
     <Compile Include="IEventTypeSaver.vb" />

@@ -1,3 +1,3 @@
 ﻿Public Interface IEventFactory
-    Function Create(ByVal form As IForm) As IEvent
+    Function Create(ByVal settings As ISettings, ByVal form As IForm) As IEvent
 End Interface

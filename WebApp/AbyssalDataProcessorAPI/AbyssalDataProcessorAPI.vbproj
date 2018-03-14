@@ -246,6 +246,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Core.Event\Core.Event.vbproj">
+      <Project>{54abb947-d5f2-4b81-ae14-d132ff07e3ce}</Project>
+      <Name>Core.Event</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.Form\Core.Form.vbproj">
       <Project>{e0824bc0-9245-4273-bbbe-ca435f79817f}</Project>
       <Name>Core.Form</Name>

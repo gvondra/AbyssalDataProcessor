@@ -26,6 +26,10 @@ Namespace Controllers
             Dim innerRequest As Forms.IRoleRequest
             Dim formFactory As IFormFactory
             Dim saver As IFormSaver
+            Dim form As IForm
+            Dim eventFactory As IEventFactory
+            Dim eventSaver As IEventSaver
+            Dim [event] As IEvent
 
             Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
                 userFactory = scope.Resolve(Of IUserFactory)()
@@ -36,7 +40,15 @@ Namespace Controllers
                 mapper = New Mapper(m_mapperConfiguration)
                 mapper.Map(Of RoleRequest, Forms.IRoleRequest)(request, innerRequest)
                 saver = scope.Resolve(Of IFormSaver)()
-                saver.Create(New Settings(), innerRequest.CreateForm(user))
+                form = innerRequest.CreateForm(user)
+                saver.Create(New Settings(), form)
+
+                eventFactory = scope.Resolve(Of IEventFactory)()
+                [event] = eventFactory.Create(New Settings(), form)
+                If [event] IsNot Nothing Then
+                    eventSaver = scope.Resolve(Of IEventSaver)()
+                    eventSaver.Create(New Settings(), [event])
+                End If
             End Using
 
             Return Ok()

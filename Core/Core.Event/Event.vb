@@ -11,6 +11,7 @@ Public Class [Event]
     Friend Sub New(ByVal eventType As IEventType)
         m_eventType = eventType
         m_eventData = New EventData() With {.EventTypeId = eventType.Type}
+        m_container = ObjectContainer.GetContainer
     End Sub
 
     Public ReadOnly Property EventId As Guid Implements IEvent.EventId

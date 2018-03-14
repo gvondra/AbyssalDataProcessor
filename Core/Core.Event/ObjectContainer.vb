@@ -8,6 +8,7 @@ Friend NotInheritable Class ObjectContainer
         Dim builder As New ContainerBuilder()
 
         builder.RegisterType(Of EventTypeDataFactory).As(Of IEventTypeDataFactory)()
+        builder.RegisterType(Of EventTypeDataSaver)()
         builder.RegisterType(Of EventDataSaver)()
 
         m_container = builder.Build()
