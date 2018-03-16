@@ -29,7 +29,7 @@ Namespace Controllers
             End If
 
             If (flags And enumRole.UserAdministrator) = enumRole.UserAdministrator Then
-                column2.Add(New With {.Text = "Users", .URL = ""})
+                column2.Add(New With {.Text = "Users", .URL = "usersearch"})
             End If
 
             If flags <> enumRole.None Then
