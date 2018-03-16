@@ -99,7 +99,11 @@ Public Class UserFactory
         Return m_innerUserFactory.GetByEmailAddress(settings, emailAddress)
     End Function
 
-    Public Function GetAccountCount(settings As ISettings) As Int32 Implements AbyssalDataProcessor.Core.Framework.IUserFactory.GetAccountCount
-        Return m_innerUserFactory.GetAccountCount(settings)
+    Public Function [Get](settings As ISettings, userId As Guid) As IUser Implements AbyssalDataProcessor.Core.Framework.IUserFactory.Get
+        Return m_innerUserFactory.Get(settings, userId)
+    End Function
+
+    Public Function Search(settings As ISettings, searchText As String) As IEnumerable(Of IUser) Implements AbyssalDataProcessor.Core.Framework.IUserFactory.Search
+        Return m_innerUserFactory.Search(settings, searchText)
     End Function
 End Class

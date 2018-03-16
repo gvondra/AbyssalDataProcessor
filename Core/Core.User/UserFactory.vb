@@ -18,16 +18,18 @@ Public Class UserFactory
         Return New User(New UserData)
     End Function
 
-    Public Function GetAccountCount(settings As ISettings) As Integer Implements IUserFactory.GetAccountCount
-        Dim count As Integer
+    Public Function [Get](settings As ISettings, userId As Guid) As IUser Implements IUserFactory.Get
         Dim userDataFactory As IUserDataFactory
-
-        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            userDataFactory = scope.Resolve(Of IUserDataFactory)()
-            count = userDataFactory.GetAccountCount(New Settings(settings))
+        Dim data As UserData
+        Dim result As User = Nothing
+        Using scope = m_container.BeginLifetimeScope()
+            userDataFactory = scope.Resolve(Of IUserDataFactory)
+            data = userDataFactory.Get(New Settings(settings), userId)
+            If data IsNot Nothing Then
+                result = New User(data)
+            End If
         End Using
-
-        Return count
+        Return result
     End Function
 
     Public Function GetByEmailAddress(settings As ISettings, emailAddress As String) As IUser Implements IUserFactory.GetByEmailAddress
@@ -54,6 +56,18 @@ Public Class UserFactory
             If data IsNot Nothing Then
                 result = New User(data)
             End If
+        End Using
+        Return result
+    End Function
+
+    Public Function Search(settings As ISettings, searchText As String) As IEnumerable(Of IUser) Implements IUserFactory.Search
+        Dim userDataFactory As IUserDataFactory
+        Dim result As New List(Of IUser)
+        Using scope = m_container.BeginLifetimeScope()
+            userDataFactory = scope.Resolve(Of IUserDataFactory)
+            For Each data As UserData In userDataFactory.Search(New Settings(settings), searchText)
+                result.Add(New User(data))
+            Next
         End Using
         Return result
     End Function

@@ -41,5 +41,34 @@ Namespace Controllers
             Return result
         End Function
 
+        'todo add error handling
+        <HttpGet(), Authorize()> Public Shadows Function GetUser(ByVal id As Guid) As IHttpActionResult
+            Dim userFactory As IUserFactory
+            Dim requestRole As enumRole = RoleProcessor.GetRoleFlags(CType(Me.User, ClaimsPrincipal))
+            Dim u As IUser = Nothing
+            Dim mapper As IMapper
+            Dim result As IHttpActionResult = Nothing
+
+            Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
+                userFactory = scope.Resolve(Of IUserFactory)()
+                u = userFactory.Get(New Settings(), id)
+            End Using
+
+            If u Is Nothing Then
+                If (requestRole And enumRole.UserAdministrator) = enumRole.UserAdministrator Then
+                    result = NotFound()
+                Else
+                    result = Unauthorized()
+                End If
+            End If
+
+            If result Is Nothing Then
+                mapper = New Mapper(m_mapperConfiguration)
+                result = Ok(mapper.Map(Of User)(u))
+            End If
+
+            Return result
+        End Function
+
     End Class
 End Namespace
