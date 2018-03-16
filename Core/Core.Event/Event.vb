@@ -7,6 +7,7 @@ Public Class [Event]
     Private m_eventData As EventData
     Private m_eventType As IEventType
     Private m_container As IContainer
+    Private m_forms As IList(Of IForm)
 
     Friend Sub New(ByVal eventType As IEventType)
         m_eventType = eventType
@@ -34,5 +35,14 @@ Public Class [Event]
 
     Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
         Throw New NotImplementedException()
+    End Function
+
+    Public Function AddForm(form As IForm) As IForm Implements IEvent.AddForm
+        Dim eventForm As New EventForm(Me, form)
+        If m_forms Is Nothing Then
+            m_forms = New List(Of IForm)
+        End If
+        m_forms.Add(eventForm)
+        Return eventForm
     End Function
 End Class

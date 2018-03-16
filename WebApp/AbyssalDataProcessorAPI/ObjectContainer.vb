@@ -23,6 +23,7 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of FormSaver)().As(Of IFormSaver)()
 
         builder.RegisterType(Of EventSaver)().As(Of IEventSaver)()
+        builder.RegisterType(Of EventSaver.CreateEventRequest)().As(Of IEventSaver.ICreateEventRequest)()
         builder.RegisterType(Of EventFactory)().As(Of IEventFactory)()
         builder.RegisterType(Of EventTypeFactory)().As(Of IEventTypeFactory)()
         builder.RegisterType(Of EventTypeSaver)().As(Of IEventTypeSaver)()

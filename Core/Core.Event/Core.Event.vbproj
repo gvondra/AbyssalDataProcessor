@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Event.vb" />
     <Compile Include="EventFactory.vb" />
+    <Compile Include="EventForm.vb" />
     <Compile Include="EventSaver.vb" />
     <Compile Include="EventType.vb" />
     <Compile Include="EventTypeFactory.vb" />

@@ -10,6 +10,7 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of EventTypeDataFactory).As(Of IEventTypeDataFactory)()
         builder.RegisterType(Of EventTypeDataSaver)()
         builder.RegisterType(Of EventDataSaver)()
+        builder.RegisterType(Of EventFormDataSaver)()
 
         m_container = builder.Build()
     End Sub
