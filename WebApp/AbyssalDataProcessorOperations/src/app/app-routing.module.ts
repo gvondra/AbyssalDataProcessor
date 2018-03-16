@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { CallbackComponent } from './callback/callback.component';
 import { RoleRequestComponent } from './role-request/role-request.component';
+import { UserSearchComponent } from './user-search/user-search.component';
+import { UserComponent} from './user/user.component';
 const routes: Routes = [
     {
         path: '',
@@ -16,6 +18,20 @@ const routes: Routes = [
       {
         path: 'rolerequest',
         component: RoleRequestComponent,
+        canActivate: [
+          AuthGuard
+        ]
+      },
+      {
+        path: 'usersearch',
+        component: UserSearchComponent,
+        canActivate: [
+          AuthGuard
+        ]
+      },
+      {
+        path: 'user/:id',
+        component: UserComponent,
         canActivate: [
           AuthGuard
         ]
