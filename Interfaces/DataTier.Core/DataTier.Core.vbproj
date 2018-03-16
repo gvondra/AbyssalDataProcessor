@@ -64,6 +64,7 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStateManager.vb" />
     <Compile Include="EventDataSaver.vb" />
     <Compile Include="EventTypeDataFactory.vb" />
     <Compile Include="EventTypeDataSaver.vb" />

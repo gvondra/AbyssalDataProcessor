@@ -95,5 +95,8 @@
     <Build Include="adp\Stored Procedure\uEventType.sql" />
     <Build Include="adp\Table\EventForm.sql" />
     <Build Include="adp\Stored Procedure\iEventForm.sql" />
+    <Build Include="adp\Stored Procedure\sEventTypeAll.sql" />
+    <Build Include="adp\Stored Procedure\sTaskTypeAll.sql" />
+    <Build Include="adp\Stored Procedure\sEventTypeTaskTypeAll.sql" />
   </ItemGroup>
 </Project>
