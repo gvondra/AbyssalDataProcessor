@@ -8,8 +8,8 @@ export class UserService {
 
   constructor(private http: Http) { }
 
-  getUser() : Promise<User> {
-    return this.http.get(environment.baseUrl + "User", {
+  getUser(userId: string) : Promise<User> {
+    return this.http.get(environment.baseUrl + "User/" + userId, {
       headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
     })
     .toPromise()
