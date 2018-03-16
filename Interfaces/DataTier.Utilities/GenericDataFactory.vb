@@ -11,8 +11,28 @@
         Me.LoaderFactory = loaderFactory
     End Sub
 
+    Public Function GetData(settings As ISettings, providerFactory As IDbProviderFactory, procedureName As String, createModelObject As Func(Of T), assignDataStateManager As Action(Of IEnumerable(Of T))) As IEnumerable(Of T) Implements IGenericDataFactory(Of T).GetData
+        Dim data As IEnumerable(Of T) = GetData(settings, providerFactory, procedureName, createModelObject)
+
+        If assignDataStateManager IsNot Nothing Then
+            assignDataStateManager.Invoke(data)
+        End If
+
+        Return data
+    End Function
+
+    Public Function GetData(settings As ISettings, providerFactory As IDbProviderFactory, procedureName As String, createModelObject As Func(Of T), assignDataStateManager As Action(Of IEnumerable(Of T)), parameters As IEnumerable(Of IDataParameter)) As IEnumerable(Of T) Implements IGenericDataFactory(Of T).GetData
+        Dim data As IEnumerable(Of T) = GetData(settings, providerFactory, procedureName, createModelObject, parameters)
+
+        If assignDataStateManager IsNot Nothing Then
+            assignDataStateManager.Invoke(data)
+        End If
+
+        Return data
+    End Function
+
     Public Function GetData(settings As ISettings, providerFactory As IDbProviderFactory, procedureName As String, createModelObject As Func(Of T)) As IEnumerable(Of T) Implements IGenericDataFactory(Of T).GetData
-        Return GetData(settings, providerFactory, procedureName, createModelObject, Nothing)
+        Return GetData(settings, providerFactory, procedureName, createModelObject, parameters:=Nothing)
     End Function
 
     Public Function GetData(settings As ISettings, providerFactory As IDbProviderFactory, procedureName As String, createModelObject As Func(Of T), parameters As IEnumerable(Of IDataParameter)) As IEnumerable(Of T) Implements IGenericDataFactory(Of T).GetData
@@ -42,6 +62,16 @@
         End Using
 
         Return result
+    End Function
+
+    Public Function LoadData(Of R)(reader As IDataReader, createModelObject As Func(Of R), ByVal assignDataStateManager As Action(Of IEnumerable(Of R))) As IEnumerable(Of R) Implements IGenericDataFactory(Of T).LoadData
+        Dim data As IEnumerable(Of R) = LoadData(Of R)(reader, createModelObject)
+
+        If assignDataStateManager IsNot Nothing Then
+            assignDataStateManager.Invoke(data)
+        End If
+
+        Return data
     End Function
 
     Public Function LoadData(Of R)(reader As IDataReader, createModelObject As Func(Of R)) As IEnumerable(Of R) Implements IGenericDataFactory(Of T).LoadData

@@ -99,4 +99,9 @@ Public Module Util
         parameterCollection.Add(parameter)
     End Sub
 
+    Public Sub AssignDataStateManager(Of T As IDataManagedState(Of T))(data As IEnumerable(Of T))
+        For Each d As T In data
+            d.DataStateManager = New DataStateManager(Of T)(CType(d.Clone, T))
+        Next
+    End Sub
 End Module

@@ -77,7 +77,6 @@
     <Build Include="adp\Stored Procedure\iUser.sql" />
     <Build Include="adp\Stored Procedure\iUserAccount.sql" />
     <Build Include="adp\Stored Procedure\uUser.sql" />
-    <Build Include="adp\Stored Procedure\sUserAccountCount.sql" />
     <Build Include="adp\Table\Form.sql" />
     <Build Include="adp\Stored Procedure\iForm.sql" />
     <Build Include="adp\Stored Procedure\sForm.sql" />
@@ -98,5 +97,7 @@
     <Build Include="adp\Stored Procedure\sEventTypeAll.sql" />
     <Build Include="adp\Stored Procedure\sTaskTypeAll.sql" />
     <Build Include="adp\Stored Procedure\sEventTypeTaskTypeAll.sql" />
+    <Build Include="adp\Stored Procedure\sUserSearch.sql" />
+    <Build Include="adp\Stored Procedure\sUser.sql" />
   </ItemGroup>
 </Project>

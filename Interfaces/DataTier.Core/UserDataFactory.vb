@@ -1,4 +1,5 @@
-﻿Public Class UserDataFactory
+﻿Imports System.Text.RegularExpressions
+Public Class UserDataFactory
     Implements IUserDataFactory
 
     Public Property GenericDataFactory As IGenericDataFactory(Of UserData)
@@ -14,7 +15,12 @@
     Public Function GetByEmailAddress(settings As ISettings, ByVal providerFactory As IDbProviderFactory, emailAddress As String) As IEnumerable(Of UserData)
         Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "emailAddress", DbType.String)
         parameter.Value = emailAddress
-        Return Me.GenericDataFactory.GetData(settings, providerFactory, "adp.sUserByEmailAddress", Function() New UserData, {parameter})
+        Return Me.GenericDataFactory.GetData(settings,
+                                             providerFactory,
+                                             "adp.sUserByEmailAddress",
+                                             Function() New UserData,
+                                             New Action(Of IEnumerable(Of UserData))(AddressOf AssignDataStateManager(Of UserData)),
+                                             {parameter})
     End Function
 
     Public Function GetBySubscriberId(settings As ISettings, subscriberId As String) As UserData Implements IUserDataFactory.GetBySubscriberId
@@ -24,24 +30,48 @@
     Public Function GetBySubscriberId(settings As ISettings, ByVal providerFactory As IDbProviderFactory, subscriberId As String) As UserData
         Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "subscriberId", DbType.String)
         parameter.Value = subscriberId
-        Return Me.GenericDataFactory.GetData(settings, providerFactory, "adp.sUserBySubscriberId", Function() New UserData, {parameter}).FirstOrDefault
+        Return Me.GenericDataFactory.GetData(settings,
+                                             providerFactory,
+                                             "adp.sUserBySubscriberId",
+                                             Function() New UserData,
+                                             New Action(Of IEnumerable(Of UserData))(AddressOf AssignDataStateManager(Of UserData)),
+                                             {parameter}).FirstOrDefault
     End Function
 
-    Public Function GetAccountCount(settings As ISettings) As Int32 Implements IUserDataFactory.GetAccountCount
-        Return GetAccountCount(settings, New DbProviderFactory())
+    Public Function [Get](settings As ISettings, userId As Guid) As UserData Implements IUserDataFactory.Get
+        Return Me.Get(settings, New DbProviderFactory, userId)
     End Function
 
-    Public Function GetAccountCount(settings As ISettings, ByVal providerFactory As IDbProviderFactory) As Int32
-        Dim count As Integer = 0
-        Using connection As IDbConnection = providerFactory.OpenConnection(settings.ConnectionString)
-            Using command As IDbCommand = connection.CreateCommand
-                command.CommandText = "adp.sUserAccountCount"
-                command.CommandType = CommandType.StoredProcedure
+    Public Function [Get](settings As ISettings, ByVal providerFactory As IDbProviderFactory, userId As Guid) As UserData
+        Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "userId", DbType.Guid)
+        parameter.Value = userId
+        Return Me.GenericDataFactory.GetData(settings,
+                                             providerFactory,
+                                             "adp.sUser",
+                                             Function() New UserData,
+                                             New Action(Of IEnumerable(Of UserData))(AddressOf AssignDataStateManager(Of UserData)),
+                                             {parameter}).FirstOrDefault
+    End Function
 
-                count = CType(command.ExecuteScalar(), Integer)
-            End Using
-            connection.Close()
-        End Using
-        Return count
+    Public Function Search(settings As ISettings, searchText As String) As IEnumerable(Of UserData) Implements IUserDataFactory.Search
+        Return Search(settings, New DbProviderFactory(), searchText)
+    End Function
+
+    Public Function Search(settings As ISettings, ByVal providerFactory As IDbProviderFactory, searchText As String) As IEnumerable(Of UserData)
+        searchText = searchText.Trim
+        Dim value As IDbDataParameter = CreateParameter(providerFactory, "value", DbType.String)
+        value.Value = searchText
+        Dim wildCardValue As IDbDataParameter = CreateParameter(providerFactory, "wildCardValue", DbType.String)
+        searchText = Regex.Replace(searchText, "\\", "\\")
+        searchText = Regex.Replace(searchText, "_", "\_")
+        searchText = Regex.Replace(searchText, "%", "\%")
+        searchText = Regex.Replace(searchText, "\s+", "%")
+        wildCardValue.Value = "%" & searchText & "%"
+        Return Me.GenericDataFactory.GetData(settings,
+                                             providerFactory,
+                                             "adp.sUserSearch",
+                                             Function() New UserData,
+                                             New Action(Of IEnumerable(Of UserData))(AddressOf AssignDataStateManager(Of UserData)),
+                                             {value, wildCardValue})
     End Function
 End Class

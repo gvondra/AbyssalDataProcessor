@@ -62,8 +62,6 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDataManagedState.vb" />
-    <Compile Include="IDataStateManager.vb" />
     <Compile Include="EventData.vb" />
     <Compile Include="EventFormData.vb" />
     <Compile Include="EventTypeData.vb" />
