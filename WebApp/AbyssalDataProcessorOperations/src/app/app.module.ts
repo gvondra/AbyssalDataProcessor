@@ -17,6 +17,8 @@ import { UserComponent } from './user/user.component';
 import { DateValueAccessorModule } from './date-value-accessor/date-value-accessor.module';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupComponent } from './group/group.component';
+import { TaskTypeComponent } from './task-type/task-type.component';
+import { TaskTypeListComponent } from './task-type-list/task-type-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { GroupComponent } from './group/group.component';
     UserSearchComponent,
     UserComponent,
     GroupListComponent,
-    GroupComponent
+    GroupComponent,
+    TaskTypeComponent,
+    TaskTypeListComponent
   ],
   imports: [
     BrowserModule,
