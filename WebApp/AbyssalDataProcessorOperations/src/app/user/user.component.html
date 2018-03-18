@@ -1,4 +1,9 @@
-<h2>User</h2>
+<div>
+  <div style="float: right; align-content: right;">
+    <a  *ngIf="User" [routerLink]="['/user', User.UserId, 'groups']">Groups</a>
+  </div>
+  <h2>User</h2>
+</div>
 <h3 *ngIf="User">{{ User.ShortName }}</h3>
 <div [hidden]="SpinnerHidden">  
   <i class="fa fa-cog fa-spin" style="font-size:36px; margin: 25px;"></i>
