@@ -82,6 +82,9 @@
     <Compile Include="IGroupSaver.vb" />
     <Compile Include="ISavable.vb" />
     <Compile Include="ISettings.vb" />
+    <Compile Include="ITaskType.vb" />
+    <Compile Include="ITaskTypeFactory.vb" />
+    <Compile Include="ITaskTypeSaver.vb" />
     <Compile Include="IUser.vb" />
     <Compile Include="IUserFactory.vb" />
     <Compile Include="IUserSaver.vb" />
