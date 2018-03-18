@@ -46,14 +46,14 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'group',
+        path: 'group/:id',
         component: GroupComponent,
         canActivate: [
           AuthGuard
         ]
       },
       {
-        path: 'group/:id',
+        path: 'group',
         component: GroupComponent,
         canActivate: [
           AuthGuard
