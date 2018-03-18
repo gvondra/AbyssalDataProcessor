@@ -20,6 +20,7 @@ import { GroupComponent } from './group/group.component';
 import { TaskTypeComponent } from './task-type/task-type.component';
 import { TaskTypeListComponent } from './task-type-list/task-type-list.component';
 import { EventTypeListComponent } from './event-type-list/event-type-list.component';
+import { EventTypeComponent } from './event-type/event-type.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EventTypeListComponent } from './event-type-list/event-type-list.compon
     GroupComponent,
     TaskTypeComponent,
     TaskTypeListComponent,
-    EventTypeListComponent
+    EventTypeListComponent,
+    EventTypeComponent
   ],
   imports: [
     BrowserModule,
