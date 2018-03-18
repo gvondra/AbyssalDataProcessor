@@ -38,4 +38,28 @@ Public Class EventTypeFactory
         End If
         Return result
     End Function
+
+    Public Function GetAll(settings As ISettings) As IEnumerable(Of IEventType) Implements IEventTypeFactory.GetAll
+        Dim dataList As IEnumerable(Of EventTypeData)
+        Dim types As IEnumerable(Of IEventType) = {}
+        Dim factory As IEventTypeDataFactory
+        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            factory = scope.Resolve(Of IEventTypeDataFactory)()
+            dataList = factory.GetAll(New Settings(settings))
+            types = From i In [Enum].GetValues(GetType(enumEventType))
+                    Where CType(i, enumEventType) <> enumEventType.NotSet
+                    Select GetEventType(CType(i, enumEventType), dataList)
+
+        End Using
+        Return types
+    End Function
+
+    Private Function GetEventType(ByVal i As enumEventType, ByVal dataList As IEnumerable(Of EventTypeData)) As IEventType
+        Dim data As EventTypeData = dataList.FirstOrDefault(Function(d As EventTypeData) CType(d.EventTypeId, enumEventType) = i)
+
+        If data Is Nothing Then
+            data = New EventTypeData() With {.EventTypeId = CType(i, Short), .Title = i.ToString}
+        End If
+        Return New EventType(data)
+    End Function
 End Class

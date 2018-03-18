@@ -26,7 +26,7 @@ Public Class EventType
         End Set
     End Property
 
-    Public ReadOnly Property Type As Int16 Implements IEventType.Type
+    Public ReadOnly Property EventTypeId As Int16 Implements IEventType.EventTypeId
         Get
             Return m_eventTypeData.EventTypeId
         End Get
