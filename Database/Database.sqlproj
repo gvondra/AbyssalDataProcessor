@@ -99,5 +99,9 @@
     <Build Include="adp\Stored Procedure\sEventTypeTaskTypeAll.sql" />
     <Build Include="adp\Stored Procedure\sUserSearch.sql" />
     <Build Include="adp\Stored Procedure\sUser.sql" />
+    <Build Include="adp\Stored Procedure\sGroup.sql" />
+    <Build Include="adp\Stored Procedure\sGroupAll.sql" />
+    <Build Include="adp\Stored Procedure\iGroup.sql" />
+    <Build Include="adp\Stored Procedure\uGroup.sql" />
   </ItemGroup>
 </Project>

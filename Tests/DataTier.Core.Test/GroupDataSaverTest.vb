@@ -1,11 +1,11 @@
 ﻿<TestClass()>
-Public Class UserDataSaverTest
+Public Class GroupDataSaverTest
 
     <TestMethod()>
     Public Sub CreateTest()
         Dim settings As New Mock(Of ISettings)()
-        Dim data As New UserData()
-        Dim saver As New UserDataSaver(settings.Object, data)
+        Dim data As New GroupData()
+        Dim saver As New GroupDataSaver(settings.Object, data)
         Dim providerFactory As New Mock(Of IDbProviderFactory)()
         Dim connection As New Mock(Of IDbConnection)()
         Dim command As New Mock(Of IDbCommand)
@@ -25,21 +25,21 @@ Public Class UserDataSaverTest
         providerFactory.Verify(Sub(f As IDbProviderFactory) f.EstablishTransaction(settings.Object), Times.Once)
         command.Verify(Of Integer)(Function(c As IDbCommand) c.ExecuteNonQuery(), Times.Once)
         command.VerifySet(Sub(c As IDbCommand) c.CommandType = CommandType.StoredProcedure, Times.AtLeastOnce)
-        command.VerifySet(Sub(c As IDbCommand) c.CommandText = "adp.iUser", Times.AtLeastOnce)
+        command.VerifySet(Sub(c As IDbCommand) c.CommandText = "adp.iGroup", Times.AtLeastOnce)
     End Sub
 
     <TestMethod()>
     Public Sub UpdateTest()
         Dim settings As New Mock(Of ISettings)()
-        Dim data As New UserData()
-        Dim saver As New UserDataSaver(settings.Object, data)
+        Dim data As New GroupData()
+        Dim saver As New GroupDataSaver(settings.Object, data)
         Dim providerFactory As New Mock(Of IDbProviderFactory)()
         Dim connection As New Mock(Of IDbConnection)()
         Dim command As New Mock(Of IDbCommand)
         Dim parameters As New Mock(Of IDataParameterCollection)
 
         data.AcceptChanges()
-        data.FullName = "new name"
+        data.Name = "new name"
 
         providerFactory.Setup(Sub(f As IDbProviderFactory) f.EstablishTransaction(settings.Object)) _
         .Callback(Sub()
@@ -55,7 +55,7 @@ Public Class UserDataSaverTest
         providerFactory.Verify(Sub(f As IDbProviderFactory) f.EstablishTransaction(settings.Object), Times.Once)
         command.Verify(Of Integer)(Function(c As IDbCommand) c.ExecuteNonQuery(), Times.Once)
         command.VerifySet(Sub(c As IDbCommand) c.CommandType = CommandType.StoredProcedure, Times.AtLeastOnce)
-        command.VerifySet(Sub(c As IDbCommand) c.CommandText = "adp.uUser", Times.AtLeastOnce)
+        command.VerifySet(Sub(c As IDbCommand) c.CommandText = "adp.uGroup", Times.AtLeastOnce)
     End Sub
 
 

@@ -69,7 +69,10 @@
     <Compile Include="EventTypeDataSaver.vb" />
     <Compile Include="FormDataSaver.vb" />
     <Compile Include="EventFormDataSaver.vb" />
+    <Compile Include="GroupDataFactory.vb" />
+    <Compile Include="GroupDataSaver.vb" />
     <Compile Include="IEventTypeDataFactory.vb" />
+    <Compile Include="IGroupDataFactory.vb" />
     <Compile Include="UserAccountDataSaver.vb" />
     <Compile Include="UserDataFactory.vb" />
     <Compile Include="IDataCreator.vb" />
