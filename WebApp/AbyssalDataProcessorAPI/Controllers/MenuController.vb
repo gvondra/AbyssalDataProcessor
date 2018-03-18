@@ -28,6 +28,12 @@ Namespace Controllers
                 column2.Add(New With {.Text = "Tasks", .URL = ""})
             End If
 
+            If (flags And enumRole.TaskAdministrator) = enumRole.TaskAdministrator _
+                    OrElse (flags And enumRole.UserAdministrator) = enumRole.UserAdministrator Then
+
+                column2.Add(New With {.Text = "Groups", .URL = "grouplist"})
+            End If
+
             If (flags And enumRole.UserAdministrator) = enumRole.UserAdministrator Then
                 column2.Add(New With {.Text = "Users", .URL = "usersearch"})
             End If
