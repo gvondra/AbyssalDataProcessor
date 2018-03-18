@@ -25,7 +25,7 @@ Namespace Controllers
             End If
 
             If (flags And enumRole.TaskAdministrator) = enumRole.TaskAdministrator Then
-                column2.Add(New With {.Text = "Tasks", .URL = ""})
+                column2.Add(New With {.Text = "Tasks", .URL = "tasktypelist"})
             End If
 
             If (flags And enumRole.TaskAdministrator) = enumRole.TaskAdministrator _
