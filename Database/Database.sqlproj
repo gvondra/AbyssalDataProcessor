@@ -106,5 +106,8 @@
     <Build Include="adp\Stored Procedure\sTaskType.sql" />
     <Build Include="adp\Stored Procedure\uTaskType.sql" />
     <Build Include="adp\Stored Procedure\iTaskType.sql" />
+    <Build Include="adp\Stored Procedure\sUserGroupByUserId.sql" />
+    <Build Include="adp\Stored Procedure\iUserGroup.sql" />
+    <Build Include="adp\Stored Procedure\uUserGroup.sql" />
   </ItemGroup>
 </Project>
