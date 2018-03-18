@@ -210,7 +210,7 @@ Namespace Controllers
 
                     saver = scope.Resolve(Of IUserGroupSaver)()
                     saver.Save(New Settings, toUpdate.Concat(toCreate))
-                    result = Ok()
+                    result = Ok("Groups Updated")
                 End If
             End Using
             Return result
