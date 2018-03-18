@@ -79,6 +79,8 @@
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="ObjectContainer.vb" />
     <Compile Include="RoleConstants.vb" />
+    <Compile Include="UserGroup.vb" />
+    <Compile Include="UserGroupSaver.vb" />
     <Compile Include="UserManagementSettings.vb" />
     <Compile Include="User.vb" />
     <Compile Include="UserFactory.vb" />

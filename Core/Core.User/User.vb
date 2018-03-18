@@ -107,4 +107,19 @@ Public Class User
             Return New DataUpdateWrapper(scope.Resolve(Of UserDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(UserData), m_userData)))
         End Using
     End Function
+
+    Public Function GetGroups(settings As ISettings) As IEnumerable(Of IUserGroup) Implements IUser.GetGroups
+        Dim result As IEnumerable(Of IUserGroup) = {}
+        Dim factory As IUserGroupDataFactory
+
+        If UserId.Equals(Guid.Empty) = False Then
+            Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+                factory = scope.Resolve(Of IUserGroupDataFactory)()
+                result = From data In factory.GetByUserId(New Settings(settings), UserId)
+                         Where data.Group IsNot Nothing
+                         Select New UserGroup(Me, New Group(data.Group), data)
+            End Using
+        End If
+        Return result
+    End Function
 End Class

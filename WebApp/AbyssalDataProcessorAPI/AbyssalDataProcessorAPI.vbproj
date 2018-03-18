@@ -214,6 +214,7 @@
     <Compile Include="MetricsLogAttribute.vb" />
     <Compile Include="Models\EventType.vb" />
     <Compile Include="Models\Group.vb" />
+    <Compile Include="Models\UserGroup.vb" />
     <Compile Include="Models\RoleRequest.vb" />
     <Compile Include="Models\TaskType.vb" />
     <Compile Include="Models\User.vb" />

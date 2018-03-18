@@ -122,5 +122,57 @@ Namespace Controllers
             End Using
             Return result
         End Function
+
+        'todo add error handling
+        <HttpGet(), ClaimsAuthorization(ClaimTypes:="UA"), Route("api/User/{id}/Groups")>
+        Function GetUserGroups(ByVal id As Guid) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim user As IUser
+            Dim userFactory As IUserFactory
+            Dim groups As IEnumerable(Of UserGroup)
+            Dim allGroups As IEnumerable(Of IGroup)
+            Dim userGroups As IEnumerable(Of IUserGroup)
+            Dim groupFactory As IGroupFactory
+            Using scope As ILifetimeScope = Me.ObjectContainer().BeginLifetimeScope
+                userFactory = scope.Resolve(Of IUserFactory)()
+                user = userFactory.Get(New Settings(), id)
+
+                If user Is Nothing Then
+                    result = NotFound()
+                End If
+
+                If result Is Nothing Then
+                    groupFactory = scope.Resolve(Of IGroupFactory)()
+                    allGroups = groupFactory.GetAll(New Settings())
+                    userGroups = user.GetGroups(New Settings())
+                    groups = From g In allGroups
+                             Select MapUserGroup(g, user, userGroups)
+
+                    result = Ok(groups)
+                End If
+            End Using
+            Return result
+        End Function
+
+        <NonAction> Private Function MapUserGroup(ByVal group As IGroup,
+                                                  ByVal user As IUser,
+                                                  ByVal userGroups As IEnumerable(Of IUserGroup)) As UserGroup
+
+            Dim userGroup As IUserGroup = userGroups.FirstOrDefault(Function(ug As IUserGroup) ug.GroupId.Equals(group.GroupId))
+            Dim result As UserGroup
+
+            If userGroup Is Nothing Then
+                result = New UserGroup() With {.GroupId = group.GroupId, .IsActive = False, .Name = group.Name}
+            Else
+                result = New UserGroup() With {.GroupId = userGroup.GroupId, .IsActive = userGroup.IsActive, .Name = userGroup.Name}
+            End If
+            Return result
+        End Function
+
+        'todo add error handling
+        <HttpPost(), ClaimsAuthorization(ClaimTypes:="UA"), Route("api/User/{id}/Groups")>
+        Function SaveUserGroups(ByVal id As Guid, ByVal userGroups As IEnumerable(Of UserGroup)) As IHttpActionResult
+
+        End Function
     End Class
 End Namespace

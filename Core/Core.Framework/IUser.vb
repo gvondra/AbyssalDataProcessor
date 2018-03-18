@@ -11,4 +11,5 @@
     ReadOnly Property UpdateTimestamp As Date
 
     Function GetAccountDataCreater(ByVal settings As ISettings, ByVal subscriberId As String) As IDataCreator
+    Function GetGroups(ByVal settings As ISettings) As IEnumerable(Of IUserGroup)
 End Interface
