@@ -1,6 +1,7 @@
 ﻿Imports AbyssalDataProcessor.Core.Event
 Imports AbyssalDataProcessor.Core.Form
 Imports AbyssalDataProcessor.Core.Log
+Imports AbyssalDataProcessor.Core.Task
 Imports AbyssalDataProcessor.Core.User
 Imports Autofac
 Friend NotInheritable Class ObjectContainer
@@ -11,6 +12,9 @@ Friend NotInheritable Class ObjectContainer
         Dim builder As New ContainerBuilder()
 
         builder.RegisterType(Of Settings)().As(Of ISettings)()
+
+        builder.RegisterType(Of TaskTypeFactory)().As(Of ITaskTypeFactory)()
+        builder.RegisterType(Of TaskTypeSaver)().As(Of ITaskTypeSaver)()
 
         builder.RegisterType(Of GroupFactory)().As(Of IGroupFactory)()
         builder.RegisterType(Of GroupSaver)().As(Of IGroupSaver)()

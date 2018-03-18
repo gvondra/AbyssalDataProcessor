@@ -203,6 +203,8 @@
     <Compile Include="Controllers\GroupController.vb" />
     <Compile Include="Controllers\GroupsController.vb" />
     <Compile Include="Controllers\MenuController.vb" />
+    <Compile Include="Controllers\TaskTypeController.vb" />
+    <Compile Include="Controllers\TaskTypesController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="Controllers\UsersController.vb" />
     <Compile Include="IUserFactory.vb" />
@@ -210,6 +212,7 @@
     <Compile Include="MetricsLogAttribute.vb" />
     <Compile Include="Models\Group.vb" />
     <Compile Include="Models\RoleRequest.vb" />
+    <Compile Include="Models\TaskType.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -266,6 +269,10 @@
     <ProjectReference Include="..\..\Core\Core.Logging\Core.Log.vbproj">
       <Project>{8c9b4a10-f563-4491-af9d-259e6a4f4f6f}</Project>
       <Name>Core.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.Task\Core.Task.vbproj">
+      <Project>{1c826a9d-914f-4c67-a4c9-0fbf59ab1f07}</Project>
+      <Name>Core.Task</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.User\Core.User.vbproj">
       <Project>{2e861851-89c0-420c-88cd-bf91f6e51b4d}</Project>

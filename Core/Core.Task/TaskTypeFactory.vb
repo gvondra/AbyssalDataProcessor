@@ -10,6 +10,10 @@ Public Class TaskTypeFactory
         m_container = ObjectContainer.GetContainer()
     End Sub
 
+    Public Function Create() As ITaskType Implements ITaskTypeFactory.Create
+        Return New TaskType(New TaskTypeData())
+    End Function
+
     Public Function [Get](settings As ISettings, taskTypeId As Guid) As ITaskType Implements ITaskTypeFactory.Get
         Dim data As TaskTypeData
         Dim factory As ITaskTypeDataFactory
