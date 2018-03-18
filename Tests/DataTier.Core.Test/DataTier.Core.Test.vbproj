@@ -104,6 +104,8 @@
     <Compile Include="EventFormDataSaverTest.vb" />
     <Compile Include="FormDataSaverTest.vb" />
     <Compile Include="EventDataSaverTest.vb" />
+    <Compile Include="TaskTypeDataFactoryTest.vb" />
+    <Compile Include="TaskTypeDataSaverTest.vb" />
     <Compile Include="UserAccountDataSaverTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

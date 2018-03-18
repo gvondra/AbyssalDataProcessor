@@ -73,6 +73,9 @@
     <Compile Include="GroupDataSaver.vb" />
     <Compile Include="IEventTypeDataFactory.vb" />
     <Compile Include="IGroupDataFactory.vb" />
+    <Compile Include="ITaskTypeDataFactory.vb" />
+    <Compile Include="TaskTypeDataFactory.vb" />
+    <Compile Include="TaskTypeDataSaver.vb" />
     <Compile Include="UserAccountDataSaver.vb" />
     <Compile Include="UserDataFactory.vb" />
     <Compile Include="IDataCreator.vb" />

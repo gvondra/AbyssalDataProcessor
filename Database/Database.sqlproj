@@ -103,5 +103,8 @@
     <Build Include="adp\Stored Procedure\sGroupAll.sql" />
     <Build Include="adp\Stored Procedure\iGroup.sql" />
     <Build Include="adp\Stored Procedure\uGroup.sql" />
+    <Build Include="adp\Stored Procedure\sTaskType.sql" />
+    <Build Include="adp\Stored Procedure\uTaskType.sql" />
+    <Build Include="adp\Stored Procedure\iTaskType.sql" />
   </ItemGroup>
 </Project>
