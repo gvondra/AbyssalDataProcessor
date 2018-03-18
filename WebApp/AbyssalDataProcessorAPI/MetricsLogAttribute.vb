@@ -15,6 +15,7 @@ Public Class MetricsLogAttribute
         Dim duration As TimeSpan = Date.UtcNow.Subtract(startTime)
         Dim saver As IWebMetricSaver
         Dim attributes As New Dictionary(Of String, String)
+        Dim statusCode As String = String.Empty
 
         attributes.Add("Action", actionExecuteContext.ActionContext.ActionDescriptor.ActionName)
 
@@ -24,6 +25,10 @@ Public Class MetricsLogAttribute
             End If
         Next
 
+        If actionExecuteContext.Response IsNot Nothing Then
+            statusCode = actionExecuteContext.Response.StatusCode.ToString
+        End If
+
         Using scope As ILifetimeScope = ObjectContainer.GetContainer.BeginLifetimeScope
             saver = scope.Resolve(Of IWebMetricSaver)()
             saver.Create(New Settings(),
@@ -31,7 +36,7 @@ Public Class MetricsLogAttribute
                          actionExecuteContext.Request.Method.ToString,
                          startTime,
                          duration.TotalSeconds,
-                         actionExecuteContext.Response.StatusCode.ToString,
+                         statusCode,
                          actionExecuteContext.ActionContext.ActionDescriptor.ControllerDescriptor.ControllerName,
                          attributes
             )
