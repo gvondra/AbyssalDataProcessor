@@ -52,10 +52,10 @@ Public Class User
 
     Public Property PhoneNumber As String Implements IUser.PhoneNumber
         Get
-            Return m_userData.PhoneNumber
+            Return StringFormatters.UnformatPhoneNumber(m_userData.PhoneNumber)
         End Get
         Set(value As String)
-            m_userData.PhoneNumber = value
+            m_userData.PhoneNumber = StringFormatters.UnformatPhoneNumber(value)
         End Set
     End Property
 

@@ -9,12 +9,10 @@ Namespace Controllers
     Public Class UsersController
         Inherits ControllerBase
 
-        Private Shared m_mapperConfiguration As MapperConfiguration
+        Private Shared UserMapper As UserMapper
 
         Shared Sub New()
-            m_mapperConfiguration = New MapperConfiguration(Sub(c As IMapperConfigurationExpression)
-                                                                c.CreateMap(Of IUser, User)()
-                                                            End Sub)
+            UserMapper = New UserMapper
         End Sub
 
         <HttpGet(), ClaimsAuthorization(ClaimTypes:="UA"), Route("api/Users/Search")>
@@ -49,7 +47,7 @@ Namespace Controllers
             End If
 
             If result Is Nothing Then
-                mapper = New Mapper(m_mapperConfiguration)
+                mapper = New Mapper(UserMapper.MapperConfiguration)
                 users = From y In innerUsers.Select(Of User)(Function(x As IUser) mapper.Map(Of User)(x))
                 result = Ok(users)
             End If

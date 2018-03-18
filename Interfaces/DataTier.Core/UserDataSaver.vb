@@ -18,27 +18,29 @@
         Dim id As IDbDataParameter
         Dim timestamp As IDbDataParameter
 
-        providerFactory.EstablishTransaction(m_settings)
-        Using command As IDbCommand = m_settings.Connection.CreateCommand
-            command.Transaction = m_settings.Transaction
-            command.CommandType = CommandType.StoredProcedure
-            command.CommandText = "adp.iUser"
+        If m_userData.DataStateManager.GetState(m_userData) = IDataStateManager(Of UserData).enumState.New Then
+            providerFactory.EstablishTransaction(m_settings)
+            Using command As IDbCommand = m_settings.Connection.CreateCommand
+                command.Transaction = m_settings.Transaction
+                command.CommandType = CommandType.StoredProcedure
+                command.CommandText = "adp.iUser"
 
-            id = CreateParameter(providerFactory, "id", DbType.Guid)
-            id.Direction = ParameterDirection.Output
-            command.Parameters.Add(id)
+                id = CreateParameter(providerFactory, "id", DbType.Guid)
+                id.Direction = ParameterDirection.Output
+                command.Parameters.Add(id)
 
-            timestamp = CreateParameter(providerFactory, "timestamp", DbType.DateTime)
-            timestamp.Direction = ParameterDirection.Output
-            command.Parameters.Add(timestamp)
+                timestamp = CreateParameter(providerFactory, "timestamp", DbType.DateTime)
+                timestamp.Direction = ParameterDirection.Output
+                command.Parameters.Add(timestamp)
 
-            CommonParameters(providerFactory, command)
+                CommonParameters(providerFactory, command)
 
-            command.ExecuteNonQuery()
-            m_userData.UserId = CType(id.Value, Guid)
-            m_userData.CreateTimestamp = CType(timestamp.Value, Date)
-            m_userData.UpdateTimestamp = CType(timestamp.Value, Date)
-        End Using
+                command.ExecuteNonQuery()
+                m_userData.UserId = CType(id.Value, Guid)
+                m_userData.CreateTimestamp = CType(timestamp.Value, Date)
+                m_userData.UpdateTimestamp = CType(timestamp.Value, Date)
+            End Using
+        End If
     End Sub
 
     Public Sub Update() Implements IDataUpdater.Update
@@ -48,23 +50,25 @@
     Public Sub Update(ByVal providerFactory As IDbProviderFactory)
         Dim timestamp As IDbDataParameter
 
-        providerFactory.EstablishTransaction(m_settings)
-        Using command As IDbCommand = m_settings.Connection.CreateCommand
-            command.Transaction = m_settings.Transaction
-            command.CommandType = CommandType.StoredProcedure
-            command.CommandText = "adp.uUser"
+        If m_userData.DataStateManager.GetState(m_userData) = IDataStateManager(Of UserData).enumState.Updated Then
+            providerFactory.EstablishTransaction(m_settings)
+            Using command As IDbCommand = m_settings.Connection.CreateCommand
+                command.Transaction = m_settings.Transaction
+                command.CommandType = CommandType.StoredProcedure
+                command.CommandText = "adp.uUser"
 
-            AddParameter(providerFactory, command.Parameters, "id", DbType.Guid, m_userData.UserId)
+                AddParameter(providerFactory, command.Parameters, "id", DbType.Guid, m_userData.UserId)
 
-            timestamp = CreateParameter(providerFactory, "timestamp", DbType.DateTime)
-            timestamp.Direction = ParameterDirection.Output
-            command.Parameters.Add(timestamp)
+                timestamp = CreateParameter(providerFactory, "timestamp", DbType.DateTime)
+                timestamp.Direction = ParameterDirection.Output
+                command.Parameters.Add(timestamp)
 
-            CommonParameters(providerFactory, command)
+                CommonParameters(providerFactory, command)
 
-            command.ExecuteNonQuery()
-            m_userData.UpdateTimestamp = CType(timestamp.Value, Date)
-        End Using
+                command.ExecuteNonQuery()
+                m_userData.UpdateTimestamp = CType(timestamp.Value, Date)
+            End Using
+        End If
     End Sub
 
     Private Sub CommonParameters(ByVal providerFactory As IDbProviderFactory, ByVal command As IDbCommand)

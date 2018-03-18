@@ -15,4 +15,13 @@ export class UserService {
     .toPromise()
     .then(response => response.json() as User)
   }
+
+  putUser(user: User): Promise<User> {
+    return this.http.put(environment.baseUrl + "User", user,
+    {
+      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
+    })
+    .toPromise()
+    .then(response => response.json() as User)
+  }
 }

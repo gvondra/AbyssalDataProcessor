@@ -204,6 +204,7 @@
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="Controllers\UsersController.vb" />
     <Compile Include="IUserFactory.vb" />
+    <Compile Include="Mappers\UserMapper.vb" />
     <Compile Include="MetricsLogAttribute.vb" />
     <Compile Include="Models\RoleRequest.vb" />
     <Compile Include="Models\User.vb" />

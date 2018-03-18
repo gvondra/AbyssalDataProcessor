@@ -28,7 +28,7 @@
           <label class="control-label">Birth Date</label>:
         </div>
         <div class="col-md-8">
-          <input id="BirthDate" name="BirthDate" #birthDateInput="ngModel" type="date" required="required" class="form-control" [(ngModel)]="User.BirthDate"/>
+          <input id="BirthDate" name="BirthDate" #birthDateInput="ngModel" type="date" required="required" class="form-control" [(ngModel)]="User.BirthDate" useValueAsDate/>
           <div [hidden]="birthDateInput.valid || birthDateInput.pristine" class="alert alert-danger">is required</div>
         </div>
       </div>         
@@ -37,8 +37,16 @@
           <label class="control-label">Email Address</label>:
         </div>
         <div class="col-md-8">
-          <input id="EmailAddress" name="EmailAddress" #emailAddressInput="ngModel" type="text" required="required" class="form-control" [(ngModel)]="User.EmailAddress"/>
-          <div [hidden]="emailAddressInput.valid || emailAddressInput.pristine" class="alert alert-danger">is required</div>
+          <input id="EmailAddress" name="EmailAddress" #emailAddressInput="ngModel" type="text" maxlength="250"
+            required="required" 
+            pattern="\S+@\S+" 
+            class="form-control" 
+            [(ngModel)]="User.EmailAddress"/>
+  
+          <div *ngIf="emailAddressInput.invalid && (emailAddressInput.dirty || emailAddressInput.touched)">
+            <div *ngIf="emailAddressInput.errors.required" class="alert alert-danger">is required</div>
+            <div *ngIf="emailAddressInput.errors.pattern" class="alert alert-danger">is invalid</div>
+          </div>
         </div>
       </div>         
       <div class="row">
@@ -46,9 +54,20 @@
           <label class="control-label">Phone Number</label>:
         </div>
         <div class="col-md-8">
-          <input id="PhoneNumber" name="PhoneNumber" #phoneNumberInput="ngModel" type="text" required="required" class="form-control" [(ngModel)]="User.PhoneNumber"/>
-          <div [hidden]="phoneNumberInput.valid || phoneNumberInput.pristine" class="alert alert-danger">is required</div>
+          <input id="PhoneNumber" name="PhoneNumber" #phoneNumberInput="ngModel" type="text" maxlength="15" 
+            pattern="1{0,1}([\(\.\- ]{0,1}[0-9]{3}[\)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4})" 
+            class="form-control"
+            [(ngModel)]="User.PhoneNumber"/>
+  
+          <div *ngIf="phoneNumberInput.invalid && (phoneNumberInput.dirty || phoneNumberInput.touched)">
+            <div *ngIf="phoneNumberInput.errors.pattern" class="alert alert-danger">is invalid</div>
+          </div>
         </div>
-      </div>    
+      </div>  
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <button class="btn btn-default" [disabled]="!userForm.form.valid" (click)="Submit()">Submit</button>
+        </div>
+      </div>  
     </div>
 </form>

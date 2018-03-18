@@ -16,6 +16,11 @@ export class UserComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private userService: UserService) { }
 
+  Submit(){
+    this.userService.putUser(this.User)
+    .then(user => this.SetUser(user))
+  }
+
   ngOnInit() {
     this.route.params
     .switchMap((params: ParamMap) => {
@@ -23,9 +28,13 @@ export class UserComponent implements OnInit {
       return this.userService.getUser(params['id']);
     })
     .subscribe(user => {
-      this.User = user;
+      this.SetUser(user)
       this.SpinnerHidden = true;
     });
   }
 
+  SetUser(user: User): void {
+    this.User = user;
+    if (this.User.BirthDate) { this.User.BirthDate = new Date(this.User.BirthDate)}
+  }
 }

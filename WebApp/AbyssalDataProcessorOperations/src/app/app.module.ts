@@ -14,6 +14,7 @@ import { CallbackComponent } from './callback/callback.component';
 import { RoleRequestComponent } from './role-request/role-request.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { UserComponent } from './user/user.component';
+import { DateValueAccessorModule } from './date-value-accessor/date-value-accessor.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UserComponent } from './user/user.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DateValueAccessorModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
