@@ -53,6 +53,7 @@ Public Class UserGroup
                 New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
                 New TypedParameter(GetType(UserGroupData), m_userGroupData)
             )
+            creator.Create()
         End Using
     End Sub
 

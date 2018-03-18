@@ -12,4 +12,5 @@
 
     Function GetAccountDataCreater(ByVal settings As ISettings, ByVal subscriberId As String) As IDataCreator
     Function GetGroups(ByVal settings As ISettings) As IEnumerable(Of IUserGroup)
+    Function CreateUserGroup(ByVal group As IGroup) As IUserGroup
 End Interface

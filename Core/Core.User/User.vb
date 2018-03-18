@@ -122,4 +122,8 @@ Public Class User
         End If
         Return result
     End Function
+
+    Public Function CreateUserGroup(group As IGroup) As IUserGroup Implements IUser.CreateUserGroup
+        Return New UserGroup(Me, group, New UserGroupData) With {.IsActive = True}
+    End Function
 End Class
