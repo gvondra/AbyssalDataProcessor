@@ -12,6 +12,9 @@ Friend NotInheritable Class ObjectContainer
 
         builder.RegisterType(Of Settings)().As(Of ISettings)()
 
+        builder.RegisterType(Of GroupFactory)().As(Of IGroupFactory)()
+        builder.RegisterType(Of GroupSaver)().As(Of IGroupSaver)()
+
         builder.RegisterType(Of AbyssalDataProcessor.Core.User.UserFactory)().As(Of AbyssalDataProcessor.Core.Framework.IUserFactory)()
         builder.RegisterType(Of UserFactory)().As(Of IUserFactory)()
 

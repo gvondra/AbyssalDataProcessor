@@ -10,6 +10,10 @@ Public Class GroupFactory
         m_container = ObjectContainer.GetContainer()
     End Sub
 
+    Public Function Create() As IGroup Implements IGroupFactory.Create
+        Return New Group(New GroupData())
+    End Function
+
     Public Function [Get](settings As ISettings, groupId As Guid) As IGroup Implements IGroupFactory.Get
         Dim data As GroupData
         Dim result As Group = Nothing

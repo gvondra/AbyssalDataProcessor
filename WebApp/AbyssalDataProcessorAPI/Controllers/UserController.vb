@@ -78,6 +78,7 @@ Namespace Controllers
             Return result
         End Function
 
+        'todo add error handling
         <HttpPut(), Authorize()> Public Function UpdateUser(<FromBody()> ByVal user As User) As IHttpActionResult
             Dim userFactory As IUserFactory
             Dim requestRole As enumRole = RoleProcessor.GetRoleFlags(CType(Me.User, ClaimsPrincipal))
