@@ -12,7 +12,7 @@
     End Function
 
     Public Function [Get](settings As ISettings, ByVal providerFactory As IDbProviderFactory, groupId As Guid) As GroupData
-        Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "userId", DbType.Guid)
+        Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "id", DbType.Guid)
         parameter.Value = groupId
         Return Me.GenericDataFactory.GetData(settings,
                                              providerFactory,
