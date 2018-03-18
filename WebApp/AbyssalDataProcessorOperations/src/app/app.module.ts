@@ -19,6 +19,7 @@ import { GroupListComponent } from './group-list/group-list.component';
 import { GroupComponent } from './group/group.component';
 import { TaskTypeComponent } from './task-type/task-type.component';
 import { TaskTypeListComponent } from './task-type-list/task-type-list.component';
+import { EventTypeListComponent } from './event-type-list/event-type-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TaskTypeListComponent } from './task-type-list/task-type-list.component
     GroupListComponent,
     GroupComponent,
     TaskTypeComponent,
-    TaskTypeListComponent
+    TaskTypeListComponent,
+    EventTypeListComponent
   ],
   imports: [
     BrowserModule,

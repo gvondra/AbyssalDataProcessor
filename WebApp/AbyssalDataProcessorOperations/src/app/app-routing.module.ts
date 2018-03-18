@@ -10,6 +10,7 @@ import { GroupListComponent } from './group-list/group-list.component';
 import { GroupComponent } from './group/group.component';
 import { TaskTypeListComponent } from './task-type-list/task-type-list.component';
 import { TaskTypeComponent } from './task-type/task-type.component';
+import { EventTypeListComponent } from './event-type-list/event-type-list.component';
 const routes: Routes = [
     {
         path: '',
@@ -78,6 +79,13 @@ const routes: Routes = [
       {
         path: 'tasktype',
         component: TaskTypeComponent,
+        canActivate: [
+          AuthGuard
+        ]
+      },
+      {
+        path: 'eventtypelist',
+        component: EventTypeListComponent,
         canActivate: [
           AuthGuard
         ]
