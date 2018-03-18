@@ -38,6 +38,9 @@ Public Class EventTypeDataSaverTest
         Dim command As New Mock(Of IDbCommand)
         Dim parameters As New Mock(Of IDataParameterCollection)
 
+        data.AcceptChanges()
+        data.Title = "New Title"
+
         providerFactory.Setup(Sub(f As IDbProviderFactory) f.EstablishTransaction(settings.Object)) _
         .Callback(Sub()
                       command.SetupGet(Of IDataParameterCollection)(Function(c As IDbCommand) c.Parameters).Returns(parameters.Object)
