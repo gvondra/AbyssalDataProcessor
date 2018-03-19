@@ -28,10 +28,27 @@ Public Class [Event]
     End Property
 
     Public Function GetDataCreator(settings As Framework.ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataCreatorWrapper(scope.Resolve(Of EventDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(EventData), m_eventData)))
-        End Using
+        Return New DataCreatorWrapper(Sub() Create(settings))
     End Function
+
+    Private Sub Create(settings As Framework.ISettings)
+        Dim creator As IDataCreator
+        Dim form As IForm
+
+        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            creator = scope.Resolve(Of EventDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings),
+                New Settings(settings)), New TypedParameter(GetType(EventData), m_eventData)
+            )
+            creator.Create()
+        End Using
+
+        If m_forms IsNot Nothing Then
+            For Each form In m_forms
+                form.GetDataCreator(settings).Create()
+            Next
+        End If
+    End Sub
 
     Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
         Throw New NotImplementedException()

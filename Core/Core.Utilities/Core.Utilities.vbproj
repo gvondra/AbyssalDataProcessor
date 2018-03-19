@@ -63,6 +63,7 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreSettings.vb" />
     <Compile Include="DataUpdaterWrapper.vb" />
     <Compile Include="DataCreatorWrapper.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

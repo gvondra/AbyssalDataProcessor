@@ -28,9 +28,9 @@ Namespace Controllers
             Dim saver As IFormSaver
             Dim form As IForm
             Dim eventFactory As IEventFactory
-            Dim eventSaver As IEventSaver
             Dim [event] As IEvent
-            Dim createEventRequest As IEventSaver.ICreateEventRequest
+            Dim triggerFactory As IEventTriggerFactory
+            Dim trigger As IEventTrigger
 
             Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
                 userFactory = scope.Resolve(Of IUserFactory)()
@@ -48,10 +48,9 @@ Namespace Controllers
                 [event] = eventFactory.Create(New Settings(), form)
                 form = [event].AddForm(form)
                 If [event] IsNot Nothing Then
-                    createEventRequest = scope.Resolve(Of IEventSaver.ICreateEventRequest)(New TypedParameter(GetType(IEvent), [event]))
-                    createEventRequest.Forms = {form}
-                    eventSaver = scope.Resolve(Of IEventSaver)()
-                    eventSaver.Create(New Settings(), createEventRequest)
+                    triggerFactory = scope.Resolve(Of IEventTriggerFactory)()
+                    trigger = triggerFactory.Create
+                    trigger.Trigger(New Settings, [event])
                 End If
             End Using
 

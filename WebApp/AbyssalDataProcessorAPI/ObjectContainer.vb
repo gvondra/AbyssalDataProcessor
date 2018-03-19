@@ -38,6 +38,8 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of EventTypeFactory)().As(Of IEventTypeFactory)()
         builder.RegisterType(Of EventTypeSaver)().As(Of IEventTypeSaver)()
 
+        builder.RegisterType(Of EventTriggerFactory)().As(Of IEventTriggerFactory)()
+
         builder.RegisterType(Of WebMetricSaver)().As(Of IWebMetricSaver)()
 
         m_container = builder.Build()

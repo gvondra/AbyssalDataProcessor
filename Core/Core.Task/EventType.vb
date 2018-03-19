@@ -30,4 +30,8 @@ Public Class EventType
     Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
         Throw New NotImplementedException()
     End Function
+
+    Public Function GetTaskTypes(settings As ISettings) As IEnumerable(Of IEventTypeTaskType) Implements IEventType.GetTaskTypes
+        Throw New NotImplementedException()
+    End Function
 End Class

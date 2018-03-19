@@ -6,10 +6,12 @@ Public Class EventTypeFactory
 
     Private m_container As IContainer
     Private m_eventTypeSaver As IEventTypeSaver
+    Private m_taskTypeFactory As ITaskTypeFactory
 
-    Public Sub New(ByVal eventTypeSaver As IEventTypeSaver)
+    Public Sub New(ByVal eventTypeSaver As IEventTypeSaver, ByVal taskTypeFactory As ITaskTypeFactory)
         m_container = ObjectContainer.GetContainer
         m_eventTypeSaver = eventTypeSaver
+        m_taskTypeFactory = taskTypeFactory
     End Sub
 
     Public Sub New(ByVal container As IContainer, ByVal eventTypeSaver As IEventTypeSaver)
@@ -31,7 +33,7 @@ Public Class EventTypeFactory
                 blnSave = True
             End If
         End Using
-        result = New EventType(data)
+        result = New EventType(data, m_taskTypeFactory)
 
         If blnSave Then
             m_eventTypeSaver.Create(settings, result)
@@ -60,6 +62,6 @@ Public Class EventTypeFactory
         If data Is Nothing Then
             data = New EventTypeData() With {.EventTypeId = CType(i, Short), .Title = i.ToString}
         End If
-        Return New EventType(data)
+        Return New EventType(data, m_taskTypeFactory)
     End Function
 End Class

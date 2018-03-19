@@ -77,4 +77,8 @@ Public Class TaskTypeEventType
             ))
         End Using
     End Function
+
+    Public Function GetTaskTypes(settings As ISettings) As IEnumerable(Of IEventTypeTaskType) Implements IEventType.GetTaskTypes
+        Return m_innerEventType.GetTaskTypes(settings)
+    End Function
 End Class
