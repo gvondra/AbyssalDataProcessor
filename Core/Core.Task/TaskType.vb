@@ -63,4 +63,23 @@ Public Class TaskType
     Public Function CreateTaskTypeEventType(eventType As IEventType) As ITaskTypeEventType Implements ITaskType.CreateTaskTypeEventType
         Return New TaskTypeEventType(Me, eventType, New EventTypeTaskTypeData() With {.IsActive = True})
     End Function
+
+    Public Function GetGroups(settings As ISettings) As IEnumerable(Of ITaskTypeGroup) Implements ITaskType.GetGroups
+        Dim result As IEnumerable(Of ITaskTypeGroup) = {}
+        Dim factory As ITaskTypeGroupDataFactory
+
+        If TaskTypeId.Equals(Guid.Empty) = False Then
+            Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+                factory = scope.Resolve(Of ITaskTypeGroupDataFactory)()
+                result = From data In factory.GetByTaskTypeId(New Settings(settings), TaskTypeId)
+                         Where data.Group IsNot Nothing
+                         Select New TaskTypeGroup(Me, New Group(data.Group), data)
+            End Using
+        End If
+        Return result
+    End Function
+
+    Public Function CreateTaskTypeGroup(group As IGroup) As ITaskTypeGroup Implements ITaskType.CreateTaskTypeGroup
+        Return New TaskTypeGroup(Me, group, New TaskTypeGroupData() With {.IsActive = True})
+    End Function
 End Class

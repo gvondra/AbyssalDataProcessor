@@ -76,12 +76,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventType.vb" />
+    <Compile Include="Group.vb" />
+    <Compile Include="TaskTypeGroupSaver.vb" />
     <Compile Include="TaskTypeEventTypeSaver.vb" />
     <Compile Include="ObjectContainer.vb" />
     <Compile Include="TaskType.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="TaskTypeEventType.vb" />
     <Compile Include="TaskTypeFactory.vb" />
+    <Compile Include="TaskTypeGroup.vb" />
     <Compile Include="TaskTypeSaver.vb" />
   </ItemGroup>
   <ItemGroup>

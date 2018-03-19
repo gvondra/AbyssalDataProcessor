@@ -85,11 +85,13 @@
     <Compile Include="ISettings.vb" />
     <Compile Include="ITaskType.vb" />
     <Compile Include="ITaskTypeFactory.vb" />
+    <Compile Include="ITaskTypeGroup.vb" />
     <Compile Include="ITaskTypeSaver.vb" />
     <Compile Include="IUser.vb" />
     <Compile Include="IUserFactory.vb" />
     <Compile Include="IUserGroup.vb" />
     <Compile Include="ITaskTypeEventTypeSaver.vb" />
+    <Compile Include="ITaskTypeGroupSaver.vb" />
     <Compile Include="IUserGroupSaver.vb" />
     <Compile Include="IUserSaver.vb" />
     <Compile Include="IUserUpdater.vb" />
