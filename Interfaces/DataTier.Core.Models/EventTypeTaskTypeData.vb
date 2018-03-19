@@ -8,6 +8,7 @@
     <ColumnMapping("UpdateTimestamp")> Public Property UpdateTimestamp As Date
 
     Public Property EventType As EventTypeData
+    Public Property TaskType As TaskTypeData
     Public Property DataStateManager As IDataStateManager(Of EventTypeTaskTypeData) = New DataStateManager(Of EventTypeTaskTypeData) Implements IDataManagedState(Of EventTypeTaskTypeData).DataStateManager
 
     Public Sub AcceptChanges() Implements IDataManagedState(Of EventTypeTaskTypeData).AcceptChanges

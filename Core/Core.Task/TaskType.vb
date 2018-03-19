@@ -52,7 +52,7 @@ Public Class TaskType
         If TaskTypeId.Equals(Guid.Empty) = False Then
             Using scope As ILifetimeScope = m_container.BeginLifetimeScope
                 factory = scope.Resolve(Of IEventTypeTaskTypeDataFactory)()
-                result = From data In factory.GetByTaskId(New Settings(settings), TaskTypeId)
+                result = From data In factory.GetByTaskTypeId(New Settings(settings), TaskTypeId)
                          Where data.EventType IsNot Nothing
                          Select New TaskTypeEventType(Me, New EventType(data.EventType), data)
             End Using
