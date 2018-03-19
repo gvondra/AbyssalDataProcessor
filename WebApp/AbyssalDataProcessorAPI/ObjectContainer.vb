@@ -15,6 +15,7 @@ Friend NotInheritable Class ObjectContainer
 
         builder.RegisterType(Of TaskTypeFactory)().As(Of ITaskTypeFactory)()
         builder.RegisterType(Of TaskTypeSaver)().As(Of ITaskTypeSaver)()
+        builder.RegisterType(Of TaskTypeEventTypeSaver)().As(Of ITaskTypeEventTypeSaver)()
 
         builder.RegisterType(Of GroupFactory)().As(Of IGroupFactory)()
         builder.RegisterType(Of GroupSaver)().As(Of IGroupSaver)()
