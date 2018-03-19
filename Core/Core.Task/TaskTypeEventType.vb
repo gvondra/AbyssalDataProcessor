@@ -59,6 +59,8 @@ Public Class TaskTypeEventType
     Private Sub Create(ByVal settings As Framework.ISettings)
         Dim creator As Framework.IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            m_eventTypeTaskTypeData.EventTypeId = m_innerEventType.EventTypeId
+            m_eventTypeTaskTypeData.TaskTypeId = m_taskType.TaskTypeId
             creator = New DataCreatorWrapper(scope.Resolve(Of EventTypeTaskTypeDataSaver)(
                 New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
                 New TypedParameter(GetType(EventTypeTaskTypeData), m_eventTypeTaskTypeData)
