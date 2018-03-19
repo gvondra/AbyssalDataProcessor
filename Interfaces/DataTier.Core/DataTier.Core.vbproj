@@ -67,6 +67,7 @@
     <Compile Include="EventDataSaver.vb" />
     <Compile Include="EventTypeDataFactory.vb" />
     <Compile Include="EventTypeDataSaver.vb" />
+    <Compile Include="EventTaskDataSaver.vb" />
     <Compile Include="FormDataSaver.vb" />
     <Compile Include="EventFormDataSaver.vb" />
     <Compile Include="GroupDataFactory.vb" />
@@ -77,6 +78,7 @@
     <Compile Include="IEventTypeTaskTypeDataFactory.vb" />
     <Compile Include="ITaskTypeGroupDataFactory.vb" />
     <Compile Include="IUserGroupDataFactory.vb" />
+    <Compile Include="TaskDataSaver.vb" />
     <Compile Include="TaskTypeDataFactory.vb" />
     <Compile Include="TaskTypeDataSaver.vb" />
     <Compile Include="UserAccountDataSaver.vb" />

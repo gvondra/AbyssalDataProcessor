@@ -115,5 +115,10 @@
     <Build Include="adp\Stored Procedure\sTaskTypeGroupByTaskTypeId.sql" />
     <Build Include="adp\Stored Procedure\iTaskTypeGroup.sql" />
     <Build Include="adp\Stored Procedure\uTaskTypeGroup.sql" />
+    <Build Include="adp\Stored Procedure\sEventTypeTaskTypeByEventTypeId.sql" />
+    <Build Include="adp\Table\Task.sql" />
+    <Build Include="adp\Table\EventTask.sql" />
+    <Build Include="adp\Stored Procedure\iTask.sql" />
+    <Build Include="adp\Stored Procedure\iEventTask.sql" />
   </ItemGroup>
 </Project>

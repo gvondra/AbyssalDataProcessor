@@ -102,7 +102,9 @@
   <ItemGroup>
     <Compile Include="DataStateManagerTest.vb" />
     <Compile Include="EventTypeTaskTypeDataFactoryTest.vb" />
+    <Compile Include="EventTaskDataSaverTest.vb" />
     <Compile Include="TaskTypeGroupDataFactoryTest.vb" />
+    <Compile Include="TaskDataSaverTest.vb" />
     <Compile Include="UserGroupDataFactoryTest.vb" />
     <Compile Include="EventTypeTaskTypeDataSaverTest.vb" />
     <Compile Include="TaskTypeGroupDataSaverTest.vb" />
