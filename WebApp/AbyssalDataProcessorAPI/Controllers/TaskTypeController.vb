@@ -71,7 +71,7 @@ Namespace Controllers
 
         'todo add error handling
         <HttpGet(), ClaimsAuthorization(ClaimTypes:="TA"), Route("api/TaskType/{id}/EventTypes")>
-        Function GetUserGroups(ByVal id As Guid, ByVal Optional allEventTypes As Boolean = False) As IHttpActionResult
+        Function GetEventTypes(ByVal id As Guid, ByVal Optional allEventTypes As Boolean = False) As IHttpActionResult
             Dim result As IHttpActionResult = Nothing
             Dim taskType As ITaskType
             Dim taskTypeFactory As ITaskTypeFactory
@@ -116,6 +116,55 @@ Namespace Controllers
                 result = New TaskTypeEventType() With {.EventTypeId = taskTypeEventType.EventTypeId, .IsActive = taskTypeEventType.IsActive, .Title = taskTypeEventType.Title}
             End If
             Return result
+        End Function
+
+        'todo add error handling
+        <HttpPut(), ClaimsAuthorization(ClaimTypes:="TA"), Route("api/TaskType/{id}/EventTypes")>
+        Function SaveEventTypes(ByVal id As Guid, ByVal taskTypeEventTypes As IEnumerable(Of TaskTypeEventType)) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim taskType As ITaskType
+            Dim taskTypeFactory As ITaskTypeFactory
+            Dim innerTaskTypeEventTypes As IEnumerable(Of ITaskTypeEventType)
+            Dim allEventTypes As IEnumerable(Of IEventType)
+            Dim eventTypeFactory As IEventTypeFactory
+            Dim toUpdate As IEnumerable(Of ITaskTypeEventType)
+            Dim toCreate As IEnumerable(Of ITaskTypeEventType)
+            Dim saver As ITaskTypeEventTypeSaver
+            Using scope As ILifetimeScope = Me.ObjectContainer().BeginLifetimeScope
+                taskTypeFactory = scope.Resolve(Of ITaskTypeFactory)()
+                taskType = taskTypeFactory.Get(New Settings(), id)
+
+                If taskType Is Nothing Then
+                    result = NotFound()
+                End If
+
+                If result Is Nothing Then
+                    eventTypeFactory = scope.Resolve(Of IEventTypeFactory)()
+                    allEventTypes = eventTypeFactory.GetAll(New Settings())
+                    innerTaskTypeEventTypes = taskType.GetEventTypes(New Settings())
+
+                    toUpdate = From ug In taskTypeEventTypes
+                               Join iug In innerTaskTypeEventTypes On ug.EventTypeId Equals iug.EventTypeId
+                               Where ug.IsActive <> iug.IsActive
+                               Select SetEventIsActive(iug, ug.IsActive)
+
+                    toCreate = From ug In taskTypeEventTypes
+                               Where ug.IsActive = True AndAlso innerTaskTypeEventTypes.Any(Function(iug As ITaskTypeEventType) iug.EventTypeId.Equals(ug.EventTypeId)) = False
+                               Join g In allEventTypes On ug.EventTypeId Equals g.EventTypeId
+                               Select taskType.CreateTaskTypeEventType(g)
+
+
+                    saver = scope.Resolve(Of ITaskTypeEventTypeSaver)()
+                    saver.Save(New Settings, toUpdate.Concat(toCreate))
+                    result = Ok("Event Types Updated")
+                End If
+            End Using
+            Return result
+        End Function
+
+        <NonAction()> Private Function SetEventIsActive(ByVal eventType As ITaskTypeEventType, ByVal value As Boolean) As ITaskTypeEventType
+            eventType.IsActive = value
+            Return eventType
         End Function
 
     End Class
