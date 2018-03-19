@@ -36,6 +36,7 @@
                 m_eventTypeTaskTypeData.CreateTimestamp = CType(timestamp.Value, Date)
                 m_eventTypeTaskTypeData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_eventTypeTaskTypeData.AcceptChanges()
         End If
     End Sub
 
@@ -64,6 +65,7 @@
                 command.ExecuteNonQuery()
                 m_eventTypeTaskTypeData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_eventTypeTaskTypeData.AcceptChanges()
         End If
     End Sub
 End Class

@@ -36,6 +36,7 @@
                 m_userGroupData.CreateTimestamp = CType(timestamp.Value, Date)
                 m_userGroupData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_userGroupData.AcceptChanges()
         End If
     End Sub
 
@@ -64,6 +65,7 @@
                 command.ExecuteNonQuery()
                 m_userGroupData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_userGroupData.AcceptChanges()
         End If
     End Sub
 End Class

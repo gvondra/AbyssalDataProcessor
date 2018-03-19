@@ -40,6 +40,7 @@
                 m_userData.CreateTimestamp = CType(timestamp.Value, Date)
                 m_userData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_userData.AcceptChanges()
         End If
     End Sub
 
@@ -68,6 +69,7 @@
                 command.ExecuteNonQuery()
                 m_userData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_userData.AcceptChanges()
         End If
     End Sub
 

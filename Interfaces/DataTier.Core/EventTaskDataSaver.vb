@@ -34,6 +34,7 @@
                 m_eventTaskData.CreateTimestamp = CType(timestamp.Value, Date)
                 m_eventTaskData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_eventTaskData.AcceptChanges()
         End If
     End Sub
 End Class

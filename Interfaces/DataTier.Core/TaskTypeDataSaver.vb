@@ -40,6 +40,7 @@
                 m_taskTypeData.CreateTimestamp = CType(timestamp.Value, Date)
                 m_taskTypeData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_taskTypeData.AcceptChanges()
         End If
     End Sub
 
@@ -67,6 +68,7 @@
                 command.ExecuteNonQuery()
                 m_taskTypeData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
+            m_taskTypeData.AcceptChanges()
         End If
     End Sub
 End Class

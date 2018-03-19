@@ -17,26 +17,29 @@
         Dim id As IDbDataParameter
         Dim timestamp As IDbDataParameter
 
-        providerFactory.EstablishTransaction(m_settings)
-        Using command As IDbCommand = m_settings.Connection.CreateCommand
-            command.Transaction = m_settings.Transaction
-            command.CommandType = CommandType.StoredProcedure
-            command.CommandText = "adp.iEvent"
+        If m_eventData.DataStateManager.GetState(m_eventData) = IDataStateManager(Of UserData).enumState.New Then
+            providerFactory.EstablishTransaction(m_settings)
+            Using command As IDbCommand = m_settings.Connection.CreateCommand
+                command.Transaction = m_settings.Transaction
+                command.CommandType = CommandType.StoredProcedure
+                command.CommandText = "adp.iEvent"
 
-            id = CreateParameter(providerFactory, "id", DbType.Guid)
-            id.Direction = ParameterDirection.Output
-            command.Parameters.Add(id)
+                id = CreateParameter(providerFactory, "id", DbType.Guid)
+                id.Direction = ParameterDirection.Output
+                command.Parameters.Add(id)
 
-            timestamp = CreateParameter(providerFactory, "timestamp", DbType.DateTime)
-            timestamp.Direction = ParameterDirection.Output
-            command.Parameters.Add(timestamp)
+                timestamp = CreateParameter(providerFactory, "timestamp", DbType.DateTime)
+                timestamp.Direction = ParameterDirection.Output
+                command.Parameters.Add(timestamp)
 
-            AddParameter(providerFactory, command.Parameters, "eventTypeId", DbType.Int16, GetParameterValue(m_eventData.EventTypeId))
+                AddParameter(providerFactory, command.Parameters, "eventTypeId", DbType.Int16, GetParameterValue(m_eventData.EventTypeId))
 
-            command.ExecuteNonQuery()
-            m_eventData.EventId = CType(id.Value, Guid)
-            m_eventData.CreateTimestamp = CType(timestamp.Value, Date)
-            m_eventData.UpdateTimestamp = CType(timestamp.Value, Date)
-        End Using
+                command.ExecuteNonQuery()
+                m_eventData.EventId = CType(id.Value, Guid)
+                m_eventData.CreateTimestamp = CType(timestamp.Value, Date)
+                m_eventData.UpdateTimestamp = CType(timestamp.Value, Date)
+            End Using
+            m_eventData.AcceptChanges()
+        End If
     End Sub
 End Class
