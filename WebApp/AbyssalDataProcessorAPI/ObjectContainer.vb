@@ -26,6 +26,7 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of UserSaver)().As(Of IUserSaver)()
         builder.RegisterType(Of UserUpdater)().As(Of IUserUpdater)()
         builder.RegisterType(Of UserGroupSaver)().As(Of IUserGroupSaver)()
+        builder.RegisterType(Of TaskTypeGroupSaver)().As(Of ITaskTypeGroupSaver)()
 
         builder.RegisterType(Of FormSerializerFactory)().As(Of IFormSerializerFactory)()
         builder.RegisterType(Of FormFactory)().As(Of IFormFactory)()

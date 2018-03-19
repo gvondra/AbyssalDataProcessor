@@ -167,5 +167,102 @@ Namespace Controllers
             Return eventType
         End Function
 
+        'todo add error handling
+        <HttpGet(), ClaimsAuthorization(ClaimTypes:="TA"), Route("api/TaskType/{id}/Groups")>
+        Function GetTaskTypeGroups(ByVal id As Guid, ByVal Optional allGroups As Boolean = False) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim taskType As ITaskType
+            Dim taskTypeFactory As ITaskTypeFactory
+            Dim groups As IEnumerable(Of TaskTypeGroup)
+            Dim allGroupsList As IEnumerable(Of IGroup)
+            Dim taskTypeGroups As IEnumerable(Of ITaskTypeGroup)
+            Dim groupFactory As IGroupFactory
+            Using scope As ILifetimeScope = Me.ObjectContainer().BeginLifetimeScope
+                taskTypeFactory = scope.Resolve(Of ITaskTypeFactory)()
+                taskType = taskTypeFactory.Get(New Settings(), id)
+
+                If taskType Is Nothing Then
+                    result = NotFound()
+                End If
+
+                If result Is Nothing Then
+                    groupFactory = scope.Resolve(Of IGroupFactory)()
+                    allGroupsList = groupFactory.GetAll(New Settings())
+                    taskTypeGroups = taskType.GetGroups(New Settings())
+                    groups = From g In (
+                                 From g In allGroupsList
+                                 Select MapTaskTypeGroup(g, taskType, taskTypeGroups)
+                             )
+                             Where allGroups = True OrElse g.IsActive = True
+
+                    result = Ok(groups)
+                End If
+            End Using
+            Return result
+        End Function
+
+        <NonAction> Private Function MapTaskTypeGroup(ByVal group As IGroup,
+                                                  ByVal taskType As ITaskType,
+                                                  ByVal taskTypeGroups As IEnumerable(Of ITaskTypeGroup)) As TaskTypeGroup
+
+            Dim taskTypeGroup As ITaskTypeGroup = taskTypeGroups.FirstOrDefault(Function(ttg As ITaskTypeGroup) ttg.GroupId.Equals(group.GroupId))
+            Dim result As TaskTypeGroup
+
+            If taskTypeGroup Is Nothing Then
+                result = New TaskTypeGroup() With {.GroupId = group.GroupId, .IsActive = False, .Name = group.Name}
+            Else
+                result = New TaskTypeGroup() With {.GroupId = taskTypeGroup.GroupId, .IsActive = taskTypeGroup.IsActive, .Name = taskTypeGroup.Name}
+            End If
+            Return result
+        End Function
+
+        'todo add error handling
+        <HttpPut(), ClaimsAuthorization(ClaimTypes:="TA"), Route("api/TaskType/{id}/Groups")>
+        Function SaveTaskTypeGroups(ByVal id As Guid, ByVal taskTypeGroups As IEnumerable(Of TaskTypeGroup)) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim taskType As ITaskType
+            Dim taskTypeFactory As ITaskTypeFactory
+            Dim innerTaskTypeGroups As IEnumerable(Of ITaskTypeGroup)
+            Dim allGroups As IEnumerable(Of IGroup)
+            Dim groupFactory As IGroupFactory
+            Dim toUpdate As IEnumerable(Of ITaskTypeGroup)
+            Dim toCreate As IEnumerable(Of ITaskTypeGroup)
+            Dim saver As ITaskTypeGroupSaver
+            Using scope As ILifetimeScope = Me.ObjectContainer().BeginLifetimeScope
+                taskTypeFactory = scope.Resolve(Of ITaskTypeFactory)()
+                taskType = taskTypeFactory.Get(New Settings(), id)
+
+                If taskType Is Nothing Then
+                    result = NotFound()
+                End If
+
+                If result Is Nothing Then
+                    groupFactory = scope.Resolve(Of IGroupFactory)()
+                    allGroups = groupFactory.GetAll(New Settings())
+                    innerTaskTypeGroups = taskType.GetGroups(New Settings())
+
+                    toUpdate = From ug In taskTypeGroups
+                               Join iug In innerTaskTypeGroups On ug.GroupId Equals iug.GroupId
+                               Where ug.IsActive <> iug.IsActive
+                               Select SetGroupIsActive(iug, ug.IsActive)
+
+                    toCreate = From ug In taskTypeGroups
+                               Where ug.IsActive = True AndAlso innerTaskTypeGroups.Any(Function(iug As ITaskTypeGroup) iug.GroupId.Equals(ug.GroupId)) = False
+                               Join g In allGroups On ug.GroupId Equals g.GroupId
+                               Select taskType.CreateTaskTypeGroup(g)
+
+
+                    saver = scope.Resolve(Of ITaskTypeGroupSaver)()
+                    saver.Save(New Settings, toUpdate.Concat(toCreate))
+                    result = Ok("Groups Updated")
+                End If
+            End Using
+            Return result
+        End Function
+
+        <NonAction()> Private Function SetGroupIsActive(ByVal group As ITaskTypeGroup, ByVal value As Boolean) As ITaskTypeGroup
+            group.IsActive = value
+            Return group
+        End Function
     End Class
 End Namespace
