@@ -75,9 +75,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventType.vb" />
+    <Compile Include="TaskTypeEventTypeSaver.vb" />
     <Compile Include="ObjectContainer.vb" />
     <Compile Include="TaskType.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="TaskTypeEventType.vb" />
     <Compile Include="TaskTypeFactory.vb" />
     <Compile Include="TaskTypeSaver.vb" />
   </ItemGroup>

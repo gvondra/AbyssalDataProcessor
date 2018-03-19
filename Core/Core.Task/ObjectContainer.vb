@@ -7,6 +7,9 @@ Friend NotInheritable Class ObjectContainer
     Shared Sub New()
         Dim builder As New ContainerBuilder()
 
+        builder.RegisterType(Of EventTypeTaskTypeDataFactory)().As(Of IEventTypeTaskTypeDataFactory)()
+        builder.RegisterType(Of EventTypeTaskTypeDataSaver)()
+
         builder.RegisterType(Of TaskTypeDataFactory)().As(Of ITaskTypeDataFactory)()
         builder.RegisterType(Of TaskTypeDataSaver)()
 

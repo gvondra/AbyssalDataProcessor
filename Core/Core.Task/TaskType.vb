@@ -44,4 +44,23 @@ Public Class TaskType
             ))
         End Using
     End Function
+
+    Public Function GetEventTypes(settings As ISettings) As IEnumerable(Of ITaskTypeEventType) Implements ITaskType.GetEventTypes
+        Dim result As IEnumerable(Of ITaskTypeEventType) = {}
+        Dim factory As IEventTypeTaskTypeDataFactory
+
+        If TaskTypeId.Equals(Guid.Empty) = False Then
+            Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+                factory = scope.Resolve(Of IEventTypeTaskTypeDataFactory)()
+                result = From data In factory.GetByTaskId(New Settings(settings), TaskTypeId)
+                         Where data.EventType IsNot Nothing
+                         Select New TaskTypeEventType(Me, New EventType(data.EventType), data)
+            End Using
+        End If
+        Return result
+    End Function
+
+    Public Function CreateTaskTypeEventType(eventType As IEventType) As ITaskTypeEventType Implements ITaskType.CreateTaskTypeEventType
+        Return New TaskTypeEventType(Me, eventType, New EventTypeTaskTypeData() With {.IsActive = True})
+    End Function
 End Class
