@@ -109,8 +109,11 @@
     <Build Include="adp\Stored Procedure\sUserGroupByUserId.sql" />
     <Build Include="adp\Stored Procedure\iUserGroup.sql" />
     <Build Include="adp\Stored Procedure\uUserGroup.sql" />
-    <Build Include="adp\Stored Procedure\sEventTypeTaskTypeByTaskId.sql" />
+    <Build Include="adp\Stored Procedure\sEventTypeTaskTypeByTaskTypeId.sql" />
     <Build Include="adp\Stored Procedure\iEventTypeTaskType.sql" />
     <Build Include="adp\Stored Procedure\uEventTypeTaskType.sql" />
+    <Build Include="adp\Stored Procedure\sTaskTypeGroupByTaskTypeId.sql" />
+    <Build Include="adp\Stored Procedure\iTaskTypeGroup.sql" />
+    <Build Include="adp\Stored Procedure\uTaskTypeGroup.sql" />
   </ItemGroup>
 </Project>

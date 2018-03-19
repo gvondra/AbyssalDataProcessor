@@ -75,6 +75,7 @@
     <Compile Include="IGroupDataFactory.vb" />
     <Compile Include="ITaskTypeDataFactory.vb" />
     <Compile Include="IEventTypeTaskTypeDataFactory.vb" />
+    <Compile Include="ITaskTypeGroupDataFactory.vb" />
     <Compile Include="IUserGroupDataFactory.vb" />
     <Compile Include="TaskTypeDataFactory.vb" />
     <Compile Include="TaskTypeDataSaver.vb" />
@@ -86,8 +87,10 @@
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="UserDataSaver.vb" />
     <Compile Include="EventTypeTaskTypeDataFactory.vb" />
+    <Compile Include="TaskTypeGroupDataFactory.vb" />
     <Compile Include="UserGroupDataFactory.vb" />
     <Compile Include="EventTypeTaskTypeDataSaver.vb" />
+    <Compile Include="TaskTypeGroupDataSaver.vb" />
     <Compile Include="UserGroupDataSaver.vb" />
     <Compile Include="WebMetricAttributeDataSaver.vb" />
     <Compile Include="WebMetricDataSaver.vb" />
