@@ -14,6 +14,7 @@ export class TaskTypeComponent implements OnInit {
 
   TaskType: TaskType = null;
   SpinnerHidden: boolean = true;
+  IsExisting: boolean = false;
 
   constructor(private route: ActivatedRoute, private taskTypeService: TaskTypeService) { }
 
@@ -30,10 +31,12 @@ export class TaskTypeComponent implements OnInit {
     this.route.params
     .switchMap((params: ParamMap) => { 
       this.SpinnerHidden = false;
-      if (params['id']) {        
+      if (params['id']) {  
+        this.IsExisting = true;      
         return this.taskTypeService.getTaskType(params['id']);
       }
       else {
+        this.IsExisting = false;
         return Promise.resolve(new TaskType());
       }      
     })

@@ -1,4 +1,9 @@
-<h2>Task</h2>
+<div>
+  <div style="float: right; align-content: right;">
+    <a  *ngIf="IsExisting && TaskType" [routerLink]="['/tasktype', TaskType.TaskTypeId, 'eventtypes']">Groups</a>
+  </div>
+  <h2>Task</h2>
+</div>
 <div [hidden]="SpinnerHidden">  
   <i class="fa fa-cog fa-spin" style="font-size:36px; margin: 25px;"></i>
 </div>
