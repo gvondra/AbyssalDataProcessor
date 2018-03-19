@@ -1,10 +1,18 @@
 ﻿Public Class EventTriggerFactory
     Implements IEventTriggerFactory
 
-    Public Function Create() As IEventTriggerAggregator Implements IEventTriggerFactory.Create
-        Dim aggregator As New EventTriggerAggregator()
+    Private m_taskFactory As ITaskFactory
+    Private m_eventSaver As IEventSaver
 
-        aggregator.Add(New TaskEventTrigger)
+    Public Sub New(ByVal taskFactory As ITaskFactory, ByVal eventSaver As IEventSaver)
+        m_taskFactory = taskFactory
+        m_eventSaver = eventSaver
+    End Sub
+
+    Public Function Create() As IEventTriggerAggregator Implements IEventTriggerFactory.Create
+        Dim aggregator As New EventTriggerSaver(m_eventSaver)
+
+        aggregator.Add(New TaskEventTrigger(m_taskFactory))
 
         Return aggregator
     End Function

@@ -25,7 +25,6 @@ Namespace Controllers
             Dim mapper As IMapper
             Dim innerRequest As Forms.IRoleRequest
             Dim formFactory As IFormFactory
-            Dim saver As IFormSaver
             Dim form As IForm
             Dim eventFactory As IEventFactory
             Dim [event] As IEvent
@@ -40,9 +39,7 @@ Namespace Controllers
                 innerRequest = formFactory.CreateRoleRequest()
                 mapper = New Mapper(m_mapperConfiguration)
                 mapper.Map(Of RoleRequest, Forms.IRoleRequest)(request, innerRequest)
-                saver = scope.Resolve(Of IFormSaver)()
                 form = innerRequest.CreateForm(user)
-                saver.Create(New Settings(), form)
 
                 eventFactory = scope.Resolve(Of IEventFactory)()
                 [event] = eventFactory.Create(New Settings(), form)

@@ -69,6 +69,7 @@
     <Compile Include="IEvent.vb" />
     <Compile Include="IEventFactory.vb" />
     <Compile Include="IEventSaver.vb" />
+    <Compile Include="IEventTask.vb" />
     <Compile Include="IEventTrigger.vb" />
     <Compile Include="IEventTriggerAggregator.vb" />
     <Compile Include="IEventTriggerFactory.vb" />
@@ -76,6 +77,8 @@
     <Compile Include="IEventTypeFactory.vb" />
     <Compile Include="IEventTypeSaver.vb" />
     <Compile Include="IEventTypeTaskType.vb" />
+    <Compile Include="ITask.vb" />
+    <Compile Include="ITaskFactory.vb" />
     <Compile Include="ITaskTypeEventType.vb" />
     <Compile Include="IForm.vb" />
     <Compile Include="IFormFactory.vb" />

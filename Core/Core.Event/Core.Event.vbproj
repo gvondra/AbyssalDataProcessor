@@ -80,8 +80,10 @@
     <Compile Include="EventFactory.vb" />
     <Compile Include="EventForm.vb" />
     <Compile Include="EventSaver.vb" />
+    <Compile Include="EventTask.vb" />
     <Compile Include="EventTriggerAggregator.vb" />
     <Compile Include="EventTriggerFactory.vb" />
+    <Compile Include="EventTriggerSaver.vb" />
     <Compile Include="EventType.vb" />
     <Compile Include="EventTypeFactory.vb" />
     <Compile Include="EventTypeSaver.vb" />

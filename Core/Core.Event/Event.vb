@@ -8,6 +8,7 @@ Public Class [Event]
     Private m_eventType As IEventType
     Private m_container As IContainer
     Private m_forms As IList(Of IForm)
+    Private m_tasks As IList(Of ITask)
 
     Friend Sub New(ByVal eventType As IEventType)
         m_eventType = eventType
@@ -33,7 +34,6 @@ Public Class [Event]
 
     Private Sub Create(settings As Framework.ISettings)
         Dim creator As IDataCreator
-        Dim form As IForm
 
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             creator = scope.Resolve(Of EventDataSaver)(
@@ -44,8 +44,13 @@ Public Class [Event]
         End Using
 
         If m_forms IsNot Nothing Then
-            For Each form In m_forms
+            For Each form As IForm In m_forms
                 form.GetDataCreator(settings).Create()
+            Next
+        End If
+        If m_tasks IsNot Nothing Then
+            For Each task As ITask In m_tasks
+                task.GetDataCreator(settings).Create()
             Next
         End If
     End Sub
@@ -61,5 +66,18 @@ Public Class [Event]
         End If
         m_forms.Add(eventForm)
         Return eventForm
+    End Function
+
+    Public Function GetEventType(settings As ISettings) As IEventType Implements IEvent.GetEventType
+        Return m_eventType
+    End Function
+
+    Public Function AddTask(task As ITask) As ITask Implements IEvent.AddTask
+        Dim eventTask As New EventTask(Me, task, New EventTaskData())
+        If m_tasks Is Nothing Then
+            m_tasks = New List(Of ITask)
+        End If
+        m_tasks.Add(eventTask)
+        Return eventTask
     End Function
 End Class
