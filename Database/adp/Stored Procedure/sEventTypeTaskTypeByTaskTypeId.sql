@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [adp].[sEventTypeTaskTypeByTaskId]
+﻿CREATE PROCEDURE [adp].[sEventTypeTaskTypeByTaskTypeId]
 	@taskTypeId UNIQUEIDENTIFIER
 AS
 BEGIN
