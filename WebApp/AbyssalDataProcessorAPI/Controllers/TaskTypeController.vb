@@ -68,5 +68,55 @@ Namespace Controllers
             End Using
             Return result
         End Function
+
+        'todo add error handling
+        <HttpGet(), ClaimsAuthorization(ClaimTypes:="TA"), Route("api/TaskType/{id}/EventTypes")>
+        Function GetUserGroups(ByVal id As Guid, ByVal Optional allEventTypes As Boolean = False) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim taskType As ITaskType
+            Dim taskTypeFactory As ITaskTypeFactory
+            Dim events As IEnumerable(Of TaskTypeEventType)
+            Dim allEventsList As IEnumerable(Of IEventType)
+            Dim taskTypeEventTypes As IEnumerable(Of ITaskTypeEventType)
+            Dim eventTypeFactory As IEventTypeFactory
+            Using scope As ILifetimeScope = Me.ObjectContainer().BeginLifetimeScope
+                taskTypeFactory = scope.Resolve(Of ITaskTypeFactory)()
+                taskType = taskTypeFactory.Get(New Settings(), id)
+
+                If taskType Is Nothing Then
+                    result = NotFound()
+                End If
+
+                If result Is Nothing Then
+                    eventTypeFactory = scope.Resolve(Of IEventTypeFactory)()
+                    allEventsList = eventTypeFactory.GetAll(New Settings())
+                    taskTypeEventTypes = taskType.GetEventTypes(New Settings())
+                    events = From e In (
+                                 From e In allEventsList
+                                 Select MapTaskTypeEventType(e, taskType, taskTypeEventTypes)
+                             )
+                             Where allEventTypes = True OrElse e.IsActive = True
+
+                    result = Ok(events)
+                End If
+            End Using
+            Return result
+        End Function
+
+        <NonAction> Private Function MapTaskTypeEventType(ByVal [event] As IEventType,
+                                                  ByVal taskType As ITaskType,
+                                                  ByVal taskTypeEventTypes As IEnumerable(Of ITaskTypeEventType)) As TaskTypeEventType
+
+            Dim taskTypeEventType As ITaskTypeEventType = taskTypeEventTypes.FirstOrDefault(Function(ettt As ITaskTypeEventType) ettt.EventTypeId.Equals([event].EventTypeId))
+            Dim result As TaskTypeEventType
+
+            If taskTypeEventType Is Nothing Then
+                result = New TaskTypeEventType() With {.EventTypeId = [event].EventTypeId, .IsActive = False, .Title = [event].Title}
+            Else
+                result = New TaskTypeEventType() With {.EventTypeId = taskTypeEventType.EventTypeId, .IsActive = taskTypeEventType.IsActive, .Title = taskTypeEventType.Title}
+            End If
+            Return result
+        End Function
+
     End Class
 End Namespace
