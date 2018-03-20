@@ -44,7 +44,6 @@
                         reader, Function() New WebMetricAttributeData
                     )
                     For Each data In result
-                        If data.Attributes Is Nothing Then data.Attributes = {}
                         data.Attributes = attributes.Where(Function(a As WebMetricAttributeData) a.WebMetricId.Equals(data.WebMetricId))
                     Next data
                 End If
