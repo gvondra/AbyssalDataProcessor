@@ -20,6 +20,12 @@ Namespace Controllers
                 column1.Add(New With {.Text = "Organizations", .URL = ""})
             End If
 
+            If (flags And enumRole.TaskAdministrator) = enumRole.TaskAdministrator _
+                    OrElse (flags And enumRole.TaskProcessor) = enumRole.TaskProcessor Then
+
+                column1.Add(New With {.Text = "Unassigned Tasks", .URL = "unassignedtasks"})
+            End If
+
             If flags = enumRole.None Then
                 column1.Add(New With {.Text = "Role Request", .URL = "rolerequest"})
             End If

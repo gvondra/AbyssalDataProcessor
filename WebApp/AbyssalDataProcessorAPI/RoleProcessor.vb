@@ -11,7 +11,8 @@ Public NotInheritable Class RoleProcessor
             RoleConstants.ORGANIZATION_ADMINISTRATOR,
             RoleConstants.TASK_ADMINISTRATOR,
             RoleConstants.SUPER_USER,
-            RoleConstants.USER_ADMINISTRATOR
+            RoleConstants.USER_ADMINISTRATOR,
+            RoleConstants.TASK_PROCESSOR
         }
 
         If principal.Claims.Where(Function(c As Claim) c.Type = "gty" And c.Value = "client-credentials").Any() Then
@@ -32,6 +33,9 @@ Public NotInheritable Class RoleProcessor
         End If
         If String.Compare(code, RoleConstants.TASK_ADMINISTRATOR, True) = 0 Then
             role = role Or enumRole.TaskAdministrator
+        End If
+        If String.Compare(code, RoleConstants.TASK_PROCESSOR, True) = 0 Then
+            role = role Or enumRole.TaskProcessor
         End If
         If String.Compare(code, RoleConstants.USER_ADMINISTRATOR, True) = 0 Then
             role = role Or enumRole.UserAdministrator

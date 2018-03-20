@@ -8,7 +8,7 @@
     End Sub
 
     Public Function GetByUser(settings As ISettings, userId As Guid) As IEnumerable(Of UnassignedTaskData) Implements IUnassignedTaskDataFactory.GetByUser
-        Return GetByUser(settings, userId)
+        Return GetByUser(settings, New DbProviderFactory(), userId)
     End Function
 
     Public Function GetByUser(settings As ISettings, ByVal providerFactory As IDbProviderFactory, userId As Guid) As IEnumerable(Of UnassignedTaskData)

@@ -4,6 +4,7 @@
     TaskAdministrator = &H2
     OrganizationAdminstrator = &H4
     FormAdminstrator = &H8
+    TaskProcessor = &H10
     SuperUser = &HFF
 End Enum
 
