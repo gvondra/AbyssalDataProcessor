@@ -66,6 +66,7 @@
     <Compile Include="ColumnMappingAttribute.vb" />
     <Compile Include="DataStateManager.vb" />
     <Compile Include="DbProviderFactory.vb" />
+    <Compile Include="DbTransaction.vb" />
     <Compile Include="GenericDataFactory.vb" />
     <Compile Include="GuidLoaderComponent.vb" />
     <Compile Include="DoubleLoaderComponent.vb" />
@@ -73,6 +74,8 @@
     <Compile Include="IDataManagedState.vb" />
     <Compile Include="IDataStateManager.vb" />
     <Compile Include="IDbProviderFactory.vb" />
+    <Compile Include="IDbTransaction.vb" />
+    <Compile Include="IDbTransactionObserver.vb" />
     <Compile Include="IGenericDataFactory.vb" />
     <Compile Include="ILoader.vb" />
     <Compile Include="ILoaderComponent.vb" />

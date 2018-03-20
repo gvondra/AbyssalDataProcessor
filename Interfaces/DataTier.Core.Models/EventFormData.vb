@@ -8,7 +8,7 @@
 
     Public Property DataStateManager As IDataStateManager(Of EventFormData) = New DataStateManager(Of EventFormData) Implements IDataManagedState(Of EventFormData).DataStateManager
 
-    Public Sub AcceptChanges() Implements IDataManagedState(Of EventFormData).AcceptChanges
+    Public Sub AcceptChanges() Implements IDataManagedState(Of EventFormData).AcceptChanges, IDbTransactionObserver.AfterCommit
         DataStateManager.Original = CType(Clone(), EventFormData)
     End Sub
 

@@ -20,7 +20,7 @@
 
     Public Property DataStateManager As IDataStateManager(Of UserData) = New DataStateManager(Of UserData) Implements IDataManagedState(Of UserData).DataStateManager
 
-    Public Sub AcceptChanges() Implements IDataManagedState(Of UserData).AcceptChanges
+    Public Sub AcceptChanges() Implements IDataManagedState(Of UserData).AcceptChanges, IDbTransactionObserver.AfterCommit
         If DataStateManager IsNot Nothing Then DataStateManager.Original = CType(Clone(), UserData)
     End Sub
 

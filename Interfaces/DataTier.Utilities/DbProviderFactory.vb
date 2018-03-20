@@ -9,6 +9,10 @@ Public Class DbProviderFactory
     End Sub
 
     Public Sub EstablishTransaction(transactionHandler As ITransactionHandler) Implements IDbProviderFactory.EstablishTransaction
+        EstablishTransaction(transactionHandler, Nothing)
+    End Sub
+
+    Public Sub EstablishTransaction(transactionHandler As ITransactionHandler, ByVal observer As IDbTransactionObserver) Implements IDbProviderFactory.EstablishTransaction
         If transactionHandler.Connection IsNot Nothing Then
             If transactionHandler.Connection.State <> ConnectionState.Open Then
                 transactionHandler.Connection.Dispose()
@@ -19,7 +23,10 @@ Public Class DbProviderFactory
             transactionHandler.Connection = OpenConnection(transactionHandler.ConnectionString)
         End If
         If transactionHandler.Transaction Is Nothing Then
-            transactionHandler.Transaction = transactionHandler.Connection.BeginTransaction
+            transactionHandler.Transaction = New DbTransaction(transactionHandler.Connection.BeginTransaction)
+        End If
+        If transactionHandler.Transaction IsNot Nothing AndAlso observer IsNot Nothing Then
+            transactionHandler.Transaction.AddObserver(observer)
         End If
     End Sub
 

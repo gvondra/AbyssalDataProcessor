@@ -15,7 +15,7 @@
     Public Property Group As GroupData
     Public Property DataStateManager As IDataStateManager(Of UserGroupData) = New DataStateManager(Of UserGroupData) Implements IDataManagedState(Of UserGroupData).DataStateManager
 
-    Public Sub AcceptChanges() Implements IDataManagedState(Of UserGroupData).AcceptChanges
+    Public Sub AcceptChanges() Implements IDataManagedState(Of UserGroupData).AcceptChanges, IDbTransactionObserver.AfterCommit
         DataStateManager.Original = CType(Clone(), UserGroupData)
     End Sub
 

@@ -19,7 +19,7 @@
         Dim timestamp As IDbDataParameter
 
         If m_userData.DataStateManager.GetState(m_userData) = IDataStateManager(Of UserData).enumState.New Then
-            providerFactory.EstablishTransaction(m_transactionHandler)
+            providerFactory.EstablishTransaction(m_transactionHandler, m_userData)
             Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
                 command.Transaction = m_transactionHandler.Transaction
                 command.CommandType = CommandType.StoredProcedure
@@ -40,7 +40,6 @@
                 m_userData.CreateTimestamp = CType(timestamp.Value, Date)
                 m_userData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
-            m_userData.AcceptChanges()
         End If
     End Sub
 
@@ -52,7 +51,7 @@
         Dim timestamp As IDbDataParameter
 
         If m_userData.DataStateManager.GetState(m_userData) = IDataStateManager(Of UserData).enumState.Updated Then
-            providerFactory.EstablishTransaction(m_transactionHandler)
+            providerFactory.EstablishTransaction(m_transactionHandler, m_userData)
             Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
                 command.Transaction = m_transactionHandler.Transaction
                 command.CommandType = CommandType.StoredProcedure
@@ -69,7 +68,6 @@
                 command.ExecuteNonQuery()
                 m_userData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
-            m_userData.AcceptChanges()
         End If
     End Sub
 

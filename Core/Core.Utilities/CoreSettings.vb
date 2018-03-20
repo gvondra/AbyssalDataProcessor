@@ -20,5 +20,5 @@
     End Property
 
     Public Property DbConnection As IDbConnection Implements ITransactionHandler.DbConnection
-    Public Property DbTransaction As IDbTransaction Implements ITransactionHandler.DbTransaction
+    Public Property DbTransaction As AbyssalDataProcessor.DataTier.Utilities.IDbTransaction Implements ITransactionHandler.DbTransaction
 End Class

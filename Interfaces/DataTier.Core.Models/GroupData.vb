@@ -12,7 +12,7 @@
 
     Public Property DataStateManager As IDataStateManager(Of GroupData) = New DataStateManager(Of GroupData) Implements IDataManagedState(Of GroupData).DataStateManager
 
-    Public Sub AcceptChanges() Implements IDataManagedState(Of GroupData).AcceptChanges
+    Public Sub AcceptChanges() Implements IDataManagedState(Of GroupData).AcceptChanges, IDbTransactionObserver.AfterCommit
         If DataStateManager IsNot Nothing Then DataStateManager.Original = CType(Clone(), GroupData)
     End Sub
 

@@ -75,7 +75,7 @@ Public Class DataStateManagerTest
             Return Me.MemberwiseClone
         End Function
 
-        Public Sub AcceptChanges() Implements IDataManagedState(Of ModelTest).AcceptChanges
+        Public Sub AcceptChanges() Implements IDataManagedState(Of ModelTest).AcceptChanges, IDbTransactionObserver.AfterCommit
             If DataStateManager IsNot Nothing Then DataStateManager.Original = Me
         End Sub
     End Class

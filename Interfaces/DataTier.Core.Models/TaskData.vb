@@ -8,7 +8,7 @@
 
     Public Property DataStateManager As IDataStateManager(Of TaskData) = New DataStateManager(Of TaskData) Implements IDataManagedState(Of TaskData).DataStateManager
 
-    Public Sub AcceptChanges() Implements IDataManagedState(Of TaskData).AcceptChanges
+    Public Sub AcceptChanges() Implements IDataManagedState(Of TaskData).AcceptChanges, IDbTransactionObserver.AfterCommit
         DataStateManager.Original = CType(Clone(), TaskData)
     End Sub
 

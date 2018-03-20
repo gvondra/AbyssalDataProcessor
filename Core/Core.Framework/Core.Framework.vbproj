@@ -104,6 +104,12 @@
     <Compile Include="IWebMetricSaver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\DataTier.Utilities\DataTier.Utilities.vbproj">
+      <Project>{85efb4ba-c5f1-454b-8129-4b04512f5753}</Project>
+      <Name>DataTier.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

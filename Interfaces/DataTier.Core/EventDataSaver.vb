@@ -18,7 +18,7 @@
         Dim timestamp As IDbDataParameter
 
         If m_eventData.DataStateManager.GetState(m_eventData) = IDataStateManager(Of UserData).enumState.New Then
-            providerFactory.EstablishTransaction(m_transactionHandler)
+            providerFactory.EstablishTransaction(m_transactionHandler, m_eventData)
             Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
                 command.Transaction = m_transactionHandler.Transaction
                 command.CommandType = CommandType.StoredProcedure
@@ -39,7 +39,6 @@
                 m_eventData.CreateTimestamp = CType(timestamp.Value, Date)
                 m_eventData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
-            m_eventData.AcceptChanges()
         End If
     End Sub
 End Class

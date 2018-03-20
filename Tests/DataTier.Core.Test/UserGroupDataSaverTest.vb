@@ -11,7 +11,7 @@ Public Class UserGroupSaverTest
         Dim command As New Mock(Of IDbCommand)
         Dim parameters As New Mock(Of IDataParameterCollection)
 
-        providerFactory.Setup(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object)) _
+        providerFactory.Setup(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object, data)) _
         .Callback(Sub()
                       command.SetupGet(Of IDataParameterCollection)(Function(c As IDbCommand) c.Parameters).Returns(parameters.Object)
                       connection.Setup(Of IDbCommand)(Function(c As IDbConnection) c.CreateCommand).Returns(command.Object)
@@ -22,7 +22,7 @@ Public Class UserGroupSaverTest
         .Returns(Function() New Mock(Of IDbDataParameter)().Object)
 
         saver.Create(providerFactory.Object)
-        providerFactory.Verify(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object), Times.Once)
+        providerFactory.Verify(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object, data), Times.Once)
         command.Verify(Of Integer)(Function(c As IDbCommand) c.ExecuteNonQuery(), Times.Once)
         command.VerifySet(Sub(c As IDbCommand) c.CommandType = CommandType.StoredProcedure, Times.AtLeastOnce)
         command.VerifySet(Sub(c As IDbCommand) c.CommandText = "adp.iUserGroup", Times.AtLeastOnce)
@@ -41,7 +41,7 @@ Public Class UserGroupSaverTest
         data.AcceptChanges()
         data.IsActive = True
 
-        providerFactory.Setup(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object)) _
+        providerFactory.Setup(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object, data)) _
         .Callback(Sub()
                       command.SetupGet(Of IDataParameterCollection)(Function(c As IDbCommand) c.Parameters).Returns(parameters.Object)
                       connection.Setup(Of IDbCommand)(Function(c As IDbConnection) c.CreateCommand).Returns(command.Object)
@@ -52,7 +52,7 @@ Public Class UserGroupSaverTest
         .Returns(Function() New Mock(Of IDbDataParameter)().Object)
 
         saver.Update(providerFactory.Object)
-        providerFactory.Verify(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object), Times.Once)
+        providerFactory.Verify(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object, data), Times.Once)
         command.Verify(Of Integer)(Function(c As IDbCommand) c.ExecuteNonQuery(), Times.Once)
         command.VerifySet(Sub(c As IDbCommand) c.CommandType = CommandType.StoredProcedure, Times.AtLeastOnce)
         command.VerifySet(Sub(c As IDbCommand) c.CommandText = "adp.uUserGroup", Times.AtLeastOnce)
