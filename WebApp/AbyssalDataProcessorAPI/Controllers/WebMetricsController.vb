@@ -25,6 +25,11 @@ Namespace Controllers
             Dim innerWebMetrics As IEnumerable(Of IWebMetric)
             Dim mapper As IMapper
             Dim webMetrics As IEnumerable(Of WebMetric)
+
+            If until.Kind = DateTimeKind.Local Then
+                until = until.ToUniversalTime
+            End If
+
             Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
                 factory = scope.Resolve(Of IWebMetricFactory)()
                 innerWebMetrics = factory.GetByMaxCreateTimestamp(New Settings(), until, page)
