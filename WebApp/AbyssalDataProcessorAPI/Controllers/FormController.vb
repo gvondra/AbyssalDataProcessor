@@ -30,6 +30,7 @@ Namespace Controllers
             Dim [event] As IEvent
             Dim triggerFactory As IEventTriggerFactory
             Dim trigger As IEventTrigger
+            Dim formSaver As IFormSaver
 
             Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
                 userFactory = scope.Resolve(Of IUserFactory)()
@@ -40,6 +41,8 @@ Namespace Controllers
                 mapper = New Mapper(m_mapperConfiguration)
                 mapper.Map(Of RoleRequest, Forms.IRoleRequest)(request, innerRequest)
                 form = innerRequest.CreateForm(user)
+                formSaver = scope.Resolve(Of IFormSaver)
+                formSaver.Create(New Settings(), form)
 
                 eventFactory = scope.Resolve(Of IEventFactory)()
                 [event] = eventFactory.Create(New Settings(), form)

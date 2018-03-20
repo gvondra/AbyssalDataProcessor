@@ -13,6 +13,8 @@
     End Sub
 
     Public Sub Trigger(settings As ISettings, [event] As IEvent) Implements IEventTrigger.Trigger
+        m_eventSaver.Create(settings, [event])
+
         m_aggregator.Trigger(settings, [event])
 
         m_eventSaver.Create(settings, [event])
