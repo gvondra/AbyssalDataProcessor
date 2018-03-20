@@ -20,7 +20,7 @@
         If m_eventTypeTaskTypeData.DataStateManager.GetState(m_eventTypeTaskTypeData) = IDataStateManager(Of UserData).enumState.New Then
             providerFactory.EstablishTransaction(m_transactionHandler, m_eventTypeTaskTypeData)
             Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
-                command.Transaction = m_transactionHandler.Transaction
+                command.Transaction = m_transactionHandler.Transaction.InnerTransaction
                 command.CommandType = CommandType.StoredProcedure
                 command.CommandText = "adp.iEventTypeTaskType"
 
@@ -49,7 +49,7 @@
         If m_eventTypeTaskTypeData.DataStateManager.GetState(m_eventTypeTaskTypeData) = IDataStateManager(Of UserData).enumState.Updated Then
             providerFactory.EstablishTransaction(m_transactionHandler, m_eventTypeTaskTypeData)
             Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
-                command.Transaction = m_transactionHandler.Transaction
+                command.Transaction = m_transactionHandler.Transaction.InnerTransaction
                 command.CommandType = CommandType.StoredProcedure
                 command.CommandText = "adp.uEventTypeTaskType"
 

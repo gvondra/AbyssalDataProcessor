@@ -9,6 +9,7 @@
         Dim command As New Mock(Of IDbCommand)
         Dim parameters As New Mock(Of IDataParameterCollection)
 
+        transactionHandler.SetupGet(Of AbyssalDataProcessor.DataTier.Utilities.IDbTransaction)(Function(th As ITransactionHandler) th.Transaction).Returns(New Mock(Of AbyssalDataProcessor.DataTier.Utilities.IDbTransaction)().Object)
         providerFactory.Setup(Sub(f As IDbProviderFactory) f.EstablishTransaction(transactionHandler.Object)) _
         .Callback(Sub()
                       command.SetupGet(Of IDataParameterCollection)(Function(c As IDbCommand) c.Parameters).Returns(parameters.Object)

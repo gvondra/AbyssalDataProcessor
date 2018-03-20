@@ -21,7 +21,7 @@ Public Class FormDataSaver
         If m_formData.DataStateManager.GetState(m_formData) = IDataStateManager(Of UserData).enumState.New Then
             providerFactory.EstablishTransaction(m_transactionHandler, m_formData)
             Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
-                command.Transaction = m_transactionHandler.Transaction
+                command.Transaction = m_transactionHandler.Transaction.InnerTransaction
                 command.CommandType = CommandType.StoredProcedure
                 command.CommandText = "adp.iForm"
 

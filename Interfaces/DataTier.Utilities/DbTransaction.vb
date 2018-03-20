@@ -9,6 +9,12 @@
         m_innerTransaction = transaction
     End Sub
 
+    Public ReadOnly Property InnerTransaction As System.Data.IDbTransaction Implements IDbTransaction.InnerTransaction
+        Get
+            Return m_innerTransaction
+        End Get
+    End Property
+
     Public ReadOnly Property Connection As IDbConnection Implements Data.IDbTransaction.Connection
         Get
             Return m_innerTransaction.Connection

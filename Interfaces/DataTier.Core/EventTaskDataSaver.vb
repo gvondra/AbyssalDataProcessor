@@ -19,7 +19,7 @@
         If m_eventTaskData.DataStateManager.GetState(m_eventTaskData) = IDataStateManager(Of UserData).enumState.New Then
             providerFactory.EstablishTransaction(m_transactionHandler, m_eventTaskData)
             Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
-                command.Transaction = m_transactionHandler.Transaction
+                command.Transaction = m_transactionHandler.Transaction.InnerTransaction
                 command.CommandType = CommandType.StoredProcedure
                 command.CommandText = "adp.iEventTask"
 

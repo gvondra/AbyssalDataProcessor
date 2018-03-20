@@ -18,7 +18,7 @@
 
         providerFactory.EstablishTransaction(m_transactionHandler)
         Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
-            command.Transaction = m_transactionHandler.Transaction
+            command.Transaction = m_transactionHandler.Transaction.InnerTransaction
             command.CommandType = CommandType.StoredProcedure
             command.CommandText = "adp.iWebMetric"
 
