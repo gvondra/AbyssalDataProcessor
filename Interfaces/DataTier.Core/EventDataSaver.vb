@@ -33,6 +33,7 @@
                 command.Parameters.Add(timestamp)
 
                 AddParameter(providerFactory, command.Parameters, "eventTypeId", DbType.Int16, GetParameterValue(m_eventData.EventTypeId))
+                AddParameter(providerFactory, command.Parameters, "message", DbType.String, GetParameterValue(m_eventData.Message))
 
                 command.ExecuteNonQuery()
                 m_eventData.EventId = CType(id.Value, Guid)

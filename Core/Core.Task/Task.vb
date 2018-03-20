@@ -25,6 +25,15 @@ Public Class Task
         End Get
     End Property
 
+    Public Property Message As String Implements ITask.Message
+        Get
+            Return m_taskData.Message
+        End Get
+        Set(value As String)
+            m_taskData.Message = value
+        End Set
+    End Property
+
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope

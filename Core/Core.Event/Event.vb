@@ -28,6 +28,15 @@ Public Class [Event]
         End Get
     End Property
 
+    Public Property Message As String Implements IEvent.Message
+        Get
+            Return m_eventData.Message
+        End Get
+        Set(value As String)
+            m_eventData.Message = value
+        End Set
+    End Property
+
     Private Sub Create(ByVal transactionHandler As Framework.ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
 

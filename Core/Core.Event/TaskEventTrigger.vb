@@ -13,6 +13,7 @@
 
         For Each taskType In [event].GetEventType(settings).GetTaskTypes(settings).Where(Function(ettt As IEventTypeTaskType) ettt.IsActive)
             task = m_taskFactory.Create(taskType)
+            task.Message = [event].Message
             task = [event].AddTask(task)
         Next
     End Sub

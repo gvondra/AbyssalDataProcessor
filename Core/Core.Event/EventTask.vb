@@ -22,6 +22,15 @@ Public Class EventTask
         End Get
     End Property
 
+    Public Property Message As String Implements ITask.Message
+        Get
+            Return m_innerTask.Message
+        End Get
+        Set(value As String)
+            m_innerTask.Message = value
+        End Set
+    End Property
+
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
         m_innerTask.Create(transactionHandler)

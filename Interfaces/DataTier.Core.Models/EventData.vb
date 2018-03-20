@@ -3,6 +3,7 @@
 
     <ColumnMapping("EventId")> Public Property EventId As Guid
     <ColumnMapping("EventTypeId")> Public Property EventTypeId As Short
+    <ColumnMapping("Message")> Public Property Message As String
     <ColumnMapping("CreateTimestamp")> Public Property CreateTimestamp As Date
     <ColumnMapping("UpdateTimestamp")> Public Property UpdateTimestamp As Date
 

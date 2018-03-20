@@ -46,6 +46,10 @@ Namespace Controllers
 
                 eventFactory = scope.Resolve(Of IEventFactory)()
                 [event] = eventFactory.Create(New Settings(), form)
+                [event].Message = [event].GetEventType(New Settings).Title & " submitted by " & user.FullName
+                If String.Compare(user.FullName, innerRequest.FullName, True) <> 0 Then
+                    [event].Message &= " on behalf of " & innerRequest.FullName
+                End If
                 form = [event].AddForm(form)
                 If [event] IsNot Nothing Then
                     triggerFactory = scope.Resolve(Of IEventTriggerFactory)()
