@@ -34,6 +34,8 @@
                 command.Parameters.Add(timestamp)
 
                 AddParameter(providerFactory, command.Parameters, "taskTypeId", DbType.Guid, GetParameterValue(m_taskData.TaskTypeId))
+                AddParameter(providerFactory, command.Parameters, "userId", DbType.Guid, GetParameterValue(m_taskData.UserId))
+                AddParameter(providerFactory, command.Parameters, "message", DbType.String, GetParameterValue(m_taskData.Message))
 
                 command.ExecuteNonQuery()
                 m_taskData.TaskId = CType(id.Value, Guid)
@@ -63,6 +65,8 @@
 
 
                 AddParameter(providerFactory, command.Parameters, "id", DbType.Guid, m_taskData.TaskId)
+                AddParameter(providerFactory, command.Parameters, "userId", DbType.Guid, GetParameterValue(m_taskData.UserId))
+                AddParameter(providerFactory, command.Parameters, "message", DbType.String, GetParameterValue(m_taskData.Message))
 
                 command.ExecuteNonQuery()
                 m_taskData.UpdateTimestamp = CType(timestamp.Value, Date)

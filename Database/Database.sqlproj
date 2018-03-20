@@ -61,6 +61,7 @@
     <Folder Include="adp" />
     <Folder Include="adp\Stored Procedure" />
     <Folder Include="adp\Table" />
+    <Folder Include="adp\View" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="adp.sql" />
@@ -121,5 +122,6 @@
     <Build Include="adp\Stored Procedure\iTask.sql" />
     <Build Include="adp\Stored Procedure\iEventTask.sql" />
     <Build Include="adp\Stored Procedure\sWebMetricByUntil.sql" />
+    <Build Include="adp\View\UnassignedTask.sql" />
   </ItemGroup>
 </Project>

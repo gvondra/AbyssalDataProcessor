@@ -74,6 +74,7 @@
     <Compile Include="TaskData.vb" />
     <Compile Include="TaskTypeData.vb" />
     <Compile Include="TaskTypeGroupData.vb" />
+    <Compile Include="UnassignedTaskData.vb" />
     <Compile Include="UserAccountData.vb" />
     <Compile Include="UserData.vb" />
     <Compile Include="UserGroupData.vb" />
