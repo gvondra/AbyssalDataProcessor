@@ -3,22 +3,12 @@
 
     Public Sub Create(settings As ISettings, eventType As IEventType) Implements IEventTypeSaver.Create
         Dim saver As New Saver()
-        saver.Save(settings, Sub() InnerCreate(settings, eventType))
-    End Sub
-
-    Private Sub InnerCreate(settings As ISettings, eventType As IEventType)
-        Dim creator As IDataCreator = eventType.GetDataCreator(settings)
-        creator.Create()
+        saver.Save(New CoreSettings(settings), AddressOf eventType.Create)
     End Sub
 
     Public Sub Update(settings As ISettings, eventType As IEventType) Implements IEventTypeSaver.Update
         Dim saver As New Saver()
-        saver.Save(settings, Sub() InnerUpdate(settings, eventType))
-    End Sub
-
-    Public Sub InnerUpdate(settings As ISettings, eventType As IEventType)
-        Dim updater As IDataUpdater = eventType.GetDataUpdater(settings)
-        updater.Update()
+        saver.Save(New CoreSettings(settings), AddressOf eventType.Update)
     End Sub
 
 End Class

@@ -73,22 +73,20 @@ Public Class Form
         End Set
     End Property
 
-    Public Function GetDataCreator(settings As Framework.ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataCreatorWrapper(Sub() Create(settings))
-        End Using
-    End Function
-
-    Private Sub Create(settings As Framework.ISettings)
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
 
-        UserId = m_user.UserId
-
-        creator = New FormDataSaver(New Settings(settings), m_formData)
-        creator.Create()
+        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            UserId = m_user.UserId
+            creator = scope.Resolve(Of FormDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(FormData), m_formData)
+            )
+            creator.Create()
+        End Using
     End Sub
 
-    Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
         Throw New NotImplementedException()
-    End Function
+    End Sub
 End Class

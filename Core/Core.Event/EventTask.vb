@@ -22,27 +22,21 @@ Public Class EventTask
         End Get
     End Property
 
-    Public Function GetDataCreator(settings As ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Return New DataCreatorWrapper(Sub() Create(settings))
-    End Function
-
-    Private Sub Create(ByVal settings As ISettings)
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
-
-        m_innerTask.GetDataCreator(settings).Create()
-
+        m_innerTask.Create(transactionHandler)
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             m_eventTaskData.EventId = m_event.EventId
             m_eventTaskData.TaskId = m_innerTask.TaskId
             creator = scope.Resolve(Of EventTaskDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(EventTaskData), m_eventTaskData)
             )
             creator.Create()
         End Using
     End Sub
 
-    Public Function GetDataUpdater(settings As ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
         Throw New NotImplementedException()
-    End Function
+    End Sub
 End Class

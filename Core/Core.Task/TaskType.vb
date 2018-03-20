@@ -27,23 +27,27 @@ Public Class TaskType
         End Set
     End Property
 
-    Public Function GetDataCreator(settings As ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
+        Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataCreatorWrapper(scope.Resolve(Of TaskTypeDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings),
-                New Settings(settings)), New TypedParameter(GetType(TaskTypeData), m_taskTypeData)
-            ))
+            creator = scope.Resolve(Of TaskTypeDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(TaskTypeData), m_taskTypeData)
+            )
+            creator.Create()
         End Using
-    End Function
+    End Sub
 
-    Public Function GetDataUpdater(settings As ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        Dim updater As IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataUpdateWrapper(scope.Resolve(Of TaskTypeDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings),
-                New Settings(settings)), New TypedParameter(GetType(TaskTypeData), m_taskTypeData)
-            ))
+            updater = scope.Resolve(Of TaskTypeDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(TaskTypeData), m_taskTypeData)
+            )
+            updater.Update()
         End Using
-    End Function
+    End Sub
 
     Public Function GetEventTypes(settings As ISettings) As IEnumerable(Of ITaskTypeEventType) Implements ITaskType.GetEventTypes
         Dim result As IEnumerable(Of ITaskTypeEventType) = {}

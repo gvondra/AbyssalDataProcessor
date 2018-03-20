@@ -46,25 +46,19 @@ Public Class EventForm
         End Get
     End Property
 
-    Public Function GetDataCreator(settings As Framework.ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Dim innerCreator As Framework.IDataCreator = m_innerForm.GetDataCreator(settings)
-        Return New DataCreatorWrapper(Sub() Create(settings, innerCreator))
-    End Function
-
-    Private Sub Create(settings As Framework.ISettings, innerCreator As Framework.IDataCreator)
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
 
-        innerCreator.Create()
-
+        m_innerForm.Create(transactionHandler)
         m_eventFormData.EventId = Me.Event.EventId
         m_eventFormData.FormId = m_innerForm.FormId
         Using scope As ILifetimeScope = m_containter.BeginLifetimeScope
-            creator = scope.Resolve(Of EventFormDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(EventFormData), m_eventFormData))
+            creator = scope.Resolve(Of EventFormDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)), New TypedParameter(GetType(EventFormData), m_eventFormData))
             creator.Create()
         End Using
     End Sub
 
-    Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
-        Return m_innerForm.GetDataUpdater(settings)
-    End Function
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        m_innerForm.Update(transactionHandler)
+    End Sub
 End Class

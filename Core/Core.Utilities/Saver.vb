@@ -1,24 +1,24 @@
 ﻿Public Class Saver
-    Public Sub Save(ByVal settings As Framework.ISettings, ByVal save As Action)
+    Public Sub Save(ByVal transactionHandler As Framework.ITransactionHandler, ByVal save As Action(Of ITransactionHandler))
         Try
-            save.Invoke()
+            save.Invoke(transactionHandler)
 
-            If settings.DbTransaction IsNot Nothing Then
-                settings.DbTransaction.Commit()
+            If transactionHandler.DbTransaction IsNot Nothing Then
+                transactionHandler.DbTransaction.Commit()
             End If
         Catch
-            If settings.DbTransaction IsNot Nothing Then
-                settings.DbTransaction.Rollback()
+            If transactionHandler.DbTransaction IsNot Nothing Then
+                transactionHandler.DbTransaction.Rollback()
             End If
             Throw
         Finally
-            If settings.DbTransaction IsNot Nothing Then
-                settings.DbTransaction.Dispose()
-                settings.DbTransaction = Nothing
+            If transactionHandler.DbTransaction IsNot Nothing Then
+                transactionHandler.DbTransaction.Dispose()
+                transactionHandler.DbTransaction = Nothing
             End If
-            If settings.DbConnection IsNot Nothing Then
-                settings.DbConnection.Dispose()
-                settings.DbConnection = Nothing
+            If transactionHandler.DbConnection IsNot Nothing Then
+                transactionHandler.DbConnection.Dispose()
+                transactionHandler.DbConnection = Nothing
             End If
         End Try
     End Sub

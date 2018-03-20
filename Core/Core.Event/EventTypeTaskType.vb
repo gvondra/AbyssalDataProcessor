@@ -44,13 +44,13 @@ Public Class EventTypeTaskType
         Return m_innerTaskType.CreateTaskTypeGroup(group)
     End Function
 
-    Public Function GetDataCreator(settings As ISettings) As IDataCreator Implements ISavable.GetDataCreator
-        Return m_innerTaskType.GetDataCreator(settings)
-    End Function
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
+        m_innerTaskType.Create(transactionHandler)
+    End Sub
 
-    Public Function GetDataUpdater(settings As ISettings) As IDataUpdater Implements ISavable.GetDataUpdater
-        Return m_innerTaskType.GetDataUpdater(settings)
-    End Function
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        m_innerTaskType.Update(transactionHandler)
+    End Sub
 
     Public Function GetEventTypes(settings As ISettings) As IEnumerable(Of ITaskTypeEventType) Implements ITaskType.GetEventTypes
         Return m_innerTaskType.GetEventTypes(settings)

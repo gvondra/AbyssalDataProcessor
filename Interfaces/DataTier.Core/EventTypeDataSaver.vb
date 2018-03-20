@@ -3,10 +3,10 @@
     Implements IDataUpdater
 
     Private m_eventTypeData As EventTypeData
-    Private m_settings As ISettings
+    Private m_transactionHandler As ITransactionHandler
 
-    Public Sub New(ByVal settings As ISettings, ByVal eventTypeData As EventTypeData)
-        m_settings = settings
+    Public Sub New(ByVal transactionHandler As ITransactionHandler, ByVal eventTypeData As EventTypeData)
+        m_transactionHandler = transactionHandler
         m_eventTypeData = eventTypeData
     End Sub
 
@@ -18,9 +18,9 @@
         Dim timestamp As IDbDataParameter
 
         If m_eventTypeData.DataStateManager.GetState(m_eventTypeData) = IDataStateManager(Of UserData).enumState.New Then
-            providerFactory.EstablishTransaction(m_settings)
-            Using command As IDbCommand = m_settings.Connection.CreateCommand
-                command.Transaction = m_settings.Transaction
+            providerFactory.EstablishTransaction(m_transactionHandler)
+            Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
+                command.Transaction = m_transactionHandler.Transaction
                 command.CommandType = CommandType.StoredProcedure
                 command.CommandText = "adp.iEventType"
 
@@ -47,9 +47,9 @@
         Dim timestamp As IDbDataParameter
 
         If m_eventTypeData.DataStateManager.GetState(m_eventTypeData) = IDataStateManager(Of UserData).enumState.Updated Then
-            providerFactory.EstablishTransaction(m_settings)
-            Using command As IDbCommand = m_settings.Connection.CreateCommand
-                command.Transaction = m_settings.Transaction
+            providerFactory.EstablishTransaction(m_transactionHandler)
+            Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
+                command.Transaction = m_transactionHandler.Transaction
                 command.CommandType = CommandType.StoredProcedure
                 command.CommandText = "adp.uEventType"
 

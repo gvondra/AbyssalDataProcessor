@@ -8,18 +8,18 @@ Public Class DbProviderFactory
         m_innerFactory = DbProviderFactories.GetFactory("System.Data.SqlClient")
     End Sub
 
-    Public Sub EstablishTransaction(settings As ISettings) Implements IDbProviderFactory.EstablishTransaction
-        If settings.Connection IsNot Nothing Then
-            If settings.Connection.State <> ConnectionState.Open Then
-                settings.Connection.Dispose()
-                settings.Connection = Nothing
+    Public Sub EstablishTransaction(transactionHandler As ITransactionHandler) Implements IDbProviderFactory.EstablishTransaction
+        If transactionHandler.Connection IsNot Nothing Then
+            If transactionHandler.Connection.State <> ConnectionState.Open Then
+                transactionHandler.Connection.Dispose()
+                transactionHandler.Connection = Nothing
             End If
         End If
-        If settings.Connection Is Nothing Then
-            settings.Connection = OpenConnection(settings.ConnectionString)
+        If transactionHandler.Connection Is Nothing Then
+            transactionHandler.Connection = OpenConnection(transactionHandler.ConnectionString)
         End If
-        If settings.Transaction Is Nothing Then
-            settings.Transaction = settings.Connection.BeginTransaction
+        If transactionHandler.Transaction Is Nothing Then
+            transactionHandler.Transaction = transactionHandler.Connection.BeginTransaction
         End If
     End Sub
 

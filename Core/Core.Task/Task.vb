@@ -25,23 +25,19 @@ Public Class Task
         End Get
     End Property
 
-    Public Function GetDataCreator(settings As ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Return New DataCreatorWrapper(Sub() Create(settings))
-    End Function
-
-    Private Sub Create(ByVal settings As ISettings)
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             m_taskData.TaskTypeId = m_taskType.TaskTypeId
             creator = scope.Resolve(Of TaskDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(TaskData), m_taskData)
             )
             creator.Create()
         End Using
     End Sub
 
-    Public Function GetDataUpdater(settings As ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
         Throw New NotImplementedException()
-    End Function
+    End Sub
 End Class

@@ -12,10 +12,10 @@ Public Class WebMetricSaver
 
     Public Sub Create(settings As Framework.ISettings, url As String, method As String, createTimestamp As DateTime, duration As Double, status As String, controller As String, Optional attributes As IDictionary(Of String, String) = Nothing) Implements IWebMetricSaver.Create
         Dim saver As New Saver()
-        saver.Save(settings, Sub() InnerCreate(settings, url, method, createTimestamp, duration, status, controller, attributes))
+        saver.Save(New CoreSettings(settings), Sub(th As ITransactionHandler) InnerCreate(th, url, method, createTimestamp, duration, status, controller, attributes))
     End Sub
 
-    Private Sub InnerCreate(settings As ISettings, url As String, method As String, createTimestamp As DateTime, duration As Double, status As String, controller As String, attributes As IDictionary(Of String, String))
+    Private Sub InnerCreate(transactionHandler As ITransactionHandler, url As String, method As String, createTimestamp As DateTime, duration As Double, status As String, controller As String, attributes As IDictionary(Of String, String))
         Dim creator As IDataCreator
         Dim webMetric As WebMetricData
         Dim attribute As WebMetricAttributeData
@@ -30,9 +30,10 @@ Public Class WebMetricSaver
                 .Controller = controller
             }
 
-            creator = scope.Resolve(Of WebMetricDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
-                                                           New TypedParameter(GetType(WebMetricData), webMetric))
-
+            creator = scope.Resolve(Of WebMetricDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(WebMetricData), webMetric)
+            )
             creator.Create()
 
             If attributes IsNot Nothing Then
@@ -42,9 +43,10 @@ Public Class WebMetricSaver
                         .Key = kp.Key,
                         .Value = kp.Value
                     }
-                    creator = scope.Resolve(Of WebMetricAttributeDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
-                                                           New TypedParameter(GetType(WebMetricAttributeData), attribute))
-
+                    creator = scope.Resolve(Of WebMetricAttributeDataSaver)(
+                        New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                        New TypedParameter(GetType(WebMetricAttributeData), attribute)
+                    )
                     creator.Create()
                 Next kp
             End If

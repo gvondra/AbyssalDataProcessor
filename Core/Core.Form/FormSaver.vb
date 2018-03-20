@@ -3,11 +3,6 @@
 
     Public Sub Create(settings As Framework.ISettings, form As IForm) Implements IFormSaver.Create
         Dim saver As New Saver()
-        saver.Save(settings, Sub() InnerCreate(settings, form))
-    End Sub
-
-    Private Sub InnerCreate(settings As ISettings, form As IForm)
-        Dim creator As IDataCreator = form.GetDataCreator(settings)
-        creator.Create()
+        saver.Save(New CoreSettings(settings), AddressOf form.Create)
     End Sub
 End Class

@@ -3,10 +3,10 @@
     Implements IDataUpdater
 
     Private m_taskTypeGroupData As TaskTypeGroupData
-    Private m_settings As ISettings
+    Private m_transactionHandler As ITransactionHandler
 
-    Public Sub New(ByVal settings As ISettings, ByVal taskTypeGroupData As TaskTypeGroupData)
-        m_settings = settings
+    Public Sub New(ByVal transactionHandler As ITransactionHandler, ByVal taskTypeGroupData As TaskTypeGroupData)
+        m_transactionHandler = transactionHandler
         m_taskTypeGroupData = taskTypeGroupData
     End Sub
 
@@ -18,9 +18,9 @@
         Dim timestamp As IDbDataParameter
 
         If m_taskTypeGroupData.DataStateManager.GetState(m_taskTypeGroupData) = IDataStateManager(Of UserData).enumState.New Then
-            providerFactory.EstablishTransaction(m_settings)
-            Using command As IDbCommand = m_settings.Connection.CreateCommand
-                command.Transaction = m_settings.Transaction
+            providerFactory.EstablishTransaction(m_transactionHandler)
+            Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
+                command.Transaction = m_transactionHandler.Transaction
                 command.CommandType = CommandType.StoredProcedure
                 command.CommandText = "adp.iTaskTypeGroup"
 
@@ -48,9 +48,9 @@
         Dim timestamp As IDbDataParameter
 
         If m_taskTypeGroupData.DataStateManager.GetState(m_taskTypeGroupData) = IDataStateManager(Of UserData).enumState.Updated Then
-            providerFactory.EstablishTransaction(m_settings)
-            Using command As IDbCommand = m_settings.Connection.CreateCommand
-                command.Transaction = m_settings.Transaction
+            providerFactory.EstablishTransaction(m_transactionHandler)
+            Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
+                command.Transaction = m_transactionHandler.Transaction
                 command.CommandType = CommandType.StoredProcedure
                 command.CommandText = "adp.uTaskTypeGroup"
 

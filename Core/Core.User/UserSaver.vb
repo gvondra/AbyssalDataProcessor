@@ -7,24 +7,18 @@
 
     Public Sub Save(settings As ISettings, user As IUser, subscriber As String) Implements IUserSaver.Save
         Dim saver As New Saver()
-        saver.Save(settings, Sub() InnerSave(settings, user, subscriber))
+        saver.Save(New CoreSettings(settings), Sub(th As ITransactionHandler) InnerSave(th, user, subscriber))
     End Sub
 
-    Private Sub InnerSave(settings As ISettings, user As IUser, subscriber As String)
-        Dim creator As IDataCreator
-        Dim updater As IDataUpdater
-
+    Private Sub InnerSave(transactionHandler As ITransactionHandler, user As IUser, subscriber As String)
         If user.UserId.Equals(Guid.Empty) Then
-            creator = user.GetDataCreator(settings)
-            creator.Create()
+            user.Create(transactionHandler)
         Else
-            updater = user.GetDataUpdater(settings)
-            updater.Update()
+            user.Update(transactionHandler)
         End If
 
         If String.IsNullOrEmpty(subscriber) = False Then
-            creator = user.GetAccountDataCreater(settings, subscriber)
-            creator.Create()
+            user.CreateAccount(transactionHandler, subscriber)
         End If
     End Sub
 End Class

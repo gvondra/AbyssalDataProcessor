@@ -23,11 +23,11 @@ Public Class Group
         End Set
     End Property
 
-    Public Function GetDataCreator(settings As Framework.ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Throw New NotImplementedException
-    End Function
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
+        Throw New NotImplementedException()
+    End Sub
 
-    Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
-        Throw New NotImplementedException
-    End Function
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        Throw New NotImplementedException()
+    End Sub
 End Class

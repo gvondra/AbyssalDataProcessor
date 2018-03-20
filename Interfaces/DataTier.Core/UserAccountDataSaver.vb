@@ -2,10 +2,10 @@
     Implements IDataCreator
 
     Private m_userAccountData As UserAccountData
-    Private m_settings As ISettings
+    Private m_transactionHandler As ITransactionHandler
 
-    Public Sub New(ByVal settings As ISettings, ByVal userAccountData As UserAccountData)
-        m_settings = settings
+    Public Sub New(ByVal transactionHandler As ITransactionHandler, ByVal userAccountData As UserAccountData)
+        m_transactionHandler = transactionHandler
         m_userAccountData = userAccountData
     End Sub
 
@@ -17,9 +17,9 @@
         Dim id As IDbDataParameter
         Dim timestamp As IDbDataParameter
 
-        providerFactory.EstablishTransaction(m_settings)
-        Using command As IDbCommand = m_settings.Connection.CreateCommand
-            command.Transaction = m_settings.Transaction
+        providerFactory.EstablishTransaction(m_transactionHandler)
+        Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
+            command.Transaction = m_transactionHandler.Transaction
             command.CommandType = CommandType.StoredProcedure
             command.CommandText = "adp.iUserAccount"
 

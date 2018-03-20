@@ -64,12 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoreSettings.vb" />
-    <Compile Include="DataUpdaterWrapper.vb" />
-    <Compile Include="DataCreatorWrapper.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="Saver.vb" />
     <Compile Include="Settings.vb" />
     <Compile Include="StringFormatters.vb" />
+    <Compile Include="TransactionHandler.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\DataTier.Core\DataTier.Core.vbproj">

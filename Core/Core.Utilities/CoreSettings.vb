@@ -1,5 +1,5 @@
 ﻿Public Class CoreSettings
-    Implements ISettings
+    Implements ITransactionHandler
 
     Private m_innerSettings As ISettings
 
@@ -19,6 +19,6 @@
         End Get
     End Property
 
-    Public Property DbConnection As IDbConnection Implements ISettings.DbConnection
-    Public Property DbTransaction As IDbTransaction Implements ISettings.DbTransaction
+    Public Property DbConnection As IDbConnection Implements ITransactionHandler.DbConnection
+    Public Property DbTransaction As IDbTransaction Implements ITransactionHandler.DbTransaction
 End Class

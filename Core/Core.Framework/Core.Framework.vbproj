@@ -64,8 +64,6 @@
     <Compile Include="Enumerations.vb" />
     <Compile Include="Forms\IFormSerializable.vb" />
     <Compile Include="Forms\IRoleRequest.vb" />
-    <Compile Include="IDataCreator.vb" />
-    <Compile Include="IDataUpdater.vb" />
     <Compile Include="IEvent.vb" />
     <Compile Include="IEventFactory.vb" />
     <Compile Include="IEventSaver.vb" />
@@ -94,6 +92,7 @@
     <Compile Include="ITaskTypeFactory.vb" />
     <Compile Include="ITaskTypeGroup.vb" />
     <Compile Include="ITaskTypeSaver.vb" />
+    <Compile Include="ITransactionHandler.vb" />
     <Compile Include="IUser.vb" />
     <Compile Include="IUserFactory.vb" />
     <Compile Include="IUserGroup.vb" />

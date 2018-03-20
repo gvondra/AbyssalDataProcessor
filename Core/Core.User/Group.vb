@@ -27,15 +27,25 @@ Public Class Group
         End Set
     End Property
 
-    Public Function GetDataCreator(settings As Framework.ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
+        Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataCreatorWrapper(scope.Resolve(Of GroupDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(GroupData), m_groupData)))
+            creator = scope.Resolve(Of GroupDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(GroupData), m_groupData)
+            )
+            creator.Create()
         End Using
-    End Function
+    End Sub
 
-    Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        Dim updater As IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataUpdateWrapper(scope.Resolve(Of GroupDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(GroupData), m_groupData)))
+            updater = scope.Resolve(Of GroupDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(GroupData), m_groupData)
+            )
+            updater.Update()
         End Using
-    End Function
+    End Sub
 End Class

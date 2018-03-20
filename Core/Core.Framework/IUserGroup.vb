@@ -4,5 +4,5 @@
 
     Property IsActive As Boolean
 
-    Sub Save(ByVal settings As ISettings)
+    Sub Save(ByVal transactionHandler As ITransactionHandler)
 End Interface

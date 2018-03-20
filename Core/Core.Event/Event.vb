@@ -28,36 +28,32 @@ Public Class [Event]
         End Get
     End Property
 
-    Public Function GetDataCreator(settings As Framework.ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Return New DataCreatorWrapper(Sub() Create(settings))
-    End Function
-
-    Private Sub Create(settings As Framework.ISettings)
+    Private Sub Create(ByVal transactionHandler As Framework.ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
 
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             creator = scope.Resolve(Of EventDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings),
-                New Settings(settings)), New TypedParameter(GetType(EventData), m_eventData)
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(EventData), m_eventData)
             )
             creator.Create()
         End Using
 
         If m_forms IsNot Nothing Then
             For Each form As IForm In m_forms
-                form.GetDataCreator(settings).Create()
+                form.Create(transactionHandler)
             Next
         End If
         If m_tasks IsNot Nothing Then
             For Each task As ITask In m_tasks
-                task.GetDataCreator(settings).Create()
+                task.Create(transactionHandler)
             Next
         End If
     End Sub
 
-    Public Function GetDataUpdater(settings As Framework.ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(ByVal transactinoHandler As Framework.ITransactionHandler) Implements ISavable.Update
         Throw New NotImplementedException()
-    End Function
+    End Sub
 
     Public Function AddForm(form As IForm) As IForm Implements IEvent.AddForm
         Dim eventForm As New EventForm(Me, form)

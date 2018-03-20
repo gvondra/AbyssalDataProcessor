@@ -40,41 +40,35 @@ Public Class TaskTypeGroup
         End Set
     End Property
 
-    Public Sub Save(settings As ISettings) Implements ITaskTypeGroup.Save
-        Dim creator As Framework.IDataCreator
-        Dim updater As Framework.IDataUpdater
+    Public Sub Save(transactionHandler As ITransactionHandler) Implements ITaskTypeGroup.Save
         If m_taskTypeGroupData.DataStateManager.GetState(m_taskTypeGroupData) = DataTier.Utilities.IDataStateManager(Of UserGroupData).enumState.New Then
-            creator = GetDataCreator(settings)
-            creator.Create()
+            Create(transactionHandler)
         ElseIf m_taskTypeGroupData.DataStateManager.GetState(m_taskTypeGroupData) = DataTier.Utilities.IDataStateManager(Of UserGroupData).enumState.Updated Then
-            updater = GetDataUpdater(settings)
-            updater.Update()
+            Update(transactionHandler)
         End If
     End Sub
 
-    Public Function GetDataCreator(settings As ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Return New DataCreatorWrapper(Sub() Create(settings))
-    End Function
-
-    Private Sub Create(ByVal settings As ISettings)
-        Dim creator As Framework.IDataCreator
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
+        Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             m_taskTypeGroupData.TaskTypeId = m_taskType.TaskTypeId
             m_taskTypeGroupData.GroupId = m_innerGroup.GroupId
-            creator = New DataCreatorWrapper(scope.Resolve(Of TaskTypeGroupDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
+            creator = scope.Resolve(Of TaskTypeGroupDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(TaskTypeGroupData), m_taskTypeGroupData)
-            ))
+            )
             creator.Create()
         End Using
     End Sub
 
-    Public Function GetDataUpdater(settings As ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        Dim updater As IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataUpdateWrapper(scope.Resolve(Of TaskTypeGroupDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
+            updater = scope.Resolve(Of TaskTypeGroupDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(TaskTypeGroupData), m_taskTypeGroupData)
-            ))
+            )
+            updater.Update()
         End Using
-    End Function
+    End Sub
 End Class

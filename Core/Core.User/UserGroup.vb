@@ -40,41 +40,35 @@ Public Class UserGroup
         End Set
     End Property
 
-    Public Function GetDataCreator(settings As ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Return New DataCreatorWrapper(Sub() Create(settings))
-    End Function
-
-    Private Sub Create(settings As ISettings)
-        Dim creator As AbyssalDataProcessor.DataTier.Core.IDataCreator
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
+        Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             m_userGroupData.UserId = m_user.UserId
             m_userGroupData.GroupId = m_innerGroup.GroupId
             creator = scope.Resolve(Of UserGroupDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(UserGroupData), m_userGroupData)
             )
             creator.Create()
         End Using
     End Sub
 
-    Public Function GetDataUpdater(settings As ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        Dim updater As IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataUpdateWrapper(scope.Resolve(Of UserGroupDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
+            updater = scope.Resolve(Of UserGroupDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(UserGroupData), m_userGroupData)
-            ))
-        End Using
-    End Function
-
-    Public Sub Save(settings As ISettings) Implements IUserGroup.Save
-        Dim creator As Framework.IDataCreator
-        Dim updater As Framework.IDataUpdater
-        If m_userGroupData.DataStateManager.GetState(m_userGroupData) = DataTier.Utilities.IDataStateManager(Of UserGroupData).enumState.New Then
-            creator = GetDataCreator(settings)
-            creator.Create()
-        ElseIf m_userGroupData.DataStateManager.GetState(m_userGroupData) = DataTier.Utilities.IDataStateManager(Of UserGroupData).enumState.Updated Then
-            updater = GetDataUpdater(settings)
+            )
             updater.Update()
+        End Using
+    End Sub
+
+    Public Sub Save(ByVal transactionHandler As ITransactionHandler) Implements IUserGroup.Save
+        If m_userGroupData.DataStateManager.GetState(m_userGroupData) = DataTier.Utilities.IDataStateManager(Of UserGroupData).enumState.New Then
+            Create(transactionHandler)
+        ElseIf m_userGroupData.DataStateManager.GetState(m_userGroupData) = DataTier.Utilities.IDataStateManager(Of UserGroupData).enumState.Updated Then
+            Update(transactionHandler)
         End If
     End Sub
 End Class

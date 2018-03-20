@@ -78,6 +78,7 @@
     <Compile Include="ILoaderComponent.vb" />
     <Compile Include="ILoaderFactory.vb" />
     <Compile Include="DateLoaderComponent.vb" />
+    <Compile Include="ITransactionHandler.vb" />
     <Compile Include="LoaderComponentNotFound.vb" />
     <Compile Include="Loader.vb" />
     <Compile Include="LoaderFactory.vb" />

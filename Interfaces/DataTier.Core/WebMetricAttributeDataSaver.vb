@@ -1,11 +1,11 @@
 ﻿Public Class WebMetricAttributeDataSaver
     Implements IDataCreator
 
-    Private m_settings As ISettings
+    Private m_transactionHandler As ITransactionHandler
     Private m_webMetricAttributeData As WebMetricAttributeData
 
-    Public Sub New(ByVal settings As ISettings, ByVal webMetricAttributeData As WebMetricAttributeData)
-        m_settings = settings
+    Public Sub New(ByVal transactionHandler As ITransactionHandler, ByVal webMetricAttributeData As WebMetricAttributeData)
+        m_transactionHandler = transactionHandler
         m_webMetricAttributeData = webMetricAttributeData
     End Sub
 
@@ -16,9 +16,9 @@
     Public Sub Create(ByVal providerFactory As IDbProviderFactory)
         Dim id As IDbDataParameter
 
-        providerFactory.EstablishTransaction(m_settings)
-        Using command As IDbCommand = m_settings.Connection.CreateCommand
-            command.Transaction = m_settings.Transaction
+        providerFactory.EstablishTransaction(m_transactionHandler)
+        Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
+            command.Transaction = m_transactionHandler.Transaction
             command.CommandType = CommandType.StoredProcedure
             command.CommandText = "adp.iWebMetricAttribute"
 

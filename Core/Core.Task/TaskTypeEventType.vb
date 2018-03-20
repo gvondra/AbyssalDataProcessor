@@ -40,43 +40,37 @@ Public Class TaskTypeEventType
         End Set
     End Property
 
-    Public Sub Save(settings As ISettings) Implements ITaskTypeEventType.Save
-        Dim creator As Framework.IDataCreator
-        Dim updater As Framework.IDataUpdater
+    Public Sub Save(ByVal transactionHandler As ITransactionHandler) Implements ITaskTypeEventType.Save
         If m_eventTypeTaskTypeData.DataStateManager.GetState(m_eventTypeTaskTypeData) = DataTier.Utilities.IDataStateManager(Of UserGroupData).enumState.New Then
-            creator = GetDataCreator(settings)
-            creator.Create()
+            Create(transactionHandler)
         ElseIf m_eventTypeTaskTypeData.DataStateManager.GetState(m_eventTypeTaskTypeData) = DataTier.Utilities.IDataStateManager(Of UserGroupData).enumState.Updated Then
-            updater = GetDataUpdater(settings)
-            updater.Update()
+            Update(transactionHandler)
         End If
     End Sub
 
-    Public Function GetDataCreator(settings As ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
-        Return New DataCreatorWrapper(Sub() Create(settings))
-    End Function
-
-    Private Sub Create(ByVal settings As Framework.ISettings)
-        Dim creator As Framework.IDataCreator
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
+        Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             m_eventTypeTaskTypeData.EventTypeId = m_innerEventType.EventTypeId
             m_eventTypeTaskTypeData.TaskTypeId = m_taskType.TaskTypeId
-            creator = New DataCreatorWrapper(scope.Resolve(Of EventTypeTaskTypeDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
+            creator = scope.Resolve(Of EventTypeTaskTypeDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(EventTypeTaskTypeData), m_eventTypeTaskTypeData)
-            ))
+            )
             creator.Create()
         End Using
     End Sub
 
-    Public Function GetDataUpdater(settings As ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        Dim updater As IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataUpdateWrapper(scope.Resolve(Of EventTypeTaskTypeDataSaver)(
-                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)),
+            updater = scope.Resolve(Of EventTypeTaskTypeDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(EventTypeTaskTypeData), m_eventTypeTaskTypeData)
-            ))
+            )
+            updater.Update()
         End Using
-    End Function
+    End Sub
 
     Public Function GetTaskTypes(settings As ISettings) As IEnumerable(Of IEventTypeTaskType) Implements IEventType.GetTaskTypes
         Return m_innerEventType.GetTaskTypes(settings)

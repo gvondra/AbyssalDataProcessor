@@ -3,12 +3,11 @@
 
     Public Sub Save(settings As ISettings, types As IEnumerable(Of ITaskTypeGroup)) Implements ITaskTypeGroupSaver.Save
         Dim saver As New Saver()
-        saver.Save(settings, Sub() InnerSave(settings, types))
+        saver.Save(New CoreSettings(settings), Sub(th As ITransactionHandler)
+                                                   For Each g As ITaskTypeGroup In types
+                                                       g.Save(th)
+                                                   Next
+                                               End Sub)
     End Sub
 
-    Private Sub InnerSave(settings As ISettings, types As IEnumerable(Of ITaskTypeGroup))
-        For Each g As ITaskTypeGroup In types
-            g.Save(settings)
-        Next
-    End Sub
 End Class

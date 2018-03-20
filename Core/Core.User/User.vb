@@ -80,33 +80,40 @@ Public Class User
         End Get
     End Property
 
-    Public Function GetAccountDataCreater(ByVal settings As Framework.ISettings, ByVal subscriberId As String) As Framework.IDataCreator Implements IUser.GetAccountDataCreater
-        Return New DataCreatorWrapper(Sub() CreateAccount(settings, subscriberId))
-    End Function
-
-    Private Sub CreateAccount(ByVal settings As Framework.ISettings, ByVal subscriberId As String)
+    Public Sub CreateAccount(ByVal transactionHandler As ITransactionHandler, ByVal subscriberId As String) Implements IUser.CreateAccount
         Dim data As New UserAccountData() With {.UserId = Me.UserId, .SubscriberId = subscriberId}
         Dim creater As IDataCreator
-        Dim innerSettings As New Settings(settings)
 
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            creater = scope.Resolve(Of UserAccountDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), innerSettings), New TypedParameter(GetType(UserAccountData), data))
+            creater = scope.Resolve(Of UserAccountDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(UserAccountData), data)
+            )
             creater.Create()
         End Using
-
     End Sub
 
-    Public Function GetDataCreator(settings As ISettings) As Framework.IDataCreator Implements ISavable.GetDataCreator
+    Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
+        Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataCreatorWrapper(scope.Resolve(Of UserDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(UserData), m_userData)))
+            creator = scope.Resolve(Of UserDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(UserData), m_userData)
+            )
+            creator.Create()
         End Using
-    End Function
+    End Sub
 
-    Public Function GetDataUpdater(settings As ISettings) As Framework.IDataUpdater Implements ISavable.GetDataUpdater
+    Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
+        Dim updater As IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            Return New DataUpdateWrapper(scope.Resolve(Of UserDataSaver)(New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ISettings), New Settings(settings)), New TypedParameter(GetType(UserData), m_userData)))
+            updater = scope.Resolve(Of UserDataSaver)(
+                New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
+                New TypedParameter(GetType(UserData), m_userData)
+            )
+            updater.Update()
         End Using
-    End Function
+    End Sub
 
     Public Function GetGroups(settings As ISettings) As IEnumerable(Of IUserGroup) Implements IUser.GetGroups
         Dim result As IEnumerable(Of IUserGroup) = {}

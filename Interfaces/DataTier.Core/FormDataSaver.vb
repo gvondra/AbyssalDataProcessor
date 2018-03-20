@@ -3,10 +3,10 @@ Public Class FormDataSaver
     Implements IDataCreator
 
     Private m_formData As FormData
-    Private m_settings As ISettings
+    Private m_transactionHandler As ITransactionHandler
 
-    Public Sub New(ByVal settings As ISettings, ByVal formData As FormData)
-        m_settings = settings
+    Public Sub New(ByVal transactionHandler As ITransactionHandler, ByVal formData As FormData)
+        m_transactionHandler = transactionHandler
         m_formData = formData
     End Sub
 
@@ -18,9 +18,9 @@ Public Class FormDataSaver
         Dim id As IDbDataParameter
         Dim timestamp As IDbDataParameter
 
-        providerFactory.EstablishTransaction(m_settings)
-        Using command As IDbCommand = m_settings.Connection.CreateCommand
-            command.Transaction = m_settings.Transaction
+        providerFactory.EstablishTransaction(m_transactionHandler)
+        Using command As IDbCommand = m_transactionHandler.Connection.CreateCommand
+            command.Transaction = m_transactionHandler.Transaction
             command.CommandType = CommandType.StoredProcedure
             command.CommandText = "adp.iForm"
 

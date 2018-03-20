@@ -3,12 +3,10 @@
 
     Public Sub Save(settings As ISettings, types As IEnumerable(Of ITaskTypeEventType)) Implements ITaskTypeEventTypeSaver.Save
         Dim saver As New Saver()
-        saver.Save(settings, Sub() InnerSave(settings, types))
-    End Sub
-
-    Private Sub InnerSave(settings As ISettings, types As IEnumerable(Of ITaskTypeEventType))
-        For Each t As ITaskTypeEventType In types
-            t.Save(settings)
-        Next
+        saver.Save(New CoreSettings(settings), Sub(th As ITransactionHandler)
+                                                   For Each t As ITaskTypeEventType In types
+                                                       t.Save(th)
+                                                   Next
+                                               End Sub)
     End Sub
 End Class

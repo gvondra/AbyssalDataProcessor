@@ -3,19 +3,14 @@
 
     Public Sub Save(settings As ISettings, taskType As ITaskType) Implements ITaskTypeSaver.Save
         Dim saver As New Saver()
-        saver.Save(settings, Sub() InnerSaver(settings, taskType))
+        saver.Save(New CoreSettings(settings), Sub(th As ITransactionHandler) InnerSaver(th, taskType))
     End Sub
 
-    Private Sub InnerSaver(settings As ISettings, taskType As ITaskType)
-        Dim creator As IDataCreator
-        Dim updater As IDataUpdater
-
+    Private Sub InnerSaver(transactionHandler As ITransactionHandler, taskType As ITaskType)
         If taskType.TaskTypeId.Equals(Guid.Empty) Then
-            creator = taskType.GetDataCreator(settings)
-            creator.Create()
+            taskType.Create(transactionHandler)
         Else
-            updater = taskType.GetDataUpdater(settings)
-            updater.Update()
+            taskType.Update(transactionHandler)
         End If
     End Sub
 End Class
