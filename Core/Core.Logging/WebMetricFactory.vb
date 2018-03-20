@@ -10,7 +10,7 @@ Public Class WebMetricFactory
     End Sub
 
     Public Function GetByMaxCreateTimestamp(settings As ISettings, until As DateTime, page As Int32) As IEnumerable(Of IWebMetric) Implements IWebMetricFactory.GetByMaxCreateTimestamp
-        Const PAGE_SIZE As Integer = 100
+        Const PAGE_SIZE As Integer = 20
         Dim factory As IWebMetricDataFactory
         Dim result As IEnumerable(Of IWebMetric)
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
