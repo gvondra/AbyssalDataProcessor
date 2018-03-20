@@ -15,6 +15,7 @@ import { EventTypeComponent } from './event-type/event-type.component';
 import { UserGroupsComponent } from './user-groups/user-groups.component';
 import { TaskTypeEventTypesComponent } from './task-type-event-types/task-type-event-types.component';
 import { TaskTypeGroupsComponent } from './task-type-groups/task-type-groups.component';
+import { WebMetricsComponent } from './web-metrics/web-metrics.component';
 const routes: Routes = [
     {
         path: '',
@@ -118,6 +119,13 @@ const routes: Routes = [
       {
         path: 'eventtype/:id',
         component: EventTypeComponent,
+        canActivate: [
+          AuthGuard
+        ]
+      },
+      {
+        path: 'webmetrics',
+        component: WebMetricsComponent,
         canActivate: [
           AuthGuard
         ]
