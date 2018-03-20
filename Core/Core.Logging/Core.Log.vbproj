@@ -75,6 +75,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ObjectContainer.vb" />
+    <Compile Include="WebMetric.vb" />
+    <Compile Include="WebMetricAttribute.vb" />
+    <Compile Include="WebMetricFactory.vb" />
     <Compile Include="WebMetricSaver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>

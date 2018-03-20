@@ -7,6 +7,7 @@ Friend NotInheritable Class ObjectContainer
     Shared Sub New()
         Dim builder As New ContainerBuilder()
 
+        builder.RegisterType(Of WebMetricDataFactory)().As(Of IWebMetricDataFactory)()
         builder.RegisterType(Of WebMetricDataSaver)()
         builder.RegisterType(Of WebMetricAttributeDataSaver)()
 

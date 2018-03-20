@@ -101,6 +101,9 @@
     <Compile Include="IUserGroupSaver.vb" />
     <Compile Include="IUserSaver.vb" />
     <Compile Include="IUserUpdater.vb" />
+    <Compile Include="IWebMetric.vb" />
+    <Compile Include="IWebMetricAttribute.vb" />
+    <Compile Include="IWebMetricFactory.vb" />
     <Compile Include="IWebMetricSaver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
