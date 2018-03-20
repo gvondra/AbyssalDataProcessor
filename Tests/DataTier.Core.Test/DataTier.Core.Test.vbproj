@@ -105,6 +105,7 @@
     <Compile Include="EventTaskDataSaverTest.vb" />
     <Compile Include="TaskTypeGroupDataFactoryTest.vb" />
     <Compile Include="TaskDataSaverTest.vb" />
+    <Compile Include="WebMetricDataFactoryTest.vb" />
     <Compile Include="UserGroupDataFactoryTest.vb" />
     <Compile Include="EventTypeTaskTypeDataSaverTest.vb" />
     <Compile Include="TaskTypeGroupDataSaverTest.vb" />

@@ -6,4 +6,6 @@
     <ColumnMapping("Duration")> Public Property Duration As Double
     <ColumnMapping("Status")> Public Property Status As String
     <ColumnMapping("Controller")> Public Property Controller As String
+
+    Public Property Attributes As IEnumerable(Of WebMetricAttributeData)
 End Class
