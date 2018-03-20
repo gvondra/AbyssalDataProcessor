@@ -209,11 +209,14 @@
     <Compile Include="Controllers\TaskTypesController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="Controllers\UsersController.vb" />
+    <Compile Include="Controllers\WebMetricsController.vb" />
     <Compile Include="IUserFactory.vb" />
     <Compile Include="Mappers\UserMapper.vb" />
     <Compile Include="MetricsLogAttribute.vb" />
     <Compile Include="Models\EventType.vb" />
     <Compile Include="Models\Group.vb" />
+    <Compile Include="Models\WebMetric.vb" />
+    <Compile Include="Models\WebMetricAttribute.vb" />
     <Compile Include="Models\TaskTypeGroup.vb" />
     <Compile Include="Models\TaskTypeEventType.vb" />
     <Compile Include="Models\UserGroup.vb" />
