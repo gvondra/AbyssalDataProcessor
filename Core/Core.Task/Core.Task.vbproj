@@ -88,6 +88,8 @@
     <Compile Include="TaskTypeFactory.vb" />
     <Compile Include="TaskTypeGroup.vb" />
     <Compile Include="TaskTypeSaver.vb" />
+    <Compile Include="UnassignedTask.vb" />
+    <Compile Include="UnassignedTaskFactory.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\DataTier.Core.Models\DataTier.Core.Models.vbproj">

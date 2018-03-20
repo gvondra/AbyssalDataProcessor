@@ -18,6 +18,8 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of TaskTypeDataFactory)().As(Of ITaskTypeDataFactory)()
         builder.RegisterType(Of TaskTypeDataSaver)()
 
+        builder.RegisterType(Of UnassignedTaskDataFactory)().As(Of IUnassignedTaskDataFactory)()
+
         m_container = builder.Build()
     End Sub
 
