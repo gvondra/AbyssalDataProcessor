@@ -40,7 +40,7 @@ Namespace Controllers
             End If
 
             If flags <> enumRole.None Then
-                column3.Add(New With {.Text = "Metrics", .URL = ""})
+                column3.Add(New With {.Text = "Web Metrics", .URL = "webmetrics"})
                 column3.Add(New With {.Text = "Exceptions", .URL = ""})
             End If
 
