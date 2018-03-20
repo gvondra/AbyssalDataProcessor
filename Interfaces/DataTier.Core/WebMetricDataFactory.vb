@@ -35,9 +35,15 @@
                 command.Parameters.Add(parameter)
 
                 reader = command.ExecuteReader()
-                result = New List(Of WebMetricData)(Me.GenericDataFactory.LoadData(Of WebMetricData)(
-                    reader, Function() New WebMetricData
-                ))
+                result = New List(Of WebMetricData)(
+                    Me.GenericDataFactory.LoadData(Of WebMetricData)(
+                        reader, Function() New WebMetricData
+                    ) _
+                    .Select(Function(wm As WebMetricData)
+                                wm.CreateTimestamp = Date.SpecifyKind(wm.CreateTimestamp, DateTimeKind.Utc)
+                                Return wm
+                            End Function)
+                )
 
                 If reader.NextResult Then
                     attributes = Me.GenericDataFactory.LoadData(Of WebMetricAttributeData)(
