@@ -25,6 +25,7 @@ import { UserGroupsComponent } from './user-groups/user-groups.component';
 import { TaskTypeEventTypesComponent } from './task-type-event-types/task-type-event-types.component';
 import { TaskTypeGroupsComponent } from './task-type-groups/task-type-groups.component';
 import { WebMetricsComponent } from './web-metrics/web-metrics.component';
+import { UnassignedTasksComponent } from './unassigned-tasks/unassigned-tasks.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { WebMetricsComponent } from './web-metrics/web-metrics.component';
     UserGroupsComponent,
     TaskTypeEventTypesComponent,
     TaskTypeGroupsComponent,
-    WebMetricsComponent
+    WebMetricsComponent,
+    UnassignedTasksComponent
   ],
   imports: [
     BrowserModule,
