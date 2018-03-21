@@ -68,11 +68,13 @@
     <Compile Include="EventTypeDataFactory.vb" />
     <Compile Include="EventTypeDataSaver.vb" />
     <Compile Include="EventTaskDataSaver.vb" />
+    <Compile Include="FormDataFactory.vb" />
     <Compile Include="FormDataSaver.vb" />
     <Compile Include="EventFormDataSaver.vb" />
     <Compile Include="GroupDataFactory.vb" />
     <Compile Include="GroupDataSaver.vb" />
     <Compile Include="IEventTypeDataFactory.vb" />
+    <Compile Include="IFormDataFactory.vb" />
     <Compile Include="IGroupDataFactory.vb" />
     <Compile Include="ITaskDataFactory.vb" />
     <Compile Include="ITaskTypeDataFactory.vb" />
