@@ -9,15 +9,18 @@ Public Class Task
     Private m_container As IContainer
     Private m_owner As IUser
     Private m_userFactory As IUserFactory
+    Private m_taskTypeFactory As ITaskTypeFactory
 
-    Friend Sub New(ByVal userFactory As IUserFactory, ByVal taskData As TaskData)
+    Friend Sub New(ByVal userFactory As IUserFactory, ByVal taskTypeFactory As ITaskTypeFactory, ByVal taskData As TaskData)
         m_userFactory = userFactory
+        m_taskTypeFactory = taskTypeFactory
         m_taskData = taskData
         m_container = ObjectContainer.GetContainer()
     End Sub
 
-    Friend Sub New(ByVal userFactory As IUserFactory, ByVal taskType As ITaskType)
+    Friend Sub New(ByVal userFactory As IUserFactory, ByVal taskTypeFactory As ITaskTypeFactory, ByVal taskType As ITaskType)
         m_userFactory = userFactory
+        m_taskTypeFactory = taskTypeFactory
         m_taskData = New TaskData
         m_taskType = taskType
         m_container = ObjectContainer.GetContainer()
@@ -47,10 +50,19 @@ Public Class Task
         End Set
     End Property
 
+    Private Property TaskTypeId As Guid
+        Get
+            Return m_taskData.TaskTypeId
+        End Get
+        Set(value As Guid)
+            m_taskData.TaskTypeId = value
+        End Set
+    End Property
+
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            m_taskData.TaskTypeId = m_taskType.TaskTypeId
+            TaskTypeId = m_taskType.TaskTypeId
             If m_owner IsNot Nothing Then
                 UserId = m_owner.UserId
             End If
@@ -87,4 +99,11 @@ Public Class Task
     Public Sub SetUser(user As IUser) Implements ITask.SetUser
         m_owner = user
     End Sub
+
+    Public Function GetTaskType(settings As ISettings) As ITaskType Implements ITask.GetTaskType
+        If m_taskType Is Nothing Then
+            m_taskType = m_taskTypeFactory.Get(settings, TaskTypeId)
+        End If
+        Return m_taskType
+    End Function
 End Class

@@ -24,6 +24,7 @@ Namespace Controllers
                     OrElse (flags And enumRole.TaskProcessor) = enumRole.TaskProcessor Then
 
                 column1.Add(New With {.Text = "Unassigned Tasks", .URL = "unassignedtasks"})
+                column1.Add(New With {.Text = "My Tasks", .URL = "mytasks"})
             End If
 
             If flags = enumRole.None Then

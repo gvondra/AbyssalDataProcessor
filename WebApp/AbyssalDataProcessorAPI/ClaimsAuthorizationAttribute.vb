@@ -2,7 +2,6 @@
 Imports System.Net
 Imports System.Net.Http
 Imports System.Threading
-Imports System.Threading.Tasks
 Imports System.Web.Http.Controllers
 Imports System.Web.Http
 Public Class ClaimsAuthorizationAttribute
@@ -10,7 +9,7 @@ Public Class ClaimsAuthorizationAttribute
 
     Public Property ClaimTypes As String
 
-    Public Overrides Function OnAuthorizationAsync(actionContext As HttpActionContext, cancellationToken As CancellationToken) As Task
+    Public Overrides Function OnAuthorizationAsync(actionContext As HttpActionContext, cancellationToken As CancellationToken) As Tasks.Task
         Dim principal As ClaimsPrincipal = CType(actionContext.RequestContext.Principal, ClaimsPrincipal)
         Dim ns As String = My.Settings.RoleNameSpace.ToLower & "role-"
         Dim hasAccess As Boolean = False
@@ -33,7 +32,7 @@ Public Class ClaimsAuthorizationAttribute
             End If
         End If
 
-        Return Task.FromResult(Of Object)(Nothing)
+        Return Tasks.Task.FromResult(Of Object)(Nothing)
     End Function
 End Class
 

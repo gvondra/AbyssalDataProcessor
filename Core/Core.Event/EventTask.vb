@@ -56,4 +56,8 @@ Public Class EventTask
     Public Sub SetUser(user As IUser) Implements ITask.SetUser
         m_innerTask.SetUser(user)
     End Sub
+
+    Public Function GetTaskType(settings As ISettings) As ITaskType Implements ITask.GetTaskType
+        Return m_innerTask.GetTaskType(settings)
+    End Function
 End Class

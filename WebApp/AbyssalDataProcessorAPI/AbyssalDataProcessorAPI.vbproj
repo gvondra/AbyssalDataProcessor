@@ -205,6 +205,7 @@
     <Compile Include="Controllers\GroupController.vb" />
     <Compile Include="Controllers\GroupsController.vb" />
     <Compile Include="Controllers\MenuController.vb" />
+    <Compile Include="Controllers\TasksController.vb" />
     <Compile Include="Controllers\TaskTypeController.vb" />
     <Compile Include="Controllers\TaskTypesController.vb" />
     <Compile Include="Controllers\UnassignedTaskController.vb" />
@@ -213,10 +214,12 @@
     <Compile Include="Controllers\UsersController.vb" />
     <Compile Include="Controllers\WebMetricsController.vb" />
     <Compile Include="IUserFactory.vb" />
+    <Compile Include="Mappers\TaskMapper.vb" />
     <Compile Include="Mappers\UserMapper.vb" />
     <Compile Include="MetricsLogAttribute.vb" />
     <Compile Include="Models\EventType.vb" />
     <Compile Include="Models\Group.vb" />
+    <Compile Include="Models\Task.vb" />
     <Compile Include="Models\UnassignedTask.vb" />
     <Compile Include="Models\WebMetric.vb" />
     <Compile Include="Models\WebMetricAttribute.vb" />
