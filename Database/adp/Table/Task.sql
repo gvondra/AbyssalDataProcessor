@@ -12,3 +12,7 @@
 GO
 
 CREATE INDEX [IX_Task_TaskTypeId] ON [adp].[Task] ([TaskTypeId])
+
+GO
+
+CREATE INDEX [IX_Task_UserId] ON [adp].[Task] ([UserId]) WHERE [UserId] is not NULL

@@ -21,4 +21,19 @@
                                              New Action(Of IEnumerable(Of TaskData))(AddressOf AssignDataStateManager(Of TaskData)),
                                              {parameter}).FirstOrDefault
     End Function
+
+    Public Function GetByUserId(settings As ISettings, userId As Guid) As IEnumerable(Of TaskData) Implements ITaskDataFactory.GetByUserId
+        Return GetByUserId(settings, New DbProviderFactory, userId)
+    End Function
+
+    Public Function GetByUserId(settings As ISettings, ByVal providerFactory As IDbProviderFactory, userId As Guid) As IEnumerable(Of TaskData)
+        Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "userId", DbType.Guid)
+        parameter.Value = userId
+        Return Me.GenericDataFactory.GetData(settings,
+                                             providerFactory,
+                                             "adp.sTaskByUserId",
+                                             Function() New TaskData,
+                                             New Action(Of IEnumerable(Of TaskData))(AddressOf AssignDataStateManager(Of TaskData)),
+                                             {parameter})
+    End Function
 End Class
