@@ -77,6 +77,7 @@
     <Compile Include="IEventTypeTaskType.vb" />
     <Compile Include="ITask.vb" />
     <Compile Include="ITaskFactory.vb" />
+    <Compile Include="ITaskSaver.vb" />
     <Compile Include="ITaskTypeEventType.vb" />
     <Compile Include="IForm.vb" />
     <Compile Include="IFormFactory.vb" />

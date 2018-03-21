@@ -207,6 +207,7 @@
     <Compile Include="Controllers\MenuController.vb" />
     <Compile Include="Controllers\TaskTypeController.vb" />
     <Compile Include="Controllers\TaskTypesController.vb" />
+    <Compile Include="Controllers\UnassignedTaskController.vb" />
     <Compile Include="Controllers\UnassignedTasksController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="Controllers\UsersController.vb" />

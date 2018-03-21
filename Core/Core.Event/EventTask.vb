@@ -46,6 +46,14 @@ Public Class EventTask
     End Sub
 
     Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
-        Throw New NotImplementedException()
+        m_innerTask.Update(transactionHandler)
+    End Sub
+
+    Public Function GetUser(settings As ISettings) As IUser Implements ITask.GetUser
+        Return m_innerTask.GetUser(settings)
+    End Function
+
+    Public Sub SetUser(user As IUser) Implements ITask.SetUser
+        m_innerTask.SetUser(user)
     End Sub
 End Class
