@@ -14,6 +14,7 @@ Public NotInheritable Class RoleProcessor
             RoleConstants.USER_ADMINISTRATOR,
             RoleConstants.TASK_PROCESSOR
         }
+        'don't add "any" to the list of role codes as will act like super user
 
         If principal.Claims.Where(Function(c As Claim) c.Type = "gty" And c.Value = "client-credentials").Any() Then
             role = role Or enumRole.SuperUser
@@ -28,16 +29,21 @@ Public NotInheritable Class RoleProcessor
 
     Public Shared Function GetRoleFlags(ByVal code As String) As enumRole
         Dim role As enumRole = enumRole.None
-        If String.Compare(code, RoleConstants.ORGANIZATION_ADMINISTRATOR, True) = 0 Then
+        If String.Compare(code, RoleConstants.ANY, True) = 0 OrElse
+                String.Compare(code, RoleConstants.ORGANIZATION_ADMINISTRATOR, True) = 0 Then
+
             role = role Or enumRole.OrganizationAdminstrator
         End If
-        If String.Compare(code, RoleConstants.TASK_ADMINISTRATOR, True) = 0 Then
+        If String.Compare(code, RoleConstants.ANY, True) = 0 OrElse
+                String.Compare(code, RoleConstants.TASK_ADMINISTRATOR, True) = 0 Then
             role = role Or enumRole.TaskAdministrator
         End If
-        If String.Compare(code, RoleConstants.TASK_PROCESSOR, True) = 0 Then
+        If String.Compare(code, RoleConstants.ANY, True) = 0 OrElse
+                String.Compare(code, RoleConstants.TASK_PROCESSOR, True) = 0 Then
             role = role Or enumRole.TaskProcessor
         End If
-        If String.Compare(code, RoleConstants.USER_ADMINISTRATOR, True) = 0 Then
+        If String.Compare(code, RoleConstants.ANY, True) = 0 OrElse
+                String.Compare(code, RoleConstants.USER_ADMINISTRATOR, True) = 0 Then
             role = role Or enumRole.UserAdministrator
         End If
         If String.Compare(code, RoleConstants.SUPER_USER, True) = 0 Then
