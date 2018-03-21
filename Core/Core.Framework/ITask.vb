@@ -3,6 +3,7 @@
 
     ReadOnly Property TaskId As Guid
     Property Message As String
+    ReadOnly Property CreateTimestamp As Date
 
     Function GetUser(ByVal settings As ISettings) As IUser
     Sub SetUser(ByVal user As IUser)

@@ -31,6 +31,12 @@ Public Class EventTask
         End Set
     End Property
 
+    Public ReadOnly Property CreateTimestamp As DateTime Implements ITask.CreateTimestamp
+        Get
+            Return m_innerTask.CreateTimestamp
+        End Get
+    End Property
+
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
         m_innerTask.Create(transactionHandler)

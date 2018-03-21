@@ -3,4 +3,5 @@ export class Task {
     TaskTypeTitle: string
     Message: string
     TaskOwnerName: string
+    CreateTimestamp: Date
 }

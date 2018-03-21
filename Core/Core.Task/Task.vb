@@ -41,6 +41,12 @@ Public Class Task
         End Set
     End Property
 
+    Public ReadOnly Property CreateTimestamp As Date Implements ITask.CreateTimestamp
+        Get
+            Return m_taskData.CreateTimestamp
+        End Get
+    End Property
+
     Private Property UserId As Guid?
         Get
             Return m_taskData.UserId
