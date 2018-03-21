@@ -4,5 +4,6 @@ AS
 SELECT [TaskId], [TaskTypeId], [UserId], [Message], [CreateTimestamp], [UpdateTimestamp]
 FROM [adp].[Task]
 WHERE [UserId] = @userId
+ORDER BY [CreateTimestamp]
 ;
 
