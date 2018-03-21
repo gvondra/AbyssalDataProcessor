@@ -42,4 +42,12 @@ Public Class TaskFactory
         End Using
         Return result
     End Function
+
+    Public Function GetFormIds(settings As ISettings, taskId As Guid) As IEnumerable(Of Guid) Implements ITaskFactory.GetFormIds
+        Dim factory As ITaskDataFactory
+        Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+            factory = scope.Resolve(Of ITaskDataFactory)()
+            Return factory.GetFormIds(New Settings(settings), taskId)
+        End Using
+    End Function
 End Class

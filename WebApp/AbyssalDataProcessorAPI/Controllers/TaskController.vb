@@ -39,5 +39,25 @@ Namespace Controllers
 
             Return result
         End Function
+
+        <HttpGet(), ClaimsAuthorization(ClaimTypes:="TP|TA"), Route("api/Task/{id}/FormIds")> Public Function GetFormIds(ByVal id As Guid) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim taskFactory As ITaskFactory
+            Dim formIds As IEnumerable(Of Guid)
+
+            If id.Equals(Guid.Empty) Then
+                result = BadRequest("Missing or invalid task id")
+            End If
+
+            Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
+                If result Is Nothing Then
+                    taskFactory = scope.Resolve(Of ITaskFactory)()
+                    formIds = taskFactory.GetFormIds(New Settings(), id)
+                    result = Ok(formIds)
+                End If
+            End Using
+
+            Return result
+        End Function
     End Class
 End Namespace
