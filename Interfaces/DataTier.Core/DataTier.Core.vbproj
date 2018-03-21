@@ -74,12 +74,14 @@
     <Compile Include="GroupDataSaver.vb" />
     <Compile Include="IEventTypeDataFactory.vb" />
     <Compile Include="IGroupDataFactory.vb" />
+    <Compile Include="ITaskDataFactory.vb" />
     <Compile Include="ITaskTypeDataFactory.vb" />
     <Compile Include="IEventTypeTaskTypeDataFactory.vb" />
     <Compile Include="ITaskTypeGroupDataFactory.vb" />
     <Compile Include="IUnassignedTaskDataFactory.vb" />
     <Compile Include="IUserGroupDataFactory.vb" />
     <Compile Include="IWebMetricDataFactory.vb" />
+    <Compile Include="TaskDataFactory.vb" />
     <Compile Include="TaskDataSaver.vb" />
     <Compile Include="TaskTypeDataFactory.vb" />
     <Compile Include="TaskTypeDataSaver.vb" />

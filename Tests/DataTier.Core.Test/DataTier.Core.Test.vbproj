@@ -103,6 +103,7 @@
     <Compile Include="DataStateManagerTest.vb" />
     <Compile Include="EventTypeTaskTypeDataFactoryTest.vb" />
     <Compile Include="EventTaskDataSaverTest.vb" />
+    <Compile Include="TaskDataFactoryTest.vb" />
     <Compile Include="TaskTypeGroupDataFactoryTest.vb" />
     <Compile Include="TaskDataSaverTest.vb" />
     <Compile Include="UnassignedTaskDataFactoryTest.vb" />
