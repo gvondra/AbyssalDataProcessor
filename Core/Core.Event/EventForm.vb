@@ -46,6 +46,12 @@ Public Class EventForm
         End Get
     End Property
 
+    Public ReadOnly Property CreateTimestamp As DateTime Implements IForm.CreateTimestamp
+        Get
+            Return m_innerForm.CreateTimestamp
+        End Get
+    End Property
+
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
 
@@ -61,4 +67,8 @@ Public Class EventForm
     Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
         m_innerForm.Update(transactionHandler)
     End Sub
+
+    Public Function GetUser(settings As ISettings) As IUser Implements IForm.GetUser
+        Return m_innerForm.GetUser(settings)
+    End Function
 End Class

@@ -17,8 +17,41 @@ Namespace Controllers
                                                             End Sub)
         End Sub
 
+        <HttpGet(), ClaimsAuthorization(ClaimTypes:="ANY")> Public Function GetForm(ByVal id As Guid) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim innerForm As IForm = Nothing
+            Dim formFactory As IFormFactory
+            Dim mapper As IMapper
+            Dim mapperConfiguration As FormMapper
+
+            If id.Equals(Guid.Empty) Then
+                result = BadRequest("Missing or invalid form id")
+            End If
+
+            Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
+                formFactory = scope.Resolve(Of IFormFactory)()
+                If result Is Nothing Then
+                    innerForm = formFactory.Get(New Settings(), id)
+                    If innerForm Is Nothing Then
+                        result = NotFound()
+                    End If
+                End If
+
+                If result Is Nothing Then
+                    mapperConfiguration = New FormMapper
+                    mapper = New Mapper(mapperConfiguration.MapperConfiguration)
+                    result = Ok(mapper.Map(Of Form)(innerForm))
+                End If
+            End Using
+
+            Return result
+        End Function
+
+        <HttpGet(), ClaimsAuthorization(ClaimTypes:="ANY"), Route("api/Form/{id}/html")> Public Function GetFormHtml(ByVal id As Guid) As IHttpActionResult
+
+        End Function
+
         'todo add exception handler
-        'todo add role request event trigger
         <HttpPost(), Authorize(), Route("api/Form/RoleRequest")> Public Function CreateRoleRequest(<FromBody> ByVal request As RoleRequest) As IHttpActionResult
             Dim userFactory As IUserFactory
             Dim user As IUser

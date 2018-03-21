@@ -4,7 +4,8 @@ Imports Moq
 <TestClass()> Public Class RoleRequestTest
 
     <TestMethod()> Public Sub CreateFormTest()
-        Dim factory As New FormFactory(New FormSerializerFactory)
+        Dim userFactory As New Mock(Of IUserFactory)()
+        Dim factory As New FormFactory(New FormSerializerFactory, userFactory.Object)
         Dim roleRequest As IRoleRequest = factory.CreateRoleRequest()
         Dim form As IForm
         Dim user As New Mock(Of IUser)()

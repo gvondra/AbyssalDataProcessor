@@ -215,10 +215,12 @@
     <Compile Include="Controllers\UsersController.vb" />
     <Compile Include="Controllers\WebMetricsController.vb" />
     <Compile Include="IUserFactory.vb" />
+    <Compile Include="Mappers\FormMapper.vb" />
     <Compile Include="Mappers\TaskMapper.vb" />
     <Compile Include="Mappers\UserMapper.vb" />
     <Compile Include="MetricsLogAttribute.vb" />
     <Compile Include="Models\EventType.vb" />
+    <Compile Include="Models\Form.vb" />
     <Compile Include="Models\Group.vb" />
     <Compile Include="Models\Task.vb" />
     <Compile Include="Models\UnassignedTask.vb" />
