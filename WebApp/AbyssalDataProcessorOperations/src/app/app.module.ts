@@ -26,6 +26,7 @@ import { TaskTypeEventTypesComponent } from './task-type-event-types/task-type-e
 import { TaskTypeGroupsComponent } from './task-type-groups/task-type-groups.component';
 import { WebMetricsComponent } from './web-metrics/web-metrics.component';
 import { UnassignedTasksComponent } from './unassigned-tasks/unassigned-tasks.component';
+import { MyTasksComponent } from './my-tasks/my-tasks.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { UnassignedTasksComponent } from './unassigned-tasks/unassigned-tasks.co
     TaskTypeEventTypesComponent,
     TaskTypeGroupsComponent,
     WebMetricsComponent,
-    UnassignedTasksComponent
+    UnassignedTasksComponent,
+    MyTasksComponent
   ],
   imports: [
     BrowserModule,

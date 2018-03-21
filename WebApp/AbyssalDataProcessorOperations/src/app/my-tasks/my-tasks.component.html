@@ -1,0 +1,11 @@
+<h2>My Tasks</h2>
+<div [hidden]="SpinnerHidden">  
+  <i class="fa fa-cog fa-spin" style="font-size:36px; margin: 25px;"></i>
+</div>
+<table *ngIf="Tasks">
+    <tr *ngFor="let t of Tasks">
+      <td>{{ t.TaskTypeTitle }}</td>
+      <td>{{ t.Message }}</td>
+      <td>{{ FormatTimestamp(t.CreateTimestamp) }}</td>
+    </tr>
+  </table>

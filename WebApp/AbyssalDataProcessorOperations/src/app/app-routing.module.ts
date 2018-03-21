@@ -17,6 +17,7 @@ import { TaskTypeEventTypesComponent } from './task-type-event-types/task-type-e
 import { TaskTypeGroupsComponent } from './task-type-groups/task-type-groups.component';
 import { WebMetricsComponent } from './web-metrics/web-metrics.component';
 import { UnassignedTasksComponent } from './unassigned-tasks/unassigned-tasks.component';
+import { MyTasksComponent } from './my-tasks/my-tasks.component';
 const routes: Routes = [
     {
         path: '',
@@ -134,6 +135,13 @@ const routes: Routes = [
       {
         path: 'unassignedtasks',
         component: UnassignedTasksComponent,
+        canActivate: [
+          AuthGuard
+        ]
+      },
+      {
+        path: 'mytasks',
+        component: MyTasksComponent,
         canActivate: [
           AuthGuard
         ]
