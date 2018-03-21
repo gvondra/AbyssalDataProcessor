@@ -205,6 +205,7 @@
     <Compile Include="Controllers\GroupController.vb" />
     <Compile Include="Controllers\GroupsController.vb" />
     <Compile Include="Controllers\MenuController.vb" />
+    <Compile Include="Controllers\TaskController.vb" />
     <Compile Include="Controllers\TasksController.vb" />
     <Compile Include="Controllers\TaskTypeController.vb" />
     <Compile Include="Controllers\TaskTypesController.vb" />
