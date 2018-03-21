@@ -93,6 +93,7 @@
     <Compile Include="LastInsertRowId.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="Util.vb" />
+    <Compile Include="XmlLoaderComponent.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

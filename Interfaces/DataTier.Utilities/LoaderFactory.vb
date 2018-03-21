@@ -11,6 +11,7 @@
                                   New DateLoaderComponent(),
                                   New BytesLoaderComponent(),
                                   New BooleanLoaderComponent(),
-                                  New GuidLoaderComponent()})}
+                                  New GuidLoaderComponent(),
+                                  New XmlLoaderComponent()})}
     End Function
 End Class
