@@ -24,8 +24,10 @@
         </div>
       </div>
 </div>
+<p *ngIf="Message">{{ Message }}</p>
 <table *ngIf="TasksFiltered">
   <tr *ngFor="let t of TasksFiltered">
+    <td><a (click)="ClaimTask(t)">claim</a></td>
     <td>{{ t.Message }}</td>
     <td>{{ FormatTimestamp(t.CreateTimestamp) }}</td>
   </tr>

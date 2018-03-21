@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UnassignedTasksService } from '../unassigned-tasks.service';
+import { UnassignedTaskService } from '../unassigned-task.service';
 import { UnassignedTask } from '../unassigned-task';
 
 @Component({
   selector: 'app-unassigned-tasks',
   templateUrl: './unassigned-tasks.component.html',
   styleUrls: ['./unassigned-tasks.component.css'],
-  providers: [UnassignedTasksService]
+  providers: [UnassignedTasksService, UnassignedTaskService]
 })
 export class UnassignedTasksComponent implements OnInit {
 
@@ -16,8 +17,9 @@ export class UnassignedTasksComponent implements OnInit {
   Tasks: Array<UnassignedTask> = null;
   TasksFiltered: Array<UnassignedTask> = null;
   SpinnerHidden: boolean = false;
+  Message: string = null;
 
-  constructor(private unassignedTasksService: UnassignedTasksService) { }
+  constructor(private unassignedTasksService: UnassignedTasksService, private unassignedTaskService: UnassignedTaskService) { }
 
   ngOnInit() {
     this.unassignedTasksService.getByUser()
@@ -27,8 +29,23 @@ export class UnassignedTasksComponent implements OnInit {
     })
   }
 
+  ClaimTask(task: UnassignedTask): void {    
+    this.SpinnerHidden = false;
+    this.Message = null;
+    this.unassignedTaskService.claimTask(task.TaskId)
+    .then(message => {
+      this.Message = message;
+      let i: number = this.TasksFiltered.indexOf(task);
+      this.TasksFiltered.splice(i, 1);
+      i = this.Tasks.indexOf(task);
+      this.Tasks.splice(i, 1);
+      this.SpinnerHidden = true;
+    })    
+  }
+
   TaskTypeChange(event) {
     this.TasksFiltered = null;
+    this.Message = null;
     this.Groups = ["-- Select --"];
     this.SelectedTaskType = event.target.value
     let i = 0;
@@ -47,6 +64,7 @@ export class UnassignedTasksComponent implements OnInit {
 
   GroupChange(event) {
     this.TasksFiltered = [];
+    this.Message = null;
     if (this.Tasks) {
       for (let t of this.Tasks) {
         if (t.TaskTypeTitle === this.SelectedTaskType && t.GroupName === event.target.value) {
@@ -65,7 +83,8 @@ export class UnassignedTasksComponent implements OnInit {
   }
 
   SetTasks(tasks: Array<UnassignedTask>): void {
-    this.TasksFiltered = null;    
+    this.TasksFiltered = null; 
+    this.Message = null;   
     let tt = ["-- Select --"];
     for (let t of tasks) {
       if (!tt.includes(t.TaskTypeTitle)) {

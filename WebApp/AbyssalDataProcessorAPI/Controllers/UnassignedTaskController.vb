@@ -9,7 +9,8 @@ Namespace Controllers
     Public Class UnassignedTaskController
         Inherits ControllerBase
 
-        <HttpPut(), ClaimsAuthorization(ClaimTypes:="TP|TA")> Public Function ClaimTask(ByVal taskId As Guid) As IHttpActionResult
+        <HttpPut(), ClaimsAuthorization(ClaimTypes:="TP|TA"), Route("api/UnassignedTask/{id}/Claim")>
+        Public Function ClaimTask(<FromUri> ByVal id As Guid) As IHttpActionResult
             Dim result As IHttpActionResult = Nothing
             Dim taskFactory As ITaskFactory
             Dim innerTask As ITask = Nothing
@@ -18,7 +19,7 @@ Namespace Controllers
             Dim task As Task(Of ITask)
             Dim taskSaver As ITaskSaver
 
-            If result Is Nothing AndAlso taskId.Equals(Guid.Empty) Then
+            If result Is Nothing AndAlso id.Equals(Guid.Empty) Then
                 result = BadRequest("Missing or invalid task id")
             End If
 
@@ -27,7 +28,7 @@ Namespace Controllers
                 userFactory = scope.Resolve(Of IUserFactory)()
 
                 If result Is Nothing Then
-                    task = System.Threading.Tasks.Task(Of ITask).Run(Of ITask)(Function() taskFactory.Get(New Settings(), taskId))
+                    task = System.Threading.Tasks.Task(Of ITask).Run(Of ITask)(Function() taskFactory.Get(New Settings(), id))
                     user = userFactory.Get(CType(Me.User, ClaimsPrincipal))
                     task.Wait()
                     innerTask = task.Result
