@@ -1,0 +1,5 @@
+﻿CREATE VIEW [adp].[TaskForm]
+	AS SELECT [ET].[TaskId], [EF].[FormId]
+	FROM [adp].[EventTask] [ET]
+		INNER JOIN [adp].[Event] [E] on [ET].[EventId] = [E].[EventId]
+		INNER JOIN [adp].[EventForm] [EF] on [E].[EventId] = [EF].[EventId]

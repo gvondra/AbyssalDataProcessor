@@ -127,5 +127,7 @@
     <Build Include="adp\Stored Procedure\sUnassignedTaskByUser.sql" />
     <Build Include="adp\Stored Procedure\sTask.sql" />
     <Build Include="adp\Stored Procedure\sTaskByUserId.sql" />
+    <Build Include="adp\View\TaskForm.sql" />
+    <Build Include="adp\Stored Procedure\sFormByTaskId.sql" />
   </ItemGroup>
 </Project>
