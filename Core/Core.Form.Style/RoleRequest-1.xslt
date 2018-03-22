@@ -17,7 +17,7 @@
     <div>
       <label>Comment</label>:
       <p style="display: inline;">
-        <xsl:value-of select="frm:FullName"/>
+        <xsl:value-of select="frm:Comment"/>
       </p>
     </div>
   </xsl:template>

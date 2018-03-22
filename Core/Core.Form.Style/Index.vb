@@ -63,7 +63,7 @@ Namespace AbyssalDataProcessor.Core.Form.Style
                 resourceCulture = value
             End Set
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to RoleRequest-1.xslt.
         '''</summary>
