@@ -41,6 +41,15 @@ Public Class Task
         End Set
     End Property
 
+    Public Property IsClosed As Boolean Implements ITask.IsClosed
+        Get
+            Return m_taskData.IsClosed
+        End Get
+        Set(value As Boolean)
+            m_taskData.IsClosed = value
+        End Set
+    End Property
+
     Public ReadOnly Property CreateTimestamp As Date Implements ITask.CreateTimestamp
         Get
             Return m_taskData.CreateTimestamp

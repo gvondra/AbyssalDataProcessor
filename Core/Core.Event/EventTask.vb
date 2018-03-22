@@ -37,6 +37,15 @@ Public Class EventTask
         End Get
     End Property
 
+    Public Property IsClosed As Boolean Implements ITask.IsClosed
+        Get
+            Return m_innerTask.IsClosed
+        End Get
+        Set(value As Boolean)
+            m_innerTask.IsClosed = value
+        End Set
+    End Property
+
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As IDataCreator
         m_innerTask.Create(transactionHandler)
