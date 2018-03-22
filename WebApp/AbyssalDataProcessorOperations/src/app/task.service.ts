@@ -24,4 +24,12 @@ export class TaskService {
     .then(response => response.json() as Array<string>)
   }
 
+  closeTask(taskId: string): Promise<string> {
+    return this.http.get(environment.baseUrl + "Task/" + taskId + "/Close", {
+      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
+    })
+    .toPromise()
+    .then(response => response.text())
+  }
+
 }
