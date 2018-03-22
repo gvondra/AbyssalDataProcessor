@@ -34,8 +34,8 @@
                 command.Parameters.Add(timestamp)
 
                 AddParameter(providerFactory, command.Parameters, "taskTypeId", DbType.Guid, GetParameterValue(m_taskData.TaskTypeId))
-                AddParameter(providerFactory, command.Parameters, "userId", DbType.Guid, GetParameterValue(m_taskData.UserId))
-                AddParameter(providerFactory, command.Parameters, "message", DbType.String, GetParameterValue(m_taskData.Message))
+
+                CommonParameters(providerFactory, command)
 
                 command.ExecuteNonQuery()
                 m_taskData.TaskId = CType(id.Value, Guid)
@@ -65,12 +65,18 @@
 
 
                 AddParameter(providerFactory, command.Parameters, "id", DbType.Guid, m_taskData.TaskId)
-                AddParameter(providerFactory, command.Parameters, "userId", DbType.Guid, GetParameterValue(m_taskData.UserId))
-                AddParameter(providerFactory, command.Parameters, "message", DbType.String, GetParameterValue(m_taskData.Message))
+
+                CommonParameters(providerFactory, command)
 
                 command.ExecuteNonQuery()
                 m_taskData.UpdateTimestamp = CType(timestamp.Value, Date)
             End Using
         End If
+    End Sub
+
+    Private Sub CommonParameters(ByVal providerFactory As IDbProviderFactory, ByVal command As IDbCommand)
+        AddParameter(providerFactory, command.Parameters, "userId", DbType.Guid, GetParameterValue(m_taskData.UserId))
+        AddParameter(providerFactory, command.Parameters, "message", DbType.String, GetParameterValue(m_taskData.Message))
+        AddParameter(providerFactory, command.Parameters, "isClosed", DbType.Boolean, GetParameterValue(m_taskData.IsClosed))
     End Sub
 End Class

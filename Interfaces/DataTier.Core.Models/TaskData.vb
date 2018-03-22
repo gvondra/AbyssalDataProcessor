@@ -5,6 +5,7 @@
     <ColumnMapping("TaskTypeId")> Public Property TaskTypeId As Guid
     <ColumnMapping("UserId", IsNullable:=True)> Public Property UserId As Guid?
     <ColumnMapping("Message")> Public Property Message As String
+    <ColumnMapping("IsClosed")> Public Property IsClosed As Boolean
     <ColumnMapping("CreateTimestamp")> Public Property CreateTimestamp As Date
     <ColumnMapping("UpdateTimestamp")> Public Property UpdateTimestamp As Date
 
