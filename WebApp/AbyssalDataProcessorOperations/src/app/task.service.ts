@@ -25,7 +25,7 @@ export class TaskService {
   }
 
   closeTask(taskId: string): Promise<string> {
-    return this.http.get(environment.baseUrl + "Task/" + taskId + "/Close", {
+    return this.http.put(environment.baseUrl + "Task/" + taskId + "/Close", null, {
       headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
     })
     .toPromise()

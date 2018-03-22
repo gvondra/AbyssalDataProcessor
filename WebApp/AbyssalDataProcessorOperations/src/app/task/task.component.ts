@@ -74,4 +74,9 @@ export class TaskComponent implements OnInit {
       this.FormsSpinnerHidden = true;
     }
   }
+
+  CloseTask() {
+    this.taskService.closeTask(this.Task.TaskId)
+    .then(msg => this.Task.IsClosed = true)
+  }
 }
