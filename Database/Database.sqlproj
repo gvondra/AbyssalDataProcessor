@@ -129,5 +129,9 @@
     <Build Include="adp\Stored Procedure\sTaskByUserId.sql" />
     <Build Include="adp\View\TaskForm.sql" />
     <Build Include="adp\Stored Procedure\sTaskFormByTaskId.sql" />
+    <Build Include="adp\Stored Procedure\iOrganization.sql" />
+    <Build Include="adp\Stored Procedure\sOrganization.sql" />
+    <Build Include="adp\Stored Procedure\sOrganizationSearch.sql" />
+    <Build Include="adp\Stored Procedure\uOrganization.sql" />
   </ItemGroup>
 </Project>
