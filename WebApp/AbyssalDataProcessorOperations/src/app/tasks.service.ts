@@ -10,8 +10,11 @@ export class TasksService {
   constructor(private http: Http) { }
 
   getMyTasks() : Promise<Array<Task>> {
+    let query = new URLSearchParams();
+    query.append("open", "true");
     return this.http.get(environment.baseUrl + "Tasks", {
-      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
+      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`}),
+      params: query
     })
     .toPromise()
     .then(response => response.json() as Array<Task>)
