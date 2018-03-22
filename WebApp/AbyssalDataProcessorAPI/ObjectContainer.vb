@@ -35,6 +35,7 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of FormSerializerFactory)().As(Of IFormSerializerFactory)()
         builder.RegisterType(Of FormFactory)().As(Of IFormFactory)()
         builder.RegisterType(Of FormSaver)().As(Of IFormSaver)()
+        builder.RegisterType(Of FormContentTransformFactory)().As(Of IFormContentTransormFactory)()
 
         builder.RegisterType(Of EventSaver)().As(Of IEventSaver)()
         builder.RegisterType(Of EventFactory)().As(Of IEventFactory)()
