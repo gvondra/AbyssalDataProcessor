@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerations.vb" />
+    <Compile Include="Exceptions\FormTransformNotFoundException.vb" />
     <Compile Include="Forms\IFormSerializable.vb" />
     <Compile Include="Forms\IRoleRequest.vb" />
     <Compile Include="IEvent.vb" />
@@ -75,6 +76,8 @@
     <Compile Include="IEventTypeFactory.vb" />
     <Compile Include="IEventTypeSaver.vb" />
     <Compile Include="IEventTypeTaskType.vb" />
+    <Compile Include="IFormContentTransormFactory.vb" />
+    <Compile Include="IFormContentTransform.vb" />
     <Compile Include="ITask.vb" />
     <Compile Include="ITaskFactory.vb" />
     <Compile Include="ITaskSaver.vb" />
