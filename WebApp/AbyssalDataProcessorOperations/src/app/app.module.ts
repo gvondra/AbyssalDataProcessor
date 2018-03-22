@@ -27,6 +27,7 @@ import { TaskTypeGroupsComponent } from './task-type-groups/task-type-groups.com
 import { WebMetricsComponent } from './web-metrics/web-metrics.component';
 import { UnassignedTasksComponent } from './unassigned-tasks/unassigned-tasks.component';
 import { MyTasksComponent } from './my-tasks/my-tasks.component';
+import { TaskComponent } from './task/task.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MyTasksComponent } from './my-tasks/my-tasks.component';
     TaskTypeGroupsComponent,
     WebMetricsComponent,
     UnassignedTasksComponent,
-    MyTasksComponent
+    MyTasksComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
