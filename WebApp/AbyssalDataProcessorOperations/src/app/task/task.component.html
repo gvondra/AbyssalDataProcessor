@@ -1,3 +1,17 @@
-<p>
-  task works!
-</p>
+<h2>Task</h2>
+<div class="container-fluid" *ngIf="Task">
+    <div class="row">
+      <div class="col-md-4">{{ Task.TaskTypeTitle }}</div>
+      <div class="col-md-4">Owned by {{ Task.TaskOwnerName }}</div>
+      <div class="col-md-4">Created on {{ FormatTimestamp(Task.CreateTimestamp) }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <label class="control-label">Message</label>:
+      </div>
+      <div class="col-md-5">{{ Task.Message }}</div>
+    </div>
+</div>
+<div [hidden]="SpinnerHidden">  
+  <i class="fa fa-cog fa-spin" style="font-size:36px; margin: 25px;"></i>
+</div>
