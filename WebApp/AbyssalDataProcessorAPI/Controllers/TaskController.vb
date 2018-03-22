@@ -59,5 +59,38 @@ Namespace Controllers
 
             Return result
         End Function
+
+        <HttpPut(), ClaimsAuthorization(ClaimTypes:="TP|TA"), Route("api/Task/{id}/Close")> Public Function CloseTask(<FromUri> ByVal id As Guid) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim taskFactory As ITaskFactory
+            Dim innerTask As ITask = Nothing
+            Dim saver As ITaskSaver
+            If id.Equals(Guid.Empty) Then
+                result = BadRequest("Missing or invalid task id")
+            End If
+
+            Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
+                If result Is Nothing Then
+                    taskFactory = scope.Resolve(Of ITaskFactory)()
+                    innerTask = taskFactory.Get(New Settings(), id)
+                    If innerTask Is Nothing Then
+                        result = NotFound()
+                    End If
+                End If
+
+                If result Is Nothing Then
+                    If innerTask.IsClosed = False Then
+                        innerTask.IsClosed = True
+                        saver = scope.Resolve(Of ITaskSaver)()
+                        saver.Update(New Settings, innerTask)
+                        result = Ok("Task closed")
+                    Else
+                        result = Ok("Task closed previously")
+                    End If
+                End If
+            End Using
+
+            Return result
+        End Function
     End Class
 End Namespace
