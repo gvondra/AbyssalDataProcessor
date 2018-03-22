@@ -9,7 +9,7 @@ Namespace Controllers
     Public Class TasksController
         Inherits ControllerBase
 
-        <HttpGet(), ClaimsAuthorization(ClaimTypes:="TP|TA")> Public Function GetTasks() As IHttpActionResult
+        <HttpGet(), ClaimsAuthorization(ClaimTypes:="TP|TA")> Public Function GetTasks(Optional ByVal open As Boolean = False) As IHttpActionResult
             Dim result As IHttpActionResult = Nothing
             Dim user As IUser
             Dim userFactory As IUserFactory
@@ -25,6 +25,7 @@ Namespace Controllers
                 mapper = New Mapper(mapperConfiguration.MapperConfiguration)
                 taskFactory = scope.Resolve(Of ITaskFactory)()
                 tasks = From t In taskFactory.GetByUserId(New Settings(), user.UserId)
+                        Where open = False OrElse t.IsClosed = False
                         Select mapper.Map(Of Task)(t)
 
                 result = Ok(tasks)
