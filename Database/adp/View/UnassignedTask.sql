@@ -9,4 +9,4 @@
 			INNER JOIN [adp].[Group] on [TTG].IsActive = 1 AND [TTG].[GroupId] = [Group].[GroupId]
 		) ON [TT].[TaskTypeId] = [TTG].[TaskTypeId]
 	WHERE [Task].[UserId] is Null
-		AND [Task].[IsClosed] = 1;
+		AND [Task].[IsClosed] = 0;
