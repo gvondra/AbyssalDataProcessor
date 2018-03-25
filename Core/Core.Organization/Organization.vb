@@ -53,4 +53,12 @@ Public Class Organization
             updater.Update()
         End Using
     End Sub
+
+    Public Sub Save(transactionHandler As ITransactionHandler) Implements IOrganization.Save
+        If m_organizationData.DataStateManager.GetState(m_organizationData) = DataTier.Utilities.IDataStateManager(Of OrganizationData).enumState.New Then
+            Create(transactionHandler)
+        ElseIf m_organizationData.DataStateManager.GetState(m_organizationData) = DataTier.Utilities.IDataStateManager(Of OrganizationData).enumState.Updated Then
+            Update(transactionHandler)
+        End If
+    End Sub
 End Class

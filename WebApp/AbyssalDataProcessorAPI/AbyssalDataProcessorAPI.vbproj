@@ -209,6 +209,7 @@
     <Compile Include="Controllers\GroupController.vb" />
     <Compile Include="Controllers\GroupsController.vb" />
     <Compile Include="Controllers\MenuController.vb" />
+    <Compile Include="Controllers\OrganizationController.vb" />
     <Compile Include="Controllers\TaskController.vb" />
     <Compile Include="Controllers\TasksController.vb" />
     <Compile Include="Controllers\TaskTypeController.vb" />
@@ -226,6 +227,7 @@
     <Compile Include="Models\EventType.vb" />
     <Compile Include="Models\Form.vb" />
     <Compile Include="Models\Group.vb" />
+    <Compile Include="Models\Organization.vb" />
     <Compile Include="Models\Task.vb" />
     <Compile Include="Models\UnassignedTask.vb" />
     <Compile Include="Models\WebMetric.vb" />
@@ -291,6 +293,10 @@
     <ProjectReference Include="..\..\Core\Core.Logging\Core.Log.vbproj">
       <Project>{8c9b4a10-f563-4491-af9d-259e6a4f4f6f}</Project>
       <Name>Core.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.Organization\Core.Organization.vbproj">
+      <Project>{2c76ae95-49b3-40ff-a308-6a9c24c625d7}</Project>
+      <Name>Core.Organization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.Task\Core.Task.vbproj">
       <Project>{1c826a9d-914f-4c67-a4c9-0fbf59ab1f07}</Project>

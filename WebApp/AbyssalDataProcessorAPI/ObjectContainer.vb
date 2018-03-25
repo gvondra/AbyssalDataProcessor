@@ -1,6 +1,7 @@
 ﻿Imports AbyssalDataProcessor.Core.Event
 Imports AbyssalDataProcessor.Core.Form
 Imports AbyssalDataProcessor.Core.Log
+Imports AbyssalDataProcessor.Core.Organization
 Imports AbyssalDataProcessor.Core.Task
 Imports AbyssalDataProcessor.Core.User
 Imports Autofac
@@ -36,6 +37,9 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of FormFactory)().As(Of IFormFactory)()
         builder.RegisterType(Of FormSaver)().As(Of IFormSaver)()
         builder.RegisterType(Of FormContentTransformFactory)().As(Of IFormContentTransormFactory)()
+
+        builder.RegisterType(Of OrganizationFactory)().As(Of IOrganizationFactory)()
+        builder.RegisterType(Of OrganizationSaver)().As(Of IOrganizationSaver)()
 
         builder.RegisterType(Of EventSaver)().As(Of IEventSaver)()
         builder.RegisterType(Of EventFactory)().As(Of IEventFactory)()
