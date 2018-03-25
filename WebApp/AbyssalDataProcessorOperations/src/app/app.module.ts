@@ -28,6 +28,8 @@ import { WebMetricsComponent } from './web-metrics/web-metrics.component';
 import { UnassignedTasksComponent } from './unassigned-tasks/unassigned-tasks.component';
 import { MyTasksComponent } from './my-tasks/my-tasks.component';
 import { TaskComponent } from './task/task.component';
+import { OrganizationsComponent } from './organizations/organizations.component';
+import { OrganizationComponent } from './organization/organization.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { TaskComponent } from './task/task.component';
     WebMetricsComponent,
     UnassignedTasksComponent,
     MyTasksComponent,
-    TaskComponent
+    TaskComponent,
+    OrganizationsComponent,
+    OrganizationComponent
   ],
   imports: [
     BrowserModule,
