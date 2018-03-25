@@ -210,6 +210,7 @@
     <Compile Include="Controllers\GroupsController.vb" />
     <Compile Include="Controllers\MenuController.vb" />
     <Compile Include="Controllers\OrganizationController.vb" />
+    <Compile Include="Controllers\OrganizationsController.vb" />
     <Compile Include="Controllers\TaskController.vb" />
     <Compile Include="Controllers\TasksController.vb" />
     <Compile Include="Controllers\TaskTypeController.vb" />
