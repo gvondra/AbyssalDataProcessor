@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AbyssalDataProcessorAPI", "WebApp\AbyssalDataProcessorAPI\AbyssalDataProcessorAPI.vbproj", "{27F1D817-0C9A-4083-A632-049E1D0070DE}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OperationsAPI", "WebApp\OperationsAPI\OperationsAPI.vbproj", "{27F1D817-0C9A-4083-A632-049E1D0070DE}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DataTier.Core", "Interfaces\DataTier.Core\DataTier.Core.vbproj", "{672A5B5A-0B59-47CE-BA3C-B4D350D99FD5}"
 EndProject

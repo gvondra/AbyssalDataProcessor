@@ -7,7 +7,7 @@ Public MustInherit Class ControllerBase
     Private m_container As IContainer
 
     Public Sub New()
-        m_container = AbyssalDataProcessorAPI.ObjectContainer.GetContainer()
+        m_container = AbyssalDataProcessorOperationsAPI.ObjectContainer.GetContainer()
     End Sub
 
     Public Property ObjectContainer As IContainer

@@ -14,7 +14,7 @@ Public Class SwaggerConfig
         Sub(c As SwaggerDocsConfig)
             Dim oauthSchemeBuilder As OAuth2SchemeBuilder
 
-            c.SingleApiVersion("v1", "AbyssalDataProcessorAPI")
+            c.SingleApiVersion("v1", "AbyssalDataProcessorOperationsAPI")
             c.IncludeXmlComments(System.IO.Path.ChangeExtension(thisAssembly.CodeBase, "xml"))
             c.OperationFilter(Of AssignOAuth2SecurityRequirements)()
             oauthSchemeBuilder = c.OAuth2("oauth2")

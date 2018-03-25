@@ -5,7 +5,7 @@ Imports Microsoft.Owin.Security.Jwt
 Imports Owin
 Imports System.IdentityModel.Tokens
 Imports System.Web.Http
-<Assembly: OwinStartup(GetType(AbyssalDataProcessorAPI.Startup))>
+<Assembly: OwinStartup(GetType(AbyssalDataProcessorOperationsAPI.Startup))>
 Public Class Startup
     Public Sub Configuration(app As IAppBuilder)
         Dim config As New HttpConfiguration()
