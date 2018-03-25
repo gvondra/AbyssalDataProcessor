@@ -10,7 +10,7 @@ BEGIN
 	UPDATE [adp].[Task] 
 	SET [UserId] = @userId,
 		[Message] = @message,
-		[isClosed] = @isClosed,
+		[IsClosed] = @isClosed,
 		[UpdateTimestamp] = @timestamp
 	WHERE [TaskId] = @id;
 END
