@@ -17,7 +17,7 @@ Namespace Controllers
             column1.Add(New With {.Text = "Home", .URL = ""})
 
             If (flags And enumRole.OrganizationAdminstrator) = enumRole.OrganizationAdminstrator Then
-                column1.Add(New With {.Text = "Organizations", .URL = ""})
+                column1.Add(New With {.Text = "Organizations", .URL = "organizations"})
             End If
 
             If (flags And enumRole.TaskAdministrator) = enumRole.TaskAdministrator _
