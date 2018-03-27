@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  baseUrl: "/api/",
-  callbackUrl: "http://localhost:4200/callback"
+  baseUrl: "/OperationsAPI/api/",
+  callbackUrl: "http://abyssaldataprocessordvlp.azurewebsites.net/Operations/callback"
 };
