@@ -62,6 +62,8 @@
     <Folder Include="adp\Stored Procedure" />
     <Folder Include="adp\Table" />
     <Folder Include="adp\View" />
+    <Folder Include="clnt" />
+    <Folder Include="clnt\Table" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="adp.sql" />
@@ -133,5 +135,19 @@
     <Build Include="adp\Stored Procedure\sOrganization.sql" />
     <Build Include="adp\Stored Procedure\sOrganizationSearch.sql" />
     <Build Include="adp\Stored Procedure\uOrganization.sql" />
+    <Build Include="clnt\Table\User.sql" />
+    <Build Include="clnt\Table\UserAccount.sql" />
+    <Build Include="clnt\Table\Event.sql" />
+    <Build Include="clnt\Table\EventForm.sql" />
+    <Build Include="clnt\Table\EventTask.sql" />
+    <Build Include="clnt\Table\EventType.sql" />
+    <Build Include="clnt\Table\EventTypeTaskType.sql" />
+    <Build Include="clnt\Table\Form.sql" />
+    <Build Include="clnt\Table\FormType.sql" />
+    <Build Include="clnt\Table\Group.sql" />
+    <Build Include="clnt\Table\Task.sql" />
+    <Build Include="clnt\Table\TaskType.sql" />
+    <Build Include="clnt\Table\TaskTypeGroup.sql" />
+    <Build Include="clnt\Table\UserGroup.sql" />
   </ItemGroup>
 </Project>
