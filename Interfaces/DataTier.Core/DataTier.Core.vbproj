@@ -93,8 +93,6 @@
     <Compile Include="UnassignedTaskDataFactory.vb" />
     <Compile Include="UserAccountDataSaver.vb" />
     <Compile Include="UserDataFactory.vb" />
-    <Compile Include="IDataCreator.vb" />
-    <Compile Include="IDataUpdater.vb" />
     <Compile Include="IUserDataFactory.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="UserDataSaver.vb" />

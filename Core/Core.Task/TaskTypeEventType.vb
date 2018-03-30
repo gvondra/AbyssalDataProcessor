@@ -49,7 +49,7 @@ Public Class TaskTypeEventType
     End Sub
 
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
-        Dim creator As IDataCreator
+        Dim creator As DataTier.Utilities.IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             m_eventTypeTaskTypeData.EventTypeId = m_innerEventType.EventTypeId
             m_eventTypeTaskTypeData.TaskTypeId = m_taskType.TaskTypeId
@@ -62,7 +62,7 @@ Public Class TaskTypeEventType
     End Sub
 
     Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
-        Dim updater As IDataUpdater
+        Dim updater As DataTier.Utilities.IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             updater = scope.Resolve(Of EventTypeTaskTypeDataSaver)(
                 New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),

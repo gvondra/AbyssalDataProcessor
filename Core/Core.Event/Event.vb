@@ -38,7 +38,7 @@ Public Class [Event]
     End Property
 
     Private Sub Create(ByVal transactionHandler As Framework.ITransactionHandler) Implements ISavable.Create
-        Dim creator As IDataCreator
+        Dim creator As DataTier.Utilities.IDataCreator
 
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             creator = scope.Resolve(Of EventDataSaver)(

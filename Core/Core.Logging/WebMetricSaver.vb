@@ -16,7 +16,7 @@ Public Class WebMetricSaver
     End Sub
 
     Private Sub InnerCreate(transactionHandler As ITransactionHandler, url As String, method As String, createTimestamp As DateTime, duration As Double, status As String, controller As String, attributes As IDictionary(Of String, String))
-        Dim creator As IDataCreator
+        Dim creator As DataTier.Utilities.IDataCreator
         Dim webMetric As WebMetricData
         Dim attribute As WebMetricAttributeData
 

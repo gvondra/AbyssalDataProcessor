@@ -47,7 +47,7 @@ Public Class EventTask
     End Property
 
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
-        Dim creator As IDataCreator
+        Dim creator As DataTier.Utilities.IDataCreator
         m_innerTask.Create(transactionHandler)
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             m_eventTaskData.EventId = m_event.EventId

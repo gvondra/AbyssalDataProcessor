@@ -53,7 +53,7 @@ Public Class EventForm
     End Property
 
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
-        Dim creator As IDataCreator
+        Dim creator As DataTier.Utilities.IDataCreator
 
         m_innerForm.Create(transactionHandler)
         m_eventFormData.EventId = Me.Event.EventId

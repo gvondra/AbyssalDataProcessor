@@ -33,9 +33,9 @@ Public Class Organization
     End Property
 
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
-        Dim creator As IDataCreator
+        Dim creator As DataTier.Utilities.IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            creator = scope.ResolveKeyed(Of IDataCreator)("OrganizationDataSaver",
+            creator = scope.ResolveKeyed(Of DataTier.Utilities.IDataCreator)("OrganizationDataSaver",
                 New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(OrganizationData), m_organizationData)
             )
@@ -44,9 +44,9 @@ Public Class Organization
     End Sub
 
     Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
-        Dim updater As IDataUpdater
+        Dim updater As DataTier.Utilities.IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
-            updater = scope.ResolveKeyed(Of IDataUpdater)("OrganizationDataSaver",
+            updater = scope.ResolveKeyed(Of DataTier.Utilities.IDataUpdater)("OrganizationDataSaver",
                 New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
                 New TypedParameter(GetType(OrganizationData), m_organizationData)
             )

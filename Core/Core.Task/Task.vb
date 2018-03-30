@@ -75,7 +75,7 @@ Public Class Task
     End Property
 
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
-        Dim creator As IDataCreator
+        Dim creator As DataTier.Utilities.IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             TaskTypeId = m_taskType.TaskTypeId
             If m_owner IsNot Nothing Then
@@ -90,7 +90,7 @@ Public Class Task
     End Sub
 
     Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
-        Dim updater As IDataUpdater
+        Dim updater As DataTier.Utilities.IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             If m_owner IsNot Nothing Then
                 UserId = m_owner.UserId

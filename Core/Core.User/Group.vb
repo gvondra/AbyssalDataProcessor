@@ -28,7 +28,7 @@ Public Class Group
     End Property
 
     Public Sub Create(transactionHandler As ITransactionHandler) Implements ISavable.Create
-        Dim creator As IDataCreator
+        Dim creator As DataTier.Utilities.IDataCreator
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             creator = scope.Resolve(Of GroupDataSaver)(
                 New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
@@ -39,7 +39,7 @@ Public Class Group
     End Sub
 
     Public Sub Update(transactionHandler As ITransactionHandler) Implements ISavable.Update
-        Dim updater As IDataUpdater
+        Dim updater As DataTier.Utilities.IDataUpdater
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
             updater = scope.Resolve(Of GroupDataSaver)(
                 New TypedParameter(GetType(AbyssalDataProcessor.DataTier.Utilities.ITransactionHandler), New TransactionHandler(transactionHandler)),
