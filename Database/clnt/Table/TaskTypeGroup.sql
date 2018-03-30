@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [clnt].[TaskTypeGroup]
 (
-	[TaskTypeId] UNIQUEIDENTIFIER NOT NULL , 
+	[TaskTypeId] UNIQUEIDENTIFIER NOT NULL, 
     [GroupId] UNIQUEIDENTIFIER NOT NULL,
+    [OrganizationId] UNIQUEIDENTIFIER NOT NULL,
     [IsActive] BIT NOT NULL, 
     [CreateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 
     [UpdateTimestamp] DATETIME NOT NULL DEFAULT GetDate(),

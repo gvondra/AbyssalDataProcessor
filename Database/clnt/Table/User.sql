@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [clnt].[User]
 (
 	[UserId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [OrganizationId] UNIQUEIDENTIFIER NOT NULL,
     [FullName] NVARCHAR(100) NOT NULL, 
     [ShortName] NVARCHAR(100) NOT NULL, 
     [BirthDate] DATE NULL, 

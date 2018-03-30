@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [clnt].[UserAccount]
 (
 	[UserAccountId] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [OrganizationId] UNIQUEIDENTIFIER NOT NULL,
     [UserId] UNIQUEIDENTIFIER NOT NULL, 
     [SubscriberId] NVARCHAR(1000) NOT NULL, 
     [CreateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 

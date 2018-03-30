@@ -2,6 +2,7 @@
 (
 	[EventId] UNIQUEIDENTIFIER NOT NULL,
 	[TaskId] UNIQUEIDENTIFIER NOT NULL,
+    [OrganizationId] UNIQUEIDENTIFIER NOT NULL,
     [CreateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 
     [UpdateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 
     CONSTRAINT [PK_EventTask] PRIMARY KEY ([TaskId], [EventId]), 

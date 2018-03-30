@@ -2,6 +2,7 @@
 (
 	[EventTypeId] SMALLINT NOT NULL , 
     [TaskTypeId] UNIQUEIDENTIFIER NOT NULL, 
+    [OrganizationId] UNIQUEIDENTIFIER NOT NULL,
     [IsActive] BIT NOT NULL, 
     [CreateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 
     [UpdateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 

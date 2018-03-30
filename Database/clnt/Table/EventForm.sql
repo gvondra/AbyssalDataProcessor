@@ -2,6 +2,7 @@
 (
 	[EventId] UNIQUEIDENTIFIER NOT NULL,
 	[FormId] UNIQUEIDENTIFIER NOT NULL, 
+    [OrganizationId] UNIQUEIDENTIFIER NOT NULL,
     [CreateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 
     [UpdateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 
     CONSTRAINT [PK_EventForm] PRIMARY KEY ([EventId], [FormId]), 
