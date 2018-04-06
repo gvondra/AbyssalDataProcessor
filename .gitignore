@@ -6,6 +6,7 @@
 # User-specific files
 *.suo
 /Database/**/*.user
+/Client/*/*.user
 /Core/*/*.user
 /Interfaces/**/*.user
 /Tests/**/*.user
