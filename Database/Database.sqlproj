@@ -64,6 +64,7 @@
     <Folder Include="adp\View" />
     <Folder Include="clnt" />
     <Folder Include="clnt\Table" />
+    <Folder Include="clnt\Stored Procedure" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="adp.sql" />
