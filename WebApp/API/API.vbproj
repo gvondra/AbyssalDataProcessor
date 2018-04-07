@@ -202,6 +202,7 @@
     <Compile Include="Controllers\UsersController.vb" />
     <Compile Include="Models\CreateFormRequest.vb" />
     <Compile Include="Models\CreateUser.vb" />
+    <Compile Include="Models\Form.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -240,6 +241,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Client\Client.Form\Client.Form.vbproj">
+      <Project>{a1a72df2-14a5-464e-98af-6e0f76f7d658}</Project>
+      <Name>Client.Form</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Client\Client.Framework\Client.Framework.vbproj">
       <Project>{6f59b77c-fc0a-43a5-85b1-dfd12711bb70}</Project>
       <Name>Client.Framework</Name>

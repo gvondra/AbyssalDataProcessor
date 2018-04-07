@@ -1,4 +1,5 @@
-﻿Imports AbyssalDataProcessor.Client.User
+﻿Imports AbyssalDataProcessor.Client.Form
+Imports AbyssalDataProcessor.Client.User
 Imports Autofac
 Friend NotInheritable Class ObjectContainer
 
@@ -9,6 +10,9 @@ Friend NotInheritable Class ObjectContainer
 
         builder.RegisterType(Of UserFactory)().As(Of IUserFactory)()
         builder.RegisterType(Of UserSaver)().As(Of IUserSaver)()
+
+        builder.RegisterType(Of FormFactory)().As(Of IFormFactory)()
+        builder.RegisterType(Of FormSaver)().As(Of IFormSaver)()
 
         m_container = builder.Build()
     End Sub

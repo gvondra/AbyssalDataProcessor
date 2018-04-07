@@ -33,7 +33,7 @@ Public Class UserDataFactory
         Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "userId", DbType.Guid)
         parameter.Value = userId
         Dim organizationParameter As IDbDataParameter = CreateParameter(providerFactory, "organizationId", DbType.Guid)
-        organizationParameter.Value = organizationParameter
+        organizationParameter.Value = organizationId
         Return Me.GenericDataFactory.GetData(settings,
                                              providerFactory,
                                              "clnt.sUser",
@@ -48,7 +48,7 @@ Public Class UserDataFactory
 
     Public Function Search(settings As ISettings, ByVal providerFactory As IDbProviderFactory, ByVal organizationId As Guid, searchText As String) As IEnumerable(Of UserData)
         Dim organizationParameter As IDbDataParameter = CreateParameter(providerFactory, "organizationId", DbType.Guid)
-        organizationParameter.Value = organizationParameter
+        organizationParameter.Value = organizationId
         searchText = searchText.Trim
         Dim value As IDbDataParameter = CreateParameter(providerFactory, "value", DbType.String)
         value.Value = searchText
