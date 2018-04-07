@@ -198,7 +198,6 @@
     <Compile Include="ControllerBase.vb" />
     <Compile Include="Controllers\FormController.vb" />
     <Compile Include="Controllers\FormsController.vb" />
-    <Compile Include="IUserFactory.vb" />
     <Compile Include="Models\CreateFormRequest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
