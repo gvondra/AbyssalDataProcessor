@@ -34,7 +34,9 @@ Public Class UserFactory
             claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.Email)
             If claim IsNot Nothing Then
                 user = GetByEmailAddress(New Settings(), claim.Value)
-                UpdateUser(principal, user, id)
+                If user IsNot Nothing Then
+                    UpdateUser(principal, user, id)
+                End If
             End If
         End If
 
