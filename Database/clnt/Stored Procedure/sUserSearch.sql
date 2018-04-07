@@ -1,9 +1,11 @@
 ﻿CREATE PROCEDURE [clnt].[sUserSearch]
 	@value NVARCHAR(500),
-	@wildCardValue NVARCHAR(500)
+	@wildCardValue NVARCHAR(500),
+	@organizationId UNIQUEIDENTIFIER
 AS
 SELECT [UserId], [OrganizationId], [FullName], [ShortName], [BirthDate], [EmailAddress], [PhoneNumber], [CreateTimestamp], [UpdateTimestamp]
 FROM [clnt].[User]
-WHERE [EmailAddress] = @value
+WHERE ([EmailAddress] = @value
 	OR [FullName] LIKE @wildCardValue ESCAPE '\'
-	OR [ShortName] LIKE @wildCardValue ESCAPE '\';
+	OR [ShortName] LIKE @wildCardValue ESCAPE '\')
+	AND [OrganizationId] = @organizationId;
