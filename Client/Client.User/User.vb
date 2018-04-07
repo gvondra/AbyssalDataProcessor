@@ -7,6 +7,11 @@ Public Class User
     Private m_userData As UserData
     Private m_container As IContainer
 
+    Friend Sub New(ByVal organizationId As Guid)
+        m_container = ObjectContainer.GetContainer()
+        m_userData = New UserData() With {.OrganizationId = organizationId}
+    End Sub
+
     Friend Sub New(ByVal userData As UserData)
         m_container = ObjectContainer.GetContainer()
         m_userData = userData

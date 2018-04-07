@@ -79,6 +79,7 @@
     <Compile Include="ObjectContainer.vb" />
     <Compile Include="User.vb" />
     <Compile Include="UserFactory.vb" />
+    <Compile Include="UserSaver.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.Utilities.Framework\Core.Utilities.Framework.vbproj">

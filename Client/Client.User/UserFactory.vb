@@ -14,8 +14,8 @@ Public Class UserFactory
         m_container = container
     End Sub
 
-    Public Function Create() As IUser Implements IUserFactory.Create
-        Return New User(New UserData)
+    Public Function Create(ByVal organizationId As Guid) As IUser Implements IUserFactory.Create
+        Return New User(organizationId)
     End Function
 
     Public Function [Get](settings As ISettings, ByVal organizationId As Guid, userId As Guid) As IUser Implements IUserFactory.Get

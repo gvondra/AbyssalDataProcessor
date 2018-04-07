@@ -67,6 +67,7 @@
     <Compile Include="IFormSaver.vb" />
     <Compile Include="IUser.vb" />
     <Compile Include="IUserFactory.vb" />
+    <Compile Include="IUserSaver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>
