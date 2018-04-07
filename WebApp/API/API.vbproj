@@ -242,6 +242,10 @@
       <Project>{6f59b77c-fc0a-43a5-85b1-dfd12711bb70}</Project>
       <Name>Client.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Client\Client.User\Client.User.vbproj">
+      <Project>{9a5b8372-0f79-46ae-8701-06ffb944fce7}</Project>
+      <Name>Client.User</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.Utilities.Framework\Core.Utilities.Framework.vbproj">
       <Project>{c19a5ae6-3454-499a-a73b-4ebdcb5c7989}</Project>
       <Name>Core.Utilities.Framework</Name>

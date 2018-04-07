@@ -1,10 +1,13 @@
-﻿Imports Autofac
+﻿Imports AbyssalDataProcessor.Client.User
+Imports Autofac
 Friend NotInheritable Class ObjectContainer
 
     Private Shared m_container As IContainer
 
     Shared Sub New()
         Dim builder As New ContainerBuilder()
+
+        builder.RegisterType(Of UserFactory)().As(Of IUserFactory)()
 
         m_container = builder.Build()
     End Sub

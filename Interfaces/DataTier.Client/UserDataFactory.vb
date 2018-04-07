@@ -15,12 +15,14 @@ Public Class UserDataFactory
     Public Function GetBySubscriberId(settings As ISettings, ByVal providerFactory As IDbProviderFactory, ByVal organizationId As Guid, subscriberId As String) As UserData
         Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "subscriberId", DbType.String)
         parameter.Value = subscriberId
+        Dim organizationParameter As IDbDataParameter = CreateParameter(providerFactory, "organizationId", DbType.Guid)
+        organizationParameter.Value = organizationId
         Return Me.GenericDataFactory.GetData(settings,
                                              providerFactory,
                                              "clnt.sUserBySubscriberId",
                                              Function() New UserData,
                                              New Action(Of IEnumerable(Of UserData))(AddressOf AssignDataStateManager(Of UserData)),
-                                             {parameter}).FirstOrDefault
+                                             {parameter, organizationParameter}).FirstOrDefault
     End Function
 
     Public Function [Get](settings As ISettings, ByVal organizationId As Guid, userId As Guid) As UserData Implements IUserDataFactory.Get
@@ -30,12 +32,14 @@ Public Class UserDataFactory
     Public Function [Get](settings As ISettings, ByVal providerFactory As IDbProviderFactory, ByVal organizationId As Guid, userId As Guid) As UserData
         Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "userId", DbType.Guid)
         parameter.Value = userId
+        Dim organizationParameter As IDbDataParameter = CreateParameter(providerFactory, "organizationId", DbType.Guid)
+        organizationParameter.Value = organizationParameter
         Return Me.GenericDataFactory.GetData(settings,
                                              providerFactory,
                                              "clnt.sUser",
                                              Function() New UserData,
                                              New Action(Of IEnumerable(Of UserData))(AddressOf AssignDataStateManager(Of UserData)),
-                                             {parameter}).FirstOrDefault
+                                             {parameter, organizationParameter}).FirstOrDefault
     End Function
 
     Public Function Search(settings As ISettings, ByVal organizationId As Guid, searchText As String) As IEnumerable(Of UserData) Implements IUserDataFactory.Search
@@ -43,6 +47,8 @@ Public Class UserDataFactory
     End Function
 
     Public Function Search(settings As ISettings, ByVal providerFactory As IDbProviderFactory, ByVal organizationId As Guid, searchText As String) As IEnumerable(Of UserData)
+        Dim organizationParameter As IDbDataParameter = CreateParameter(providerFactory, "organizationId", DbType.Guid)
+        organizationParameter.Value = organizationParameter
         searchText = searchText.Trim
         Dim value As IDbDataParameter = CreateParameter(providerFactory, "value", DbType.String)
         value.Value = searchText
@@ -57,6 +63,6 @@ Public Class UserDataFactory
                                              "clnt.sUserSearch",
                                              Function() New UserData,
                                              New Action(Of IEnumerable(Of UserData))(AddressOf AssignDataStateManager(Of UserData)),
-                                             {value, wildCardValue})
+                                             {value, wildCardValue, organizationParameter})
     End Function
 End Class
