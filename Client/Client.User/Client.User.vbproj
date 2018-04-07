@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90FBCF4B-681C-4B01-8D78-FABE7BBB04E0}</ProjectGuid>
+    <ProjectGuid>{9A5B8372-0F79-46AE-8701-06FFB944FCE7}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AbyssalDataProcessor.Core.Framework</RootNamespace>
-    <AssemblyName>AbyssalDataProcessor.Core.Framework</AssemblyName>
+    <RootNamespace>AbyssalDataProcessor.Client.User</RootNamespace>
+    <AssemblyName>AbyssalDataProcessor.Client.User</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -18,7 +18,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>AbyssalDataProcessor.Core.Framework.xml</DocumentationFile>
+    <DocumentationFile>AbyssalDataProcessor.Client.User.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
@@ -28,7 +28,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>AbyssalDataProcessor.Core.Framework.xml</DocumentationFile>
+    <DocumentationFile>AbyssalDataProcessor.Client.User.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
@@ -45,13 +45,25 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="AbyssalDataProcessor.Client.Framework" />
+    <Import Include="AbyssalDataProcessor.Core.Utilities" />
     <Import Include="AbyssalDataProcessor.Core.Utilities.Framework" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
@@ -60,65 +72,42 @@
     <Import Include="System.Data" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Linq" />
+    <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enumerations.vb" />
-    <Compile Include="Exceptions\FormTransformNotFoundException.vb" />
-    <Compile Include="Forms\IFormSerializable.vb" />
-    <Compile Include="Forms\IRoleRequest.vb" />
-    <Compile Include="IEvent.vb" />
-    <Compile Include="IEventFactory.vb" />
-    <Compile Include="IEventSaver.vb" />
-    <Compile Include="IEventTask.vb" />
-    <Compile Include="IEventTrigger.vb" />
-    <Compile Include="IEventTriggerAggregator.vb" />
-    <Compile Include="IEventTriggerFactory.vb" />
-    <Compile Include="IEventType.vb" />
-    <Compile Include="IEventTypeFactory.vb" />
-    <Compile Include="IEventTypeSaver.vb" />
-    <Compile Include="IEventTypeTaskType.vb" />
-    <Compile Include="IFormContentTransormFactory.vb" />
-    <Compile Include="IFormContentTransform.vb" />
-    <Compile Include="IOrganization.vb" />
-    <Compile Include="IOrganizationFactory.vb" />
-    <Compile Include="IOrganizationSaver.vb" />
-    <Compile Include="ITask.vb" />
-    <Compile Include="ITaskFactory.vb" />
-    <Compile Include="ITaskSaver.vb" />
-    <Compile Include="ITaskTypeEventType.vb" />
-    <Compile Include="IForm.vb" />
-    <Compile Include="IFormFactory.vb" />
-    <Compile Include="IFormSaver.vb" />
-    <Compile Include="IFormSerializer.vb" />
-    <Compile Include="IFormSerializerFactory.vb" />
-    <Compile Include="IGroup.vb" />
-    <Compile Include="IGroupFactory.vb" />
-    <Compile Include="IGroupSaver.vb" />
-    <Compile Include="ITaskType.vb" />
-    <Compile Include="ITaskTypeFactory.vb" />
-    <Compile Include="ITaskTypeGroup.vb" />
-    <Compile Include="ITaskTypeSaver.vb" />
-    <Compile Include="IUnassignedTask.vb" />
-    <Compile Include="IUnassignedTaskFactory.vb" />
-    <Compile Include="IUser.vb" />
-    <Compile Include="IUserFactory.vb" />
-    <Compile Include="IUserGroup.vb" />
-    <Compile Include="ITaskTypeEventTypeSaver.vb" />
-    <Compile Include="ITaskTypeGroupSaver.vb" />
-    <Compile Include="IUserGroupSaver.vb" />
-    <Compile Include="IUserSaver.vb" />
-    <Compile Include="IUserUpdater.vb" />
-    <Compile Include="IWebMetric.vb" />
-    <Compile Include="IWebMetricAttribute.vb" />
-    <Compile Include="IWebMetricFactory.vb" />
-    <Compile Include="IWebMetricSaver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="ObjectContainer.vb" />
+    <Compile Include="User.vb" />
+    <Compile Include="UserFactory.vb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Utilities.Framework\Core.Utilities.Framework.vbproj">
+    <ProjectReference Include="..\..\Core\Core.Utilities.Framework\Core.Utilities.Framework.vbproj">
       <Project>{c19a5ae6-3454-499a-a73b-4ebdcb5c7989}</Project>
       <Name>Core.Utilities.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.Utilities\Core.Utilities.vbproj">
+      <Project>{b37692e3-910a-4dee-a1e4-d87ac24bc4eb}</Project>
+      <Name>Core.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\DataTier.Client.Models\DataTier.Client.Models.vbproj">
+      <Project>{9406477b-2e80-4da9-8248-abfd3a57a497}</Project>
+      <Name>DataTier.Client.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\DataTier.Client\DataTier.Client.vbproj">
+      <Project>{8ca660f7-9272-450d-ac10-161ef32a7124}</Project>
+      <Name>DataTier.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\DataTier.Utilities\DataTier.Utilities.vbproj">
+      <Project>{85efb4ba-c5f1-454b-8129-4b04512f5753}</Project>
+      <Name>DataTier.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Client.Framework\Client.Framework.vbproj">
+      <Project>{6f59b77c-fc0a-43a5-85b1-dfd12711bb70}</Project>
+      <Name>Client.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -53,7 +53,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Import Include="AbyssalDataProcessor.Core.Framework" />
+    <Import Include="AbyssalDataProcessor.Core.Utilities.Framework" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -79,9 +79,9 @@
       <Project>{85efb4ba-c5f1-454b-8129-4b04512f5753}</Project>
       <Name>DataTier.Utilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.Framework\Core.Framework.vbproj">
-      <Project>{90fbcf4b-681c-4b01-8d78-fabe7bbb04e0}</Project>
-      <Name>Core.Framework</Name>
+    <ProjectReference Include="..\Core.Utilities.Framework\Core.Utilities.Framework.vbproj">
+      <Project>{c19a5ae6-3454-499a-a73b-4ebdcb5c7989}</Project>
+      <Name>Core.Utilities.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

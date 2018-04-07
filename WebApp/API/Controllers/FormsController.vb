@@ -23,7 +23,7 @@ Namespace Controllers
 
                 If response Is Nothing Then
                     userFactory = scope.Resolve(Of IUserFactory)()
-                    user = userFactory.Get(New settings(), request.UserId)
+                    user = userFactory.Get(New Settings(), GetOrganizationId, request.UserId)
                     If user Is Nothing Then
                         response = BadRequest("User not found")
                     End If

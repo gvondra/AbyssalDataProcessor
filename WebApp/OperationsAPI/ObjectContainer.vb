@@ -12,7 +12,7 @@ Friend NotInheritable Class ObjectContainer
     Shared Sub New()
         Dim builder As New ContainerBuilder()
 
-        builder.RegisterType(Of Settings)().As(Of ISettings)()
+        builder.RegisterType(Of Settings)().As(Of AbyssalDataProcessor.Core.Utilities.Framework.ISettings)()
 
         builder.RegisterType(Of TaskTypeFactory)().As(Of ITaskTypeFactory)()
         builder.RegisterType(Of TaskTypeSaver)().As(Of ITaskTypeSaver)()

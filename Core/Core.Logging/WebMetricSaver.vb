@@ -10,7 +10,7 @@ Public Class WebMetricSaver
         m_container = ObjectContainer.GetContainer
     End Sub
 
-    Public Sub Create(settings As Framework.ISettings, url As String, method As String, createTimestamp As DateTime, duration As Double, status As String, controller As String, Optional attributes As IDictionary(Of String, String) = Nothing) Implements IWebMetricSaver.Create
+    Public Sub Create(settings As ISettings, url As String, method As String, createTimestamp As DateTime, duration As Double, status As String, controller As String, Optional attributes As IDictionary(Of String, String) = Nothing) Implements IWebMetricSaver.Create
         Dim saver As New Saver()
         saver.Save(New CoreSettings(settings), Sub(th As ITransactionHandler) InnerCreate(th, url, method, createTimestamp, duration, status, controller, attributes))
     End Sub

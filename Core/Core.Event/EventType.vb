@@ -68,7 +68,7 @@ Public Class EventType
         Return result
     End Function
 
-    Private Function LoadTaskType(settings As Framework.ISettings, d As EventTypeTaskTypeData) As IEventTypeTaskType
+    Private Function LoadTaskType(settings As ISettings, d As EventTypeTaskTypeData) As IEventTypeTaskType
         Return New EventTypeTaskType(Me, m_taskTypeFactory.Get(settings, d.TaskTypeId), d)
     End Function
 End Class

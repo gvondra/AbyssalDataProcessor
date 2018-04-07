@@ -198,7 +198,9 @@
     <Compile Include="ControllerBase.vb" />
     <Compile Include="Controllers\FormController.vb" />
     <Compile Include="Controllers\FormsController.vb" />
+    <Compile Include="Controllers\UserController.vb" />
     <Compile Include="Models\CreateFormRequest.vb" />
+    <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -239,6 +241,10 @@
     <ProjectReference Include="..\..\Client\Client.Framework\Client.Framework.vbproj">
       <Project>{6f59b77c-fc0a-43a5-85b1-dfd12711bb70}</Project>
       <Name>Client.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.Utilities.Framework\Core.Utilities.Framework.vbproj">
+      <Project>{c19a5ae6-3454-499a-a73b-4ebdcb5c7989}</Project>
+      <Name>Core.Utilities.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

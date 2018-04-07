@@ -65,7 +65,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IUserDataFactory.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="UserAccountDataSaver.vb" />
+    <Compile Include="UserDataFactory.vb" />
+    <Compile Include="UserDataSaver.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTier.Client.Models\DataTier.Client.Models.vbproj">

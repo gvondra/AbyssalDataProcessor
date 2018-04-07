@@ -19,7 +19,7 @@ Public Class EventTypeFactory
         m_eventTypeSaver = eventTypeSaver
     End Sub
 
-    Public Function [Get](settings As Framework.ISettings, type As enumEventType) As IEventType Implements IEventTypeFactory.Get
+    Public Function [Get](settings As ISettings, type As enumEventType) As IEventType Implements IEventTypeFactory.Get
         Dim data As EventTypeData
         Dim dataFactory As IEventTypeDataFactory
         Dim blnSave As Boolean = False

@@ -1,4 +1,5 @@
-﻿Imports Autofac
+﻿Imports AbyssalDataProcessor.Core.Utilities.Framework
+Imports Autofac
 Imports System.Security.Claims
 Imports System.Web
 Public Class UserFactory

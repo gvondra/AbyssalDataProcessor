@@ -13,7 +13,7 @@ Public Class UserUpdater
         m_container = container
     End Sub
 
-    Public Sub UpdateFromUserManagement(settings As Framework.ISettings, user As IUser, ByVal accessToken As String) Implements IUserUpdater.UpdateFromUserManagement
+    Public Sub UpdateFromUserManagement(settings As Utilities.Framework.ISettings, user As IUser, ByVal accessToken As String) Implements IUserUpdater.UpdateFromUserManagement
         Dim service As IUserInfoService
         Dim userInfo As UserInfo
 

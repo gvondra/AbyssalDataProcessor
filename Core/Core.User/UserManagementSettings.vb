@@ -2,9 +2,9 @@
 Public Class UserManagementSettings
     Implements [Interface].UserManagement.ISettings
 
-    Private m_innerSettings As Framework.ISettings
+    Private m_innerSettings As Utilities.Framework.ISettings
 
-    Friend Sub New(ByVal settings As Framework.ISettings)
+    Friend Sub New(ByVal settings As Utilities.Framework.ISettings)
         m_innerSettings = settings
     End Sub
 

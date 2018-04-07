@@ -37,7 +37,7 @@ Public Class [Event]
         End Set
     End Property
 
-    Private Sub Create(ByVal transactionHandler As Framework.ITransactionHandler) Implements ISavable.Create
+    Private Sub Create(ByVal transactionHandler As ITransactionHandler) Implements ISavable.Create
         Dim creator As DataTier.Utilities.IDataCreator
 
         Using scope As ILifetimeScope = m_container.BeginLifetimeScope
@@ -60,7 +60,7 @@ Public Class [Event]
         End If
     End Sub
 
-    Public Sub Update(ByVal transactinoHandler As Framework.ITransactionHandler) Implements ISavable.Update
+    Public Sub Update(ByVal transactinoHandler As ITransactionHandler) Implements ISavable.Update
         Throw New NotImplementedException()
     End Sub
 

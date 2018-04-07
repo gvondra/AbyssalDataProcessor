@@ -85,6 +85,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Import Include="AbyssalDataProcessor.DataTier.Client" />
+    <Import Include="AbyssalDataProcessor.DataTier.Client.Models" />
+    <Import Include="AbyssalDataProcessor.DataTier.Utilities" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="Moq" />
     <Import Include="System" />
@@ -113,6 +116,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UserDataFactoryTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -11,4 +11,5 @@
     ReadOnly Property CreateTimestamp As Date
     ReadOnly Property UpdateTimestamp As Date
 
+    Sub CreateAccount(ByVal transactionHandler As ITransactionHandler, ByVal subscriberId As String)
 End Interface

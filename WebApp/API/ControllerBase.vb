@@ -10,7 +10,7 @@ Public MustInherit Class ControllerBase
         m_container = AbyssalDataProcessorAPI.ObjectContainer.GetContainer()
     End Sub
 
-    Public Function GetOrganizationId() As Guid
+    <NonAction> Public Function GetOrganizationId() As Guid
         Dim ns As String = My.Settings.RoleNameSpace.ToLower
         Dim principal As ClaimsPrincipal = CType(Me.User, ClaimsPrincipal)
         Return Guid.Parse(
