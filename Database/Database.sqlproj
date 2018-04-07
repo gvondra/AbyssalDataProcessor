@@ -150,5 +150,12 @@
     <Build Include="clnt\Table\TaskType.sql" />
     <Build Include="clnt\Table\TaskTypeGroup.sql" />
     <Build Include="clnt\Table\UserGroup.sql" />
+    <Build Include="clnt\Stored Procedure\sUser.sql" />
+    <Build Include="clnt\Stored Procedure\sUserBySubscriberId.sql" />
+    <Build Include="clnt\Stored Procedure\sUserSearch.sql" />
+    <Build Include="clnt\Stored Procedure\iUser.sql" />
+    <Build Include="clnt\Stored Procedure\iUserAccount.sql" />
+    <Build Include="clnt\Stored Procedure\uUser.sql" />
+    <Build Include="clnt\Stored Procedure\iForm.sql" />
   </ItemGroup>
 </Project>
