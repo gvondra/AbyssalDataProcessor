@@ -51,6 +51,9 @@ Namespace Controllers
                     form = formFactory.CreateForm(GetOrganizationId, user, request.Type, request.Style, request.Content)
                     formSaver = scope.Resolve(Of IFormSaver)()
                     formSaver.Create(New Settings(), form)
+
+                    ' todo trigger event
+
                     mapper = New Mapper(m_mapperConfiguration)
                     response = Ok(mapper.Map(Of Form)(form))
                 End If
