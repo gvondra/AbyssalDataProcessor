@@ -29,7 +29,7 @@ Namespace Controllers
                     mapper = New Mapper(m_mapperConfiguration)
                     result = Ok(mapper.Map(Of User)(innerUser))
                 Else
-                    result = NotFound()
+                    result = Ok()
                 End If
             End Using
 
