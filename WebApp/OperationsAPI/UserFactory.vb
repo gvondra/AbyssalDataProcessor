@@ -74,7 +74,7 @@ Public Class UserFactory
                 user.BirthDate = Date.Parse(claim.Value).Date
             End If
 
-            If principal.Claims.Where(Function(c As Claim) c.Type = "gty" And c.Value = "client-credentials").Any() Then
+            If principal.Claims.Where(Function(c As Claim) c.Type = "gty" AndAlso c.Value = "client-credentials").Any() Then
                 claim = principal.Claims.FirstOrDefault(Function(c As Claim) c.Type = ClaimTypes.NameIdentifier)
                 If claim IsNot Nothing AndAlso String.IsNullOrEmpty(user.FullName) Then
                     user.FullName = claim.Value
