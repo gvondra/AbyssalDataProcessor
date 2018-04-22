@@ -8,7 +8,7 @@ BEGIN
 	WHERE [UserId] = @userId
 		AND [OrganizationId] = @organizationId;
 
-	SELECT [Gr].[GroupId], [Gr].[Name], [Gr].[CreateTimestamp], [Gr].[UpdateTimestamp]
+	SELECT [Gr].[GroupId], [Gr].[OrganizationId], [Gr].[Name], [Gr].[CreateTimestamp], [Gr].[UpdateTimestamp]
 	FROM [clnt].[Group] [Gr]
 		INNER JOIN [clnt].[UserGroup] [UG] on [Gr].[GroupId] = [UG].[GroupId]
 	WHERE [UG].[UserId] = @userId
