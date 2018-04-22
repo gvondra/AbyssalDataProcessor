@@ -70,6 +70,8 @@
     <Compile Include="IGroupSaver.vb" />
     <Compile Include="IUser.vb" />
     <Compile Include="IUserFactory.vb" />
+    <Compile Include="IUserGroup.vb" />
+    <Compile Include="IUserGroupSaver.vb" />
     <Compile Include="IUserSaver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>

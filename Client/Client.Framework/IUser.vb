@@ -12,4 +12,6 @@
     ReadOnly Property UpdateTimestamp As Date
 
     Sub CreateAccount(ByVal transactionHandler As ITransactionHandler, ByVal subscriberId As String)
+    Function GetGroups(ByVal settings As ISettings) As IEnumerable(Of IUserGroup)
+    Function CreateUserGroup(ByVal group As IGroup) As IUserGroup
 End Interface

@@ -10,6 +10,7 @@ Friend NotInheritable Class ObjectContainer
 
         builder.RegisterType(Of UserFactory)().As(Of IUserFactory)()
         builder.RegisterType(Of UserSaver)().As(Of IUserSaver)()
+        builder.RegisterType(Of UserGroupSaver)().As(Of IUserGroupSaver)()
 
         builder.RegisterType(Of GroupFactory)().As(Of IGroupFactory)()
         builder.RegisterType(Of GroupSaver)().As(Of IGroupSaver)()

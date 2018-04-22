@@ -125,4 +125,23 @@ Public Class User
             updater.Update()
         End Using
     End Sub
+
+    Public Function GetGroups(settings As ISettings) As IEnumerable(Of IUserGroup) Implements IUser.GetGroups
+        Dim result As IEnumerable(Of IUserGroup) = {}
+        Dim factory As IUserGroupDataFactory
+
+        If UserId.Equals(Guid.Empty) = False Then
+            Using scope As ILifetimeScope = m_container.BeginLifetimeScope
+                factory = scope.Resolve(Of IUserGroupDataFactory)()
+                result = From data In factory.GetByUserId(New Settings(settings), OrganizationId, UserId)
+                         Where data.Group IsNot Nothing
+                         Select New UserGroup(Me, New Group(data.Group), data)
+            End Using
+        End If
+        Return result
+    End Function
+
+    Public Function CreateUserGroup(group As IGroup) As IUserGroup Implements IUser.CreateUserGroup
+        Return New UserGroup(Me, group, New UserGroupData) With {.IsActive = True}
+    End Function
 End Class

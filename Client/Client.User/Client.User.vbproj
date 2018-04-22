@@ -82,6 +82,8 @@
     <Compile Include="ObjectContainer.vb" />
     <Compile Include="User.vb" />
     <Compile Include="UserFactory.vb" />
+    <Compile Include="UserGroup.vb" />
+    <Compile Include="UserGroupSaver.vb" />
     <Compile Include="UserSaver.vb" />
   </ItemGroup>
   <ItemGroup>

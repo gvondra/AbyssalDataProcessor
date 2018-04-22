@@ -208,6 +208,7 @@
     <Compile Include="Models\Form.vb" />
     <Compile Include="Models\Group.vb" />
     <Compile Include="Models\User.vb" />
+    <Compile Include="Models\UserGroup.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
