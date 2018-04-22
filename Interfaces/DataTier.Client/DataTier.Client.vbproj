@@ -66,6 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormDataSaver.vb" />
+    <Compile Include="GroupDataFactory.vb" />
+    <Compile Include="GroupDataSaver.vb" />
+    <Compile Include="IGroupDataFactory.vb" />
     <Compile Include="IUserDataFactory.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="UserAccountDataSaver.vb" />

@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormData.vb" />
+    <Compile Include="GroupData.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="UserAccountData.vb" />
     <Compile Include="UserData.vb" />

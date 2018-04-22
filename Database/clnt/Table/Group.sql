@@ -6,3 +6,7 @@
     [CreateTimestamp] DATETIME NOT NULL DEFAULT GetDate(), 
     [UpdateTimestamp] DATETIME NOT NULL DEFAULT GetDate()
 )
+
+GO
+
+CREATE INDEX [IX_Group_OrganizationId] ON [clnt].[Group] ([OrganizationId])
