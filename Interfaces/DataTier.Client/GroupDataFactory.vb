@@ -13,7 +13,7 @@
 
     Public Function [Get](ByVal settings As ISettings, ByVal providerFactory As IDbProviderFactory, groupId As Guid, organizationId As Guid) As GroupData
         Dim parameter As IDbDataParameter = CreateParameter(providerFactory, "id", DbType.Guid)
-        Dim orgIdParam As IDbDataParameter = CreateParameter(providerFactory, "organizataionId", DbType.Guid)
+        Dim orgIdParam As IDbDataParameter = CreateParameter(providerFactory, "organizationId", DbType.Guid)
         orgIdParam.Value = organizationId
         parameter.Value = groupId
         Return Me.GenericDataFactory.GetData(settings,
@@ -29,7 +29,7 @@
     End Function
 
     Public Function GetAll(ByVal settings As ISettings, ByVal providerFactory As IDbProviderFactory, organizationId As Guid) As IEnumerable(Of GroupData)
-        Dim orgIdParam As IDbDataParameter = CreateParameter(providerFactory, "organizataionId", DbType.Guid)
+        Dim orgIdParam As IDbDataParameter = CreateParameter(providerFactory, "organizationId", DbType.Guid)
         orgIdParam.Value = organizationId
         Return Me.GenericDataFactory.GetData(settings,
                                              providerFactory,
