@@ -13,6 +13,10 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of UserDataSaver).Keyed(Of IDataUpdater)("UserDataSaver")
         builder.RegisterType(Of UserAccountDataSaver).Keyed(Of IDataCreator)("UserAccountDataSaver")
 
+        builder.RegisterType(Of GroupDataFactory).As(Of IGroupDataFactory)()
+        builder.RegisterType(Of GroupDataSaver)().Keyed(Of DataTier.Utilities.IDataCreator)("GroupDataSaver")
+        builder.RegisterType(Of GroupDataSaver)().Keyed(Of DataTier.Utilities.IDataUpdater)("GroupDataSaver")
+
         m_container = builder.Build()
     End Sub
 

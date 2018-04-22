@@ -65,6 +65,9 @@
     <Compile Include="IForm.vb" />
     <Compile Include="IFormFactory.vb" />
     <Compile Include="IFormSaver.vb" />
+    <Compile Include="IGroup.vb" />
+    <Compile Include="IGroupFactory.vb" />
+    <Compile Include="IGroupSaver.vb" />
     <Compile Include="IUser.vb" />
     <Compile Include="IUserFactory.vb" />
     <Compile Include="IUserSaver.vb" />

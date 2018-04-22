@@ -75,6 +75,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Group.vb" />
+    <Compile Include="GroupFactory.vb" />
+    <Compile Include="GroupSaver.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="ObjectContainer.vb" />
     <Compile Include="User.vb" />
