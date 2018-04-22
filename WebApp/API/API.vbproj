@@ -198,11 +198,14 @@
     <Compile Include="ControllerBase.vb" />
     <Compile Include="Controllers\FormController.vb" />
     <Compile Include="Controllers\FormsController.vb" />
+    <Compile Include="Controllers\GroupController.vb" />
+    <Compile Include="Controllers\GroupsController.vb" />
     <Compile Include="Controllers\UserController.vb" />
     <Compile Include="Controllers\UsersController.vb" />
     <Compile Include="Models\CreateFormRequest.vb" />
     <Compile Include="Models\CreateUser.vb" />
     <Compile Include="Models\Form.vb" />
+    <Compile Include="Models\Group.vb" />
     <Compile Include="Models\User.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
