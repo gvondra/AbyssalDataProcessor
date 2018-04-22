@@ -17,6 +17,9 @@ Friend NotInheritable Class ObjectContainer
         builder.RegisterType(Of FormFactory)().As(Of IFormFactory)()
         builder.RegisterType(Of FormSaver)().As(Of IFormSaver)()
 
+        builder.RegisterType(Of AbyssalDataProcessor.Core.Log.WebMetricSaver)() _
+            .As(Of AbyssalDataProcessor.Core.Framework.IWebMetricSaver)()
+
         m_container = builder.Build()
     End Sub
 

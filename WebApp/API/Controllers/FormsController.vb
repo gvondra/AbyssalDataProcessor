@@ -5,6 +5,7 @@ Imports System.Security.Claims
 Imports System.Web.Http
 
 Namespace Controllers
+    <MetricsLog()>
     Public Class FormsController
         Inherits ControllerBase
 
@@ -26,7 +27,7 @@ Namespace Controllers
             Dim organizationId As Guid
             Dim response As IHttpActionResult = Nothing
             Dim formSaver As IFormSaver
-            Dim mapper As imapper
+            Dim mapper As IMapper
             Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
                 organizationId = GetOrganizationId()
 

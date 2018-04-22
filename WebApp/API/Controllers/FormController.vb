@@ -2,6 +2,7 @@
 Imports System.Web.Http
 
 Namespace Controllers
+    <MetricsLog()>
     Public Class FormController
         Inherits ControllerBase
 

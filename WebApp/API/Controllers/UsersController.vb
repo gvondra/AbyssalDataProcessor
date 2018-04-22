@@ -4,6 +4,7 @@ Imports System.Net
 Imports System.Web.Http
 
 Namespace Controllers
+    <MetricsLog()>
     Public Class UsersController
         Inherits ControllerBase
 
