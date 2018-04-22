@@ -8,15 +8,10 @@ Namespace Controllers
     Public Class UsersController
         Inherits ControllerBase
 
-        Private Shared m_mapperConfiguration As MapperConfiguration
+        Private Shared m_userMapper As UserMapper
 
         Shared Sub New()
-            m_mapperConfiguration = New MapperConfiguration(
-                Sub(exp As IMapperConfigurationExpression)
-                    exp.CreateMap(Of User, IUser)()
-                    exp.CreateMap(Of IUser, User)()
-                End Sub
-            )
+            m_userMapper = New UserMapper
         End Sub
 
         <HttpPost(), ClientAuthorization()> Public Function CreateUser(<FromBody> request As CreateUser) As IHttpActionResult
@@ -41,7 +36,7 @@ Namespace Controllers
 
                 If result Is Nothing Then
                     innerUser = userFactory.Create(GetOrganizationId)
-                    mapper = New Mapper(m_mapperConfiguration)
+                    mapper = New Mapper(m_userMapper.MapperConfiguration)
                     mapper.Map(Of User, IUser)(request.User, innerUser)
                     saver = scope.Resolve(Of IUserSaver)()
                     saver.Save(New Settings(), innerUser, request.SubscriberId)
@@ -50,6 +45,58 @@ Namespace Controllers
             End Using
 
             Return result
+        End Function
+
+        <HttpGet(), Authorize(), Route("api/Users/Search")>
+        Function Search(ByVal s As String) As IHttpActionResult
+            Dim result As IHttpActionResult = Nothing
+            Dim userId As Guid?
+            Dim userFactory As IUserFactory
+            Dim innerUsers As IEnumerable(Of IUser) = Nothing
+            Dim u As IUser
+            Dim users As IEnumerable(Of User)
+            Dim mapper As IMapper
+
+            If String.IsNullOrEmpty(s) Then
+                result = BadRequest("Missing search text")
+            End If
+
+            If result Is Nothing Then
+                Using scope As ILifetimeScope = Me.ObjectContainer.BeginLifetimeScope
+                    userFactory = scope.Resolve(Of IUserFactory)()
+                    userId = SearchToGuid(s)
+                    If userId.HasValue Then
+                        u = userFactory.Get(New Settings(), GetOrganizationId, userId.Value)
+                        If u IsNot Nothing Then
+                            innerUsers = {u}
+                        Else
+                            innerUsers = New List(Of IUser)()
+                        End If
+                    Else
+                        innerUsers = userFactory.Search(New Settings(), GetOrganizationId, s)
+                    End If
+                End Using
+            End If
+
+            If result Is Nothing Then
+                mapper = New Mapper(m_userMapper.MapperConfiguration)
+                users = From y In innerUsers.Select(Of User)(Function(x As IUser) mapper.Map(Of User)(x))
+                result = Ok(users)
+            End If
+
+            Return result
+        End Function
+
+        Private Function SearchToGuid(ByVal s As String) As Guid?
+            Dim g As Guid? = Nothing
+            Dim h As Guid
+            s = Regex.Replace(s, "[^0-9A-Fa-f]+", String.Empty)
+            If Regex.IsMatch(s, "[0-9A-Fa-f]{32}") Then
+                If Guid.TryParse(s, h) Then
+                    g = h
+                End If
+            End If
+            Return g
         End Function
     End Class
 End Namespace
