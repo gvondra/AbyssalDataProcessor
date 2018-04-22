@@ -69,6 +69,7 @@
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="UserAccountData.vb" />
     <Compile Include="UserData.vb" />
+    <Compile Include="UserGroupData.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTier.Utilities\DataTier.Utilities.vbproj">

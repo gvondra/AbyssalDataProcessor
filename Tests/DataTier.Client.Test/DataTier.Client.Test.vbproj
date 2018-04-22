@@ -119,6 +119,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="UserDataFactoryTest.vb" />
+    <Compile Include="UserGroupDataFactoryTest.vb" />
+    <Compile Include="UserGroupDataSaverTest.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

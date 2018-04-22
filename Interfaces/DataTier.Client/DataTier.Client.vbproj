@@ -70,10 +70,13 @@
     <Compile Include="GroupDataSaver.vb" />
     <Compile Include="IGroupDataFactory.vb" />
     <Compile Include="IUserDataFactory.vb" />
+    <Compile Include="IUserGroupDataFactory.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="UserAccountDataSaver.vb" />
     <Compile Include="UserDataFactory.vb" />
     <Compile Include="UserDataSaver.vb" />
+    <Compile Include="UserGroupDataFactory.vb" />
+    <Compile Include="UserGroupDataSaver.vb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTier.Client.Models\DataTier.Client.Models.vbproj">

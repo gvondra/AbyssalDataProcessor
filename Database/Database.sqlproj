@@ -161,5 +161,8 @@
     <Build Include="clnt\Stored Procedure\sGroupAll.sql" />
     <Build Include="clnt\Stored Procedure\uGroup.sql" />
     <Build Include="clnt\Stored Procedure\iGroup.sql" />
+    <Build Include="clnt\Stored Procedure\iUserGroup.sql" />
+    <Build Include="clnt\Stored Procedure\sUserGroupByUserId.sql" />
+    <Build Include="clnt\Stored Procedure\uUserGroup.sql" />
   </ItemGroup>
 </Project>
